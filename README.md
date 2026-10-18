@@ -2,7 +2,7 @@
 
 **Eigene Ideen. Sorgfältige Entwicklung. Software zum Entdecken und Gestalten.**
 
-Ich bin Alexander und entwickle in meiner Freizeit Anwendungen für macOS, iPhone, iPad und Android. Meine Projekte entstehen aus eigenen Ideen und praktischen Bedürfnissen – von Virtualisierung und Videobearbeitung bis zu spielerischer Umweltbildung für Kinder.
+Ich bin Alexander und entwickle in meiner Freizeit Anwendungen für macOS, iPhone, iPad und Android. Meine Projekte entstehen aus eigenen Ideen und praktischen Bedürfnissen von Virtualisierung und Videobearbeitung bis zu spielerischer Umweltbildung für Kinder.
 
 ## Projekte
 
