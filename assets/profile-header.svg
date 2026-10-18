@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="300" viewBox="0 0 1280 300" role="img" aria-labelledby="title desc">
+  <title id="title">PwnedG0blin</title>
+  <desc id="desc">Unabhängige Softwareentwicklung. Dunkelblauer Hintergrund mit türkisen Akzenten und abstrahierten App-Fenstern.</desc>
+  <rect width="1280" height="300" rx="22" fill="#101e30"/>
+  <path d="M40 258H1240" stroke="#284154"/>
+  <rect x="54" y="55" width="44" height="5" rx="2.5" fill="#45e0cc"/>
+  <text x="50" y="151" fill="#f3f7fc" font-family="Arial,Helvetica,sans-serif" font-size="76" font-weight="700" letter-spacing="-2">PwnedG0blin</text>
+  <text x="54" y="205" fill="#a9c0d6" font-family="Arial,Helvetica,sans-serif" font-size="25">Unabhängige Softwareentwicklung</text>
+  <g fill="none" stroke="#3c6078" stroke-width="2">
+    <rect x="882" y="49" width="285" height="172" rx="15" fill="#102538"/>
+    <path d="M883 86H1166"/>
+    <rect x="1036" y="113" width="152" height="124" rx="12" fill="#102030"/>
+  </g>
+  <g fill="#5ddbc8"><circle cx="907" cy="68" r="4"/><circle cx="922" cy="68" r="4" opacity=".55"/><circle cx="937" cy="68" r="4" opacity=".3"/></g>
+  <rect x="907" y="111" width="99" height="85" rx="8" fill="#1a3f4d"/>
+  <path d="M931 156L948 173L980 138" fill="none" stroke="#5de1cd" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="1058" y="139" width="91" height="7" rx="3.5" fill="#84baff"/>
+  <rect x="1058" y="161" width="65" height="6" rx="3" fill="#456985"/>
+  <rect x="1058" y="180" width="101" height="6" rx="3" fill="#456985"/>
+  <rect x="1058" y="206" width="38" height="5" rx="2.5" fill="#5ddbc8"/>
+</svg>

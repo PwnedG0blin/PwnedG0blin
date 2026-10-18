@@ -1,34 +1,43 @@
-# PwnedG0blin
+<p align="center">
+  <img src="assets/profile-header.svg" alt="PwnedG0blin — unabhängige Softwareentwicklung" width="100%">
+</p>
 
-**Eigene Ideen. Sorgfältige Entwicklung. Software zum Entdecken und Gestalten.**
+**Unabhängige Softwareentwicklung für macOS, iOS, iPadOS und Android.**
 
-Ich bin Alexander und entwickle in meiner Freizeit Anwendungen für macOS, iPhone, iPad und Android. Meine Projekte entstehen aus eigenen Ideen und praktischen Bedürfnissen von Virtualisierung und Videobearbeitung bis zu spielerischer Umweltbildung für Kinder.
+Unter dem Namen **PwnedG0blin** entwickle ich eigene Anwendungen: von Virtualisierung und Videobearbeitung bis zu spielerischer Umweltbildung für Kinder. Im Mittelpunkt stehen verständliche Bedienung, nachvollziehbare Entwicklung und ein klar kommunizierter Projektstand.
+
+[Projekte](#projekte) · [Testversionen](#testversionen) · [Austausch](#austausch-und-beiträge) · [Kontakt](#kontakt-und-unterstützung)
 
 ## Projekte
 
-| Projekt | Zielplattformen | Schwerpunkt |
+| Projekt | Plattformen | Schwerpunkt und Stand |
 | :--- | :--- | :--- |
-| **Wimmelwelt: Naturdetektive** | iOS · iPadOS · Android | Ein kostenloses, werbe- und trackingfreies Lernspiel, mit dem Kinder Natur-, Tier- und Umweltschutz spielerisch entdecken. |
-| **[Pixelkoje](https://github.com/PwnedG0blin/OpenGuest)** | macOS · Apple Silicon | Ein kostenloser Open-Source-Player für Android und Windows auf dem Mac. |
-| **FrameForge** | iOS · iPadOS | Ein eigenständiger Videoeditor für iPhone und iPad mit Fokus auf Touch-Bedienung, präzisen Schnitt und umfangreiche Bearbeitungsmöglichkeiten. |
-| **[RegionPilot](https://github.com/PwnedG0blin/PwnedG0blin/tree/master/projects/RegionPilot)** | macOS | Ein experimenteller Helfer für Diagnose und Konfiguration regionaler Freigaben rund um iPhone Mirroring, mit Sicherungs- und Rücknahmefunktion. |
+| **Wimmelwelt: Naturdetektive** | iOS · iPadOS · Android | Kostenloses Lernspiel rund um Natur-, Tier- und Umweltschutz, ohne Werbung und Tracking. **In Entwicklung.** |
+| **[Pixelkoje](https://github.com/PwnedG0blin/OpenGuest)** | macOS · Apple Silicon | Kostenloser Open-Source-Player für Android und Windows mit getrennten Playerfenstern und dauerhaft gespeicherten Gastsystemen. **Öffentliche Testversion.** |
+| **FrameForge** | iOS · iPadOS | Videoeditor für iPhone und iPad mit Touch-Bedienung und präzisem Schnitt. **In Entwicklung.** |
+| **[RegionPilot](projects/RegionPilot)** | macOS | Experimenteller Helfer für Diagnose und Konfiguration rund um iPhone Mirroring, mit Sicherung und Rücknahme eigener Änderungen. **0.1 Beta.** |
 
-**RegionPilot 0.1 Beta:** [Download, Teststand und Anleitung](https://github.com/PwnedG0blin/PwnedG0blin/releases/tag/regionpilot-v0.1-beta).
+**Projektnamen:** Pixelkoje, FrameForge und RegionPilot sind Arbeitstitel. **Wimmelwelt: Naturdetektive** ist der feste Name der Lern-App; unter dem App-Symbol heißt sie **Naturdetektive**.
 
-**Hinweis zu den Namen:** Pixelkoje, FrameForge und RegionPilot sind vorläufige Projektnamen und können sich bis zur Veröffentlichung ändern. Der Name **Wimmelwelt: Naturdetektive** steht fest; unter dem App-Symbol heißt die Lern-App **Naturdetektive**.
+## Testversionen
 
-Alle Projekte befinden sich in Entwicklung. Funktionsumfang, Plattformunterstützung und Verfügbarkeit richten sich nach dem jeweiligen Entwicklungsstand. Bei RegionPilot ist eine erfolgreiche Freischaltung nicht garantiert.
+- **[RegionPilot 0.1 Beta herunterladen](https://github.com/PwnedG0blin/PwnedG0blin/releases/tag/regionpilot-v0.1-beta)** — Mac-App, Quellpaket, Prüfsummen und Hinweise zum Teststand. Die experimentelle Funktion garantiert keine erfolgreiche Mirroring-Verbindung.
+- **[Pixelkoje: Einrichtung und Test-Builds](https://github.com/PwnedG0blin/OpenGuest#installation-und-einrichtung)** — Voraussetzungen, macOS-Builds und Anleitung für Android und Windows.
 
-## Entwicklung und Austausch
+Funktionsumfang und Verfügbarkeit richten sich nach dem jeweiligen Entwicklungsstand. Hinweise zu Einschränkungen, Tests und Lizenzen stehen direkt beim Projekt.
 
-Ich arbeite als Privatperson an diesen Projekten und entwickle sie Schritt für Schritt weiter. Mir sind verständliche Bedienung, nachvollziehbare Änderungen und ehrliche Angaben zum Entwicklungsstand wichtig.
+## Austausch und Beiträge
 
-Konstruktives Feedback, Fehlerberichte und Beiträge zu meinen öffentlichen Projekten sind willkommen. Bei Pixelkoje und RegionPilot findest du Quellcode und Dokumentation direkt in den verlinkten Projektbereichen.
+Ich entwickle diese Projekte als unabhängiger Entwickler. Fehlerberichte, konkrete Verbesserungsvorschläge und Beiträge zu den öffentlichen Quellcodes sind willkommen.
+
+Für **Pixelkoje** findest du [Beitragshinweise](https://github.com/PwnedG0blin/OpenGuest/blob/main/CONTRIBUTING.md) und [Fehlerberichte](https://github.com/PwnedG0blin/OpenGuest/issues). Für **RegionPilot** enthält die [Dokumentation](projects/RegionPilot#fehlerdiagnose) Hinweise zur Diagnose und zu bereinigten Protokollen.
 
 ## Kontakt und Unterstützung
 
-- **[X · @PwnedG0blin](https://x.com/PwnedG0blin)** — Neuigkeiten, Einblicke und Austausch zu meinen Projekten.
-- **[GoFundMe · Naturdetektive](https://www.gofundme.com/f/kostenlose-umweltlernapp-fur-kinder-gemeinsam-helfen-3ta8c)** — Die Kampagne für meine kostenlose Umwelt-Lern-App für Kinder.
-- **[Patreon · PwnedG0blinApp](https://www.patreon.com/cw/PwnedG0blinApp)** — Meine Entwicklungsarbeit freiwillig unterstützen.
+[**X · @PwnedG0blin**](https://x.com/PwnedG0blin) · [**Patreon · Entwicklungsarbeit unterstützen**](https://www.patreon.com/cw/PwnedG0blinApp) · [**GoFundMe · Naturdetektive**](https://www.gofundme.com/f/kostenlose-umweltlernapp-fur-kinder-gemeinsam-helfen-3ta8c)
 
-Danke an alle, die ausprobieren, Rückmeldung geben oder meine Arbeit unterstützen.
+Auf X teile ich Neuigkeiten und Einblicke. Patreon unterstützt meine Entwicklungsarbeit; die GoFundMe-Kampagne gilt der kostenlosen Umwelt-Lern-App für Kinder.
+
+---
+
+**Projektentwicklung: PwnedG0blin** · Urheber- und Lizenzhinweise gelten gemäß der Dokumentation des jeweiligen Projekts.
