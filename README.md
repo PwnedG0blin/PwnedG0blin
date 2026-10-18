@@ -34,7 +34,7 @@ Für **Pixelkoje** findest du [Beitragshinweise](https://github.com/PwnedG0blin/
 
 ## Kontakt und Unterstützung
 
-[**X · @PwnedG0blin**](https://x.com/PwnedG0blin) · [**Patreon · Entwicklungsarbeit unterstützen**](https://www.patreon.com/cw/PwnedG0blinApp) · [**GoFundMe · Naturdetektive**](https://www.gofundme.com/f/kostenlose-umweltlernapp-fur-kinder-gemeinsam-helfen-3ta8c)
+[**X · @PwnedG0blin**](https://x.com/PwnedG0blin) · [**Patreon · Entwicklungsarbeit unterstützen**](https://www.patreon.com/cw/PwnedG0blinApp) · [**GoFundMe · Naturdetektive**](https://www.gofundme.com/u/360e08e6-c72f-4696-b609-a74f4ef3295d)
 
 Auf X teile ich Neuigkeiten und Einblicke. Patreon unterstützt meine Entwicklungsarbeit; die GoFundMe-Kampagne gilt der kostenlosen Umwelt-Lern-App für Kinder.
 
