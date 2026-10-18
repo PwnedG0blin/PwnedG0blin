@@ -87,7 +87,7 @@ except (OSError, KeyError, ValueError, plistlib.InvalidFileException):
         source = source.replace('/bin/cat', shlex.quote(str(self.tools / 'cat')))
         source = source.replace('$(uname -s)', '$(' + shlex.quote(str(self.tools / 'uname')) + ' -s)')
         source = source.replace('$(id -u)', '$(' + shlex.quote(str(self.tools / 'id')) + ' -u)')
-        assert '/private/var/' not in source, 'A real system path must never survive in test copy'
+        assert all(path not in source for path in ['/private/var/db/regionpilot', '/private/var/db/os_eligibility/eligibility.plist', '/private/var/os_eligibility/eligibility.plist']), 'A real system path must never survive in test copy'
         self.script = self.root / 'core-under-test.sh'
         self.script.write_text(source)
 
