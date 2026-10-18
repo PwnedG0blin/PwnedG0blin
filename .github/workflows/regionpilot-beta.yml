@@ -1,0 +1,59 @@
+name: RegionPilot 0.1 Beta
+on:
+  push:
+    branches: [master]
+    paths:
+      - 'projects/RegionPilot/**'
+      - '.github/workflows/regionpilot-beta.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: regionpilot-beta-release
+  cancel-in-progress: false
+jobs:
+  beta:
+    runs-on: macos-15
+    timeout-minutes: 15
+    permissions:
+      contents: write
+    defaults:
+      run:
+        working-directory: projects/RegionPilot
+    steps:
+      - uses: actions/checkout@v4
+      - name: Shell syntax and isolated regression tests
+        run: |
+          bash -n core.sh RegionPilot.command DMG_erstellen.command scripts/build-macos.sh scripts/verify-macos.sh
+          python3 -m unittest discover -s tests -v
+      - name: Build and verify Mac application and DMG
+        run: |
+          bash scripts/build-macos.sh
+          bash scripts/verify-macos.sh
+      - name: Package sources and checksums
+        run: |
+          python3 scripts/package-source.py
+          cd dist
+          shasum -a 256 RegionPilot-0.1-Beta-Mac.dmg RegionPilot-0.1-Beta-Quellpaket.zip > SHA256SUMS.txt
+      - name: Upload checked beta package
+        uses: actions/upload-artifact@v7
+        with:
+          name: RegionPilot-0.1-Beta
+          path: |
+            projects/RegionPilot/dist/RegionPilot-0.1-Beta-Mac.dmg
+            projects/RegionPilot/dist/RegionPilot-0.1-Beta-Quellpaket.zip
+            projects/RegionPilot/dist/SHA256SUMS.txt
+          retention-days: 14
+          if-no-files-found: error
+      - name: Publish public beta release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          RELEASE_TARGET: ${{ github.sha }}
+        run: |
+          tag='regionpilot-v0.1-beta'
+          if gh release view "$tag" >/dev/null 2>&1; then
+            echo 'Diese Beta wurde bereits veröffentlicht und wird nicht still überschrieben.'
+            exit 0
+          fi
+          gh release create "$tag" --target "$RELEASE_TARGET" --prerelease --title 'RegionPilot 0.1 Beta' --notes-file RELEASE_NOTES.md dist/RegionPilot-0.1-Beta-Mac.dmg dist/RegionPilot-0.1-Beta-Quellpaket.zip dist/SHA256SUMS.txt

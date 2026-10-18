@@ -11,7 +11,9 @@ Ich bin Alexander und entwickle in meiner Freizeit Anwendungen für macOS, iPhon
 | **Wimmelwelt: Naturdetektive** | iOS · iPadOS · Android | Ein kostenloses, werbe- und trackingfreies Lernspiel, mit dem Kinder Natur-, Tier- und Umweltschutz spielerisch entdecken. |
 | **[Pixelkoje](https://github.com/PwnedG0blin/OpenGuest)** | macOS · Apple Silicon | Ein kostenloser Open-Source-Player für Android und Windows auf dem Mac. |
 | **FrameForge** | iOS · iPadOS | Ein eigenständiger Videoeditor für iPhone und iPad mit Fokus auf Touch-Bedienung, präzisen Schnitt und umfangreiche Bearbeitungsmöglichkeiten. |
-| **RegionPilot** | macOS | Ein experimenteller Helfer für Diagnose und Konfiguration regionaler Freigaben rund um iPhone Mirroring, mit Sicherungs- und Rücknahmefunktion. |
+| **[RegionPilot](https://github.com/PwnedG0blin/PwnedG0blin/tree/master/projects/RegionPilot)** | macOS | Ein experimenteller Helfer für Diagnose und Konfiguration regionaler Freigaben rund um iPhone Mirroring, mit Sicherungs- und Rücknahmefunktion. |
+
+**RegionPilot 0.1 Beta:** [Download, Teststand und Anleitung](https://github.com/PwnedG0blin/PwnedG0blin/releases/tag/regionpilot-v0.1-beta).
 
 **Hinweis zu den Namen:** Pixelkoje, FrameForge und RegionPilot sind vorläufige Projektnamen und können sich bis zur Veröffentlichung ändern. Der Name **Wimmelwelt: Naturdetektive** steht fest; unter dem App-Symbol heißt die Lern-App **Naturdetektive**.
 
@@ -21,7 +23,7 @@ Alle Projekte befinden sich in Entwicklung. Funktionsumfang, Plattformunterstüt
 
 Ich arbeite als Privatperson an diesen Projekten und entwickle sie Schritt für Schritt weiter. Mir sind verständliche Bedienung, nachvollziehbare Änderungen und ehrliche Angaben zum Entwicklungsstand wichtig.
 
-Konstruktives Feedback, Fehlerberichte und Beiträge zu meinen öffentlichen Projekten sind willkommen. Bei Pixelkoje findest du Quellcode und Dokumentation direkt im verlinkten Repository.
+Konstruktives Feedback, Fehlerberichte und Beiträge zu meinen öffentlichen Projekten sind willkommen. Bei Pixelkoje und RegionPilot findest du Quellcode und Dokumentation direkt in den verlinkten Projektbereichen.
 
 ## Kontakt und Unterstützung
 
