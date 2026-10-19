@@ -14,7 +14,7 @@ DOMAIN = 'OS_ELIGIBILITY_DOMAIN_IRON'
 
 class CoreTests(unittest.TestCase):
     def setUp(self):
-        self.temp = tempfile.TemporaryDirectory(prefix='RegionPilot tests ')
+        self.temp = tempfile.TemporaryDirectory(prefix='Mirravel tests ')
         self.addCleanup(self.temp.cleanup)
         self.root = Path(self.temp.name).resolve()
         self.tools = self.root / 'fake tools'

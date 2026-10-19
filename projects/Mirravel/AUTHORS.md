@@ -2,7 +2,7 @@
 
 **Entwickelt von PwnedG0blin.**
 
-Projekt: RegionPilot (vorläufiger Projektname) · Version 0.1 Beta.
+Projekt: Mirravel · Version 0.1.1 Beta.
 
 Copyright (c) 2026 PwnedG0blin.
 

@@ -1,8 +1,8 @@
-RegionPilot 0.1 Beta
+Mirravel 0.1.1 Beta
 
 Experimenteller macOS-Helfer für iPhone Mirroring. Kostenlos und Open Source unter der MIT-Lizenz.
 
-Entwickelt von PwnedG0blin. RegionPilot ist ein vorläufiger Projektname.
+Entwickelt von PwnedG0blin.
 
 Beta herunterladen (https://github.com/PwnedG0blin/PwnedG0blin/releases/tag/regionpilot-v0.1-beta) · Profil (https://github.com/PwnedG0blin) · Fehler melden (https://github.com/PwnedG0blin/PwnedG0blin/issues/new)
 
@@ -27,22 +27,22 @@ Bekannte Probleme: In einem früheren manuellen Test wurde der Bildschirm kurz a
 
 Download und erster Start
 
-1. Auf der Beta-Seite (https://github.com/PwnedG0blin/PwnedG0blin/releases/tag/regionpilot-v0.1-beta) unter Assets RegionPilot-0.1-Beta-Mac.dmg laden.
-2. DMG öffnen und RegionPilot.app nach Programme / Applications ziehen. Die Anleitung liegt ebenfalls im DMG.
-3. RegionPilot öffnen. Anleitung zeigt diese Hinweise; Terminal-Menü startet das lokale Menü.
+1. Auf der Beta-Seite (https://github.com/PwnedG0blin/PwnedG0blin/releases/tag/regionpilot-v0.1-beta) unter Assets Mirravel-0.1.1-Beta-Mac.dmg laden.
+2. DMG öffnen und Mirravel.app nach Programme / Applications ziehen. Die Anleitung liegt ebenfalls im DMG.
+3. Mirravel öffnen. Anleitung zeigt diese Hinweise; Terminal-Menü startet das lokale Menü.
 4. Im Terminal zuerst 1 – Diagnose wählen. Dabei werden keine Systemeinstellungen geändert und keine Administratorrechte angefordert.
 
 Die Beta ist ad-hoc signiert, aber nicht mit einer Apple Developer ID signiert und nicht notarisiert. Wenn macOS den Start blockiert, nach einem Öffnungsversuch unter Systemeinstellungen → Datenschutz & Sicherheit → Dennoch öffnen / Open Anyway nachsehen und den gezielten Start bestätigen, sofern macOS ihn anbietet. Nicht alle Blockierungsarten bieten diese Option an. Gatekeeper oder SIP nicht systemweit deaktivieren.
 
-Alternative ohne fertige App: RegionPilot-0.1-Beta-Quellpaket.zip vollständig entpacken, alle Dateien zusammenlassen und RegionPilot.command öffnen. Das Menü ist dasselbe. Nicht einzelne Dateien aus der GitHub-Vorschau herunterladen; vollständiges ZIP verwenden.
+Alternative ohne fertige App: Mirravel-0.1.1-Beta-Quellpaket.zip vollständig entpacken, alle Dateien zusammenlassen und Mirravel.command öffnen. Das Menü ist dasselbe. Nicht einzelne Dateien aus der GitHub-Vorschau herunterladen; vollständiges ZIP verwenden.
 
 Optional: experimentellen Mac-Patch testen
 
 1. Systemeinstellungen → Datenschutz & Sicherheit → Festplattenvollzugriff / Full Disk Access öffnen. Menüpunkt 6 führt dorthin.
 2. Terminal.app hinzufügen und einschalten. Bei Nutzung des mitgelieferten Launchers läuft der Helfer in Apples Terminal.
-3. Terminal mit ⌘Q vollständig beenden, danach RegionPilot erneut starten. Eine schon offene Terminal-Sitzung übernimmt die Freigabe unter Umständen nicht.
+3. Terminal mit ⌘Q vollständig beenden, danach Mirravel erneut starten. Eine schon offene Terminal-Sitzung übernimmt die Freigabe unter Umständen nicht.
 4. iPhone Mirroring vollständig beenden. Im Menü 2 wählen, die Hinweise lesen und ausdrücklich TEST eingeben. Ohne diese Eingabe erfolgt kein Patch.
-5. Das Mac-Administratorpasswort wird lokal von sudo abgefragt. Beim Tippen erscheinen keine Zeichen. RegionPilot speichert oder überträgt das Passwort nicht.
+5. Das Mac-Administratorpasswort wird lokal von sudo abgefragt. Beim Tippen erscheinen keine Zeichen. Mirravel speichert oder überträgt das Passwort nicht.
 6. Nach erfolgreicher Verifikation iPhone Mirroring erneut öffnen, beispielsweise über Menü 4. iPhone sperren und neben den Mac legen.
 7. Verbindung tatsächlich testen. Bei Timeout oder Regionsfehlern nicht annehmen, dass der Patch die Verbindung bereits repariert hat; siehe Fehlerdiagnose.
 
@@ -64,11 +64,11 @@ Vor dem Schreiben wird die Ausgangsdatei unter /private/var/db/regionpilot/origi
 
 Die Sicherung liegt bewusst im geschützten Systembereich des Macs, auch wenn die App auf einer externen SSD liegt. Sie ist klein und enthält keine iPhone-Apps oder Nutzerdatenträger.
 
-Es werden keine Dienste, Autostarts, geplanten Aufgaben, Profile, VPNs oder automatischen Dauer-Patches eingerichtet. RegionPilot selbst tätigt keine Netzwerkanfragen; GitHub-Downloads und Apples Mirroring-Dienste sind davon getrennt.
+Es werden keine Dienste, Autostarts, geplanten Aufgaben, Profile, VPNs oder automatischen Dauer-Patches eingerichtet. Mirravel selbst tätigt keine Netzwerkanfragen; GitHub-Downloads und Apples Mirroring-Dienste sind davon getrennt.
 
 Eigene Änderung zurücknehmen
 
-1. iPhone Mirroring beenden, RegionPilot starten und 3 – Eigene Änderung zurücknehmen wählen.
+1. iPhone Mirroring beenden, Mirravel starten und 3 – Eigene Änderung zurücknehmen wählen.
 2. Die lokale Administratorabfrage bestätigen.
 3. Das Programm setzt nur seine drei Schlüssel auf die gespeicherten Originalwerte zurück. Andere inzwischen geänderte Bereiche werden beibehalten.
 4. Anschließend iPhone Mirroring erneut öffnen oder beenden, je nachdem, ob du es weiter nutzen möchtest.
@@ -91,7 +91,7 @@ Mac-Protokoll: Zuerst einen fehlgeschlagenen Verbindungsversuch auslösen, danac
 
 iPhone-Protokoll: Bei Bedarf das iPhone per USB verbinden, in der macOS-App Konsole / Console unter Geräte / Devices das iPhone auswählen und eine frische Aufnahme starten. Einen Mirroring-Versuch auslösen und anschließend stoppen. Nach ScreenContinuityShell oder MediaContinuity suchen. Falls Prozessnummern verwendet werden, die Nummer aus der aktuellen Aufnahme nehmen; sie kann sich nach jedem Neustart ändern. Zusätzliche Entwicklungs-/JIT-Tunnel oder VPNs können den Test beeinflussen, sind durch ihr bloßes Vorhandensein aber noch nicht als Ursache nachgewiesen.
 
-Bei Timeouts empfiehlt Apple unter anderem Updates und Neustarts, die Prüfung von VPN-/Sicherheitsfiltern sowie das Zurücksetzen der Mirroring-Kopplung über die Einstellungen der Mirroring-App. RegionPilot führt diese Schritte nicht automatisch aus. Apple: Hilfe bei Verbindungsproblemen (https://support.apple.com/en-euro/120421).
+Bei Timeouts empfiehlt Apple unter anderem Updates und Neustarts, die Prüfung von VPN-/Sicherheitsfiltern sowie das Zurücksetzen der Mirroring-Kopplung über die Einstellungen der Mirroring-App. Mirravel führt diese Schritte nicht automatisch aus. Apple: Hilfe bei Verbindungsproblemen (https://support.apple.com/en-euro/120421).
 
 Vor dem Teilen von Protokollen Namen, E-Mail-Adressen, Gerätekennungen und andere private Daten entfernen. Es gibt keinen automatischen Upload.
 
@@ -109,7 +109,7 @@ bash
 /bin/bash scripts/build-macos.sh
 
 
-Die fertige DMG liegt unter dist/RegionPilot-0.1-Beta-Mac.dmg. AppleScript-Compiler, Signaturwerkzeuge und DMG-Werkzeuge gehören zu macOS; Xcode ist für diesen lokalen Paketbau nicht erforderlich. Projekt und temporäre Paketdateien bleiben im gewählten Ausgabeordner. Der Build führt keinen Patch aus.
+Die fertige DMG liegt unter dist/Mirravel-0.1.1-Beta-Mac.dmg. AppleScript-Compiler, Signaturwerkzeuge und DMG-Werkzeuge gehören zu macOS; Xcode ist für diesen lokalen Paketbau nicht erforderlich. Projekt und temporäre Paketdateien bleiben im gewählten Ausgabeordner. Der Build führt keinen Patch aus.
 
 Für die automatisierten Regressionstests wird Python 3 benötigt:
 
@@ -122,7 +122,7 @@ Die Tests arbeiten ausschließlich mit temporären Plist-Fixtures und simulierte
 Quellen und Einordnung
 
 - Apple: Voraussetzungen, Verfügbarkeit und Verbindungsdiagnose (https://support.apple.com/en-euro/120421)
-- nxm/iphone-mirroring-bypass (https://github.com/nxm/iphone-mirroring-bypass): öffentliche Dokumentation der drei Mac-Schlüssel und einer zusätzlichen iPhone-seitigen Ablehnung. Fremde Testergebnisse gelten nicht als RegionPilot-Kompatibilitätsnachweis.
+- nxm/iphone-mirroring-bypass (https://github.com/nxm/iphone-mirroring-bypass): öffentliche Dokumentation der drei Mac-Schlüssel und einer zusätzlichen iPhone-seitigen Ablehnung. Fremde Testergebnisse gelten nicht als Mirravel-Kompatibilitätsnachweis.
 - Pauli1Go/iphone-mirroring-eu-enabler (https://github.com/Pauli1Go/iphone-mirroring-eu-enabler): früherer Community-Ansatz.
 
 Die Shell-Implementierung ist eigenständig. Es werden keine Fremdskripte heruntergeladen oder ausgeführt. Kein Apple-Produkt und keine Verbindung zu Apple.
@@ -133,4 +133,4 @@ Entwickelt von PwnedG0blin (https://github.com/PwnedG0blin) · X (https://x.com/
 
 Urheberhinweis: Copyright (c) 2026 PwnedG0blin · Entwicklung / AUTHORS (AUTHORS.md).
 
-Lizenz: MIT (LICENSE). Der Hinweis auf Beta-Status und vorläufigen Namen gehört zur Beschreibung dieser Veröffentlichung.
+Lizenz: MIT (LICENSE). Der Hinweis auf den experimentellen Beta-Status gehört zur Beschreibung dieser Veröffentlichung.

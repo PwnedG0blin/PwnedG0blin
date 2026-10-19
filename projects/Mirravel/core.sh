@@ -174,7 +174,7 @@ main() {
   case "${1:-}" in
     diagnose) diagnose ;;
     apply|restore)
-      [ "$(id -u)" -eq 0 ] || fail 'Über RegionPilot mit Administratorrechten starten.'
+      [ "$(id -u)" -eq 0 ] || fail 'Über Mirravel mit Administratorrechten starten.'
       if [ "$1" = apply ]; then apply_patch; else restore_patch; fi ;;
     *) fail 'Interner Aufruf ungültig.' ;;
   esac

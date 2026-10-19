@@ -1,15 +1,19 @@
-name: RegionPilot 0.1 Beta
+name: Mirravel 0.1.1 Beta
 on:
   push:
     branches: [master]
     paths:
-      - 'projects/RegionPilot/**'
+      - 'projects/Mirravel/**'
+      - '.github/workflows/regionpilot-beta.yml'
+  pull_request:
+    paths:
+      - 'projects/Mirravel/**'
       - '.github/workflows/regionpilot-beta.yml'
   workflow_dispatch:
 permissions:
   contents: read
 concurrency:
-  group: regionpilot-beta-release
+  group: mirravel-beta-release
   cancel-in-progress: false
 jobs:
   beta:
@@ -19,12 +23,12 @@ jobs:
       contents: write
     defaults:
       run:
-        working-directory: projects/RegionPilot
+        working-directory: projects/Mirravel
     steps:
       - uses: actions/checkout@v4
       - name: Shell syntax and isolated regression tests
         run: |
-          bash -n core.sh RegionPilot.command DMG_erstellen.command scripts/build-macos.sh scripts/verify-macos.sh
+          bash -n core.sh Mirravel.command DMG_erstellen.command scripts/build-macos.sh scripts/verify-macos.sh
           python3 -m unittest discover -s tests -v
       - name: Build and verify Mac application and DMG
         run: |
@@ -34,26 +38,27 @@ jobs:
         run: |
           python3 scripts/package-source.py
           cd dist
-          shasum -a 256 RegionPilot-0.1-Beta-Mac.dmg RegionPilot-0.1-Beta-Quellpaket.zip > SHA256SUMS.txt
+          shasum -a 256 Mirravel-0.1.1-Beta-Mac.dmg Mirravel-0.1.1-Beta-Quellpaket.zip > SHA256SUMS.txt
       - name: Upload checked beta package
         uses: actions/upload-artifact@v7
         with:
-          name: RegionPilot-0.1-Beta
+          name: Mirravel-0.1.1-Beta
           path: |
-            projects/RegionPilot/dist/RegionPilot-0.1-Beta-Mac.dmg
-            projects/RegionPilot/dist/RegionPilot-0.1-Beta-Quellpaket.zip
-            projects/RegionPilot/dist/SHA256SUMS.txt
+            projects/Mirravel/dist/Mirravel-0.1.1-Beta-Mac.dmg
+            projects/Mirravel/dist/Mirravel-0.1.1-Beta-Quellpaket.zip
+            projects/Mirravel/dist/SHA256SUMS.txt
           retention-days: 14
           if-no-files-found: error
       - name: Publish public beta release
+        if: github.event_name == 'push' && github.ref == 'refs/heads/master'
         env:
           GH_TOKEN: ${{ github.token }}
           GH_REPO: ${{ github.repository }}
           RELEASE_TARGET: ${{ github.sha }}
         run: |
-          tag='regionpilot-v0.1-beta'
+          tag='mirravel-v0.1.1-beta'
           if gh release view "$tag" >/dev/null 2>&1; then
             echo 'Diese Beta wurde bereits veröffentlicht und wird nicht still überschrieben.'
             exit 0
           fi
-          gh release create "$tag" --target "$RELEASE_TARGET" --prerelease --title 'RegionPilot 0.1 Beta' --notes-file RELEASE_NOTES.md dist/RegionPilot-0.1-Beta-Mac.dmg dist/RegionPilot-0.1-Beta-Quellpaket.zip dist/SHA256SUMS.txt
+          gh release create "$tag" --target "$RELEASE_TARGET" --prerelease --title 'Mirravel 0.1.1 Beta' --notes-file RELEASE_NOTES.md dist/Mirravel-0.1.1-Beta-Mac.dmg dist/Mirravel-0.1.1-Beta-Quellpaket.zip dist/SHA256SUMS.txt
