@@ -1,14 +1,14 @@
-# RegionPilot 0.1 Beta
+# Mirravel 0.1.1 Beta
 
 Entwickelt von **PwnedG0blin** · Copyright (c) 2026 PwnedG0blin.
 
-Erste öffentliche Beta des experimentellen macOS-Helfers für iPhone Mirroring.
-**RegionPilot ist ein vorläufiger Projektname.**
+Umbenennung von RegionPilot zu Mirravel; Funktion und dokumentierte Grenzen des experimentellen iPhone-Mirroring-Helfers bleiben erhalten.
+Bundle-ID und vorhandener Sicherungsordner bleiben kompatibel.
 
 ## Downloads
 
-- **RegionPilot-0.1-Beta-Mac.dmg:** App nach Programme ziehen; die App startet ein lokales Terminal-Menü.
-- **RegionPilot-0.1-Beta-Quellpaket.zip:** vollständige Quellen, Anleitung, Tests und lokaler DMG-Bau ohne Xcode.
+- **Mirravel-0.1.1-Beta-Mac.dmg:** App nach Programme ziehen; die App startet ein lokales Terminal-Menü.
+- **Mirravel-0.1.1-Beta-Quellpaket.zip:** vollständige Quellen, Anleitung, Tests und lokaler DMG-Bau ohne Xcode.
 - **SHA256SUMS.txt:** Prüfsummen der beiden Pakete.
 
 ## Enthalten
@@ -27,4 +27,4 @@ Die App ist ad-hoc signiert, nicht Developer-ID-signiert und nicht notarisiert. 
 
 Tests mit simulierten Systemdateien und der macOS-Paketbau prüfen die Implementierung und Verpackung; sie ersetzen keinen Hardware-, TCC- oder Mirroring-Test.
 
-[Ausführliche Anleitung und Quellcode](https://github.com/PwnedG0blin/PwnedG0blin/tree/master/projects/RegionPilot) · [Fehler melden](https://github.com/PwnedG0blin/PwnedG0blin/issues/new)
+[Ausführliche Anleitung und Quellcode](https://github.com/PwnedG0blin/PwnedG0blin/tree/master/projects/Mirravel) · [Fehler melden](https://github.com/PwnedG0blin/PwnedG0blin/issues/new)
