@@ -26,6 +26,10 @@ Video editor for iPhone and iPad, designed for touch controls and precise video 
 
 ### [Mirravel — iPhone Mirroring Diagnostics for Mac](projects/Mirravel)
 
+Mirravel richtet sich an Nutzerinnen und Nutzer in der Europäischen Union und verfolgt das Ziel, Apples regionale Einschränkung für iPhone Mirroring experimentell zu umgehen. Dafür bietet es Diagnose und Änderungen auf der Mac-Seite mit Sicherung und Rücknahme eigener Änderungen. Eine erfolgreiche oder dauerhaft stabile Umgehung ist nicht bestätigt; Prüfungen auf dem iPhone können die Verbindung weiterhin verhindern.
+
+Mirravel is intended for users in the European Union and aims to experimentally bypass Apple’s regional restriction on iPhone Mirroring. It provides diagnostics and Mac-side configuration changes with backup and restore of its own changes. A successful or reliably working bypass has not been established; iPhone-side eligibility checks may still prevent a connection.
+
 Kostenloser Open-Source-Helfer für iPhone-Mirroring-Diagnose und experimentelle Mac-Konfiguration mit Sicherung und Rücknahme eigener Änderungen. **macOS · 0.1.1 Beta.**
 
 Free, open-source macOS helper for iPhone Mirroring diagnostics and experimental configuration, including backup and restore of its own changes. **Experimental beta; a successful mirroring connection is not guaranteed.**

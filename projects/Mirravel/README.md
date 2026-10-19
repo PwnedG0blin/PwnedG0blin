@@ -8,6 +8,10 @@ Entwickelt von **PwnedG0blin**. **Mirravel hieß bisher RegionPilot.**
 
 [Beta herunterladen](https://github.com/PwnedG0blin/PwnedG0blin/releases/tag/mirravel-v0.1.1-beta) · [Profil](https://github.com/PwnedG0blin) · [Fehler melden](https://github.com/PwnedG0blin/PwnedG0blin/issues/new)
 
+## EU-Zweck und experimentelle Umgehung
+
+Mirravel richtet sich an Nutzerinnen und Nutzer in der Europäischen Union und verfolgt das Ziel, Apples regionale Einschränkung für iPhone Mirroring experimentell zu umgehen. Dafür bietet es Diagnose und Änderungen auf der Mac-Seite mit Sicherung und Rücknahme eigener Änderungen. Eine erfolgreiche oder dauerhaft stabile Umgehung ist nicht bestätigt; Prüfungen auf dem iPhone können die Verbindung weiterhin verhindern.
+
 ## Was die Beta kann
 
 - Lokale Mirroring-Berechtigung und Systemversion auslesen.

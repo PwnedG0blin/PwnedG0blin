@@ -6,6 +6,12 @@ Inspect local requirements, view Mac logs, and back up or restore settings chang
 
 [Download beta](https://github.com/PwnedG0blin/PwnedG0blin/releases/tag/mirravel-v0.1.1-beta) · [Detailed German guide](README.md)
 
+## EU purpose and experimental bypass
+
+Mirravel is intended for users in the European Union and aims to experimentally bypass Apple’s regional restriction on iPhone Mirroring. It provides diagnostics and Mac-side configuration changes with backup and restore of its own changes. A successful or reliably working bypass has not been established; iPhone-side eligibility checks may still prevent a connection.
+
+Apple lists iPhone Mirroring as unavailable in the EU: [Apple Support](https://support.apple.com/en-euro/120421).
+
 ## What it does
 
 - Read local eligibility and macOS version information without making changes.
