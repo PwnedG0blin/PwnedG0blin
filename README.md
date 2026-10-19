@@ -34,9 +34,9 @@ Für **Pixelkoje** findest du [Beitragshinweise](https://github.com/PwnedG0blin/
 
 ## Kontakt und Unterstützung
 
-[**X · @PwnedG0blin**](https://x.com/PwnedG0blin) · [**Patreon · Entwicklungsarbeit unterstützen**](https://www.patreon.com/cw/PwnedG0blinApp) · [**GoFundMe · Naturdetektive**](https://www.gofundme.com/u/360e08e6-c72f-4696-b609-a74f4ef3295d)
+[**X · @PwnedG0blin**](https://x.com/PwnedG0blin) · [**GitHub Sponsors · Entwicklungsarbeit unterstützen**](https://github.com/sponsors/PwnedG0blin) · [**Patreon · Entwicklungsarbeit unterstützen**](https://www.patreon.com/cw/PwnedG0blinApp) · [**GoFundMe · Naturdetektive**](https://www.gofundme.com/u/360e08e6-c72f-4696-b609-a74f4ef3295d)
 
-Auf X teile ich Neuigkeiten und Einblicke. Patreon unterstützt meine Entwicklungsarbeit; die GoFundMe-Kampagne gilt der kostenlosen Umwelt-Lern-App für Kinder.
+Auf X teile ich Neuigkeiten und Einblicke. Über GitHub Sponsors und Patreon kannst du meine gesamte Entwicklungsarbeit an Pixelkoje, Wimmelwelt: Naturdetektive, FrameForge und RegionPilot unterstützen. GitHub Sponsors bietet monatliche Unterstützung ab $2 und eine einmalige Unterstützung für $10. Die GoFundMe-Kampagne gilt der kostenlosen Umwelt-Lern-App für Kinder.
 
 ---
 
