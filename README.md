@@ -4,19 +4,19 @@
 
 # PwnedG0blin — Apps für Mac, iPhone, iPad und Android
 
-**Unabhängige Softwareentwicklung: Android-Emulation, Windows-Virtualisierung, Videobearbeitung und spielerische Umweltbildung.**
+**Unabhängige Softwareentwicklung: Android-Emulation, Windows- und Linux-Virtualisierung, Videobearbeitung und spielerische Umweltbildung.**
 
-**Independent software development:** Android emulation and Windows ARM64 virtual machines for Mac, video editing for iPhone and iPad, and nature learning games for children.
+**Independent software development:** Android emulation, Windows ARM64 and Ubuntu ARM virtual machines for Mac, video editing for iPhone and iPad, and nature learning games for children.
 
 [Projekte / Projects](#projekte--projects) · [Testversionen / Downloads](#testversionen--downloads) · [Kontakt und Unterstützung](#kontakt-und-unterstützung)
 
 ## Projekte / Projects
 
-### [Stratovo — Android Emulator & Windows VM for Mac](https://github.com/PwnedG0blin/OpenGuest)
+### [Stratovo — Android, Windows & Ubuntu for Mac](https://github.com/PwnedG0blin/OpenGuest)
 
-Kostenlose Open-Source-App für Android-Emulation und Windows-ARM64-VMs auf Macs mit Apple Silicon. APK-Installation, eigene Playerfenster und dauerhaft gespeicherte Gastsysteme. **macOS 14+ · Öffentliche Testversion.**
+Kostenlose Open-Source-App für Android-Emulation sowie Windows-ARM64- und Ubuntu-ARM-VMs auf Macs mit Apple Silicon. APK-Installation, eigene Playerfenster und dauerhaft gespeicherte Gastsysteme. **macOS 14+ · Öffentliche Testversion.**
 
-Free, open-source macOS app for Android emulation and Windows ARM64 virtual machines on Apple silicon, with APK installation and persistent guest storage. One guest runs at a time. **Public test version.** [English documentation](https://github.com/PwnedG0blin/OpenGuest#readme).
+Free, open-source macOS app for Android emulation, Windows ARM64 and Ubuntu ARM virtual machines on Apple silicon, with APK installation and persistent guest storage. One guest runs at a time. **Public test version.** [English documentation](https://github.com/PwnedG0blin/OpenGuest#readme).
 
 ### [Scenalto — Video Editor for iPhone & iPad](projects/Scenalto)
 
@@ -44,7 +44,7 @@ Free nature learning and hidden object game for kids about wildlife, habitats an
 
 ## Testversionen / Downloads
 
-- **[Stratovo: Einrichtung und Mac-Test-Builds](https://github.com/PwnedG0blin/OpenGuest#install-or-build)** — Android-Emulator und Windows-ARM64-VM; Voraussetzungen und Grenzen stehen direkt beim Projekt.
+- **[Stratovo: Einrichtung und Mac-Test-Builds](https://github.com/PwnedG0blin/OpenGuest#install-or-build)** — Android-Emulator, Windows-ARM64- und Ubuntu-ARM-VMs; Voraussetzungen und Grenzen stehen direkt beim Projekt.
 - **[Mirravel 0.1.1 Beta](https://github.com/PwnedG0blin/PwnedG0blin/releases/tag/mirravel-v0.1.1-beta)** — Mac-App, Quellen und Prüfsummen. Experimentelle iPhone-Mirroring-Diagnose; keine garantierte Verbindung.
 - Scenalto und Naturdetektive befinden sich in Entwicklung; auf diesen Projektseiten wird kein bereits veröffentlichter App-Store-Download behauptet.
 
