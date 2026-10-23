@@ -60,7 +60,8 @@ jobs:
         run: |
           tag='mirravel-v0.2.0-beta'
           if gh release view "$tag" >/dev/null 2>&1; then
-            echo 'Diese Beta wurde bereits veröffentlicht und wird nicht still überschrieben.'
+            gh release edit "$tag" --notes-file RELEASE_NOTES.md
+            echo 'Release-Hinweise aktualisiert. Bereits veröffentlichte Pakete bleiben unverändert.'
             exit 0
           fi
           gh release create "$tag" --target "$RELEASE_TARGET" --prerelease --title 'Mirravel 0.2.0 Beta' --notes-file RELEASE_NOTES.md dist/Mirravel-0.2.0-Beta-Mac.dmg dist/Mirravel-0.2.0-Beta-Quellpaket.zip dist/SHA256SUMS.txt

@@ -27,6 +27,17 @@ The existing RegionPilot bundle ID and `/private/var/db/regionpilot` backup dire
 
 The app is ad-hoc signed, not Developer ID signed or notarized. Build and isolated regression tests do not replace hardware, Full Disk Access or end-to-end connection testing. Do not disable SIP or Gatekeeper globally.
 
+## First launch: allow Mirravel in macOS
+
+This beta is ad-hoc signed and not notarized, so macOS may show **“Mirravel.app was blocked to protect your Mac.”**
+
+1. After copying the app to **Applications**, try opening **Mirravel.app** once.
+2. Open **System Settings → Privacy & Security** and scroll to **Security**.
+3. Click **Open Anyway** next to the message about **Mirravel.app**.
+4. Confirm the local macOS prompt, then open Mirravel again and choose **Open** if prompted.
+
+Allowing the app to open is separate from granting **Terminal → Full Disk Access**, which is also required to apply the experimental patch.
+
 ## Build and support
 
 On a Mac run `bash scripts/build-macos.sh`; the output is `dist/Mirravel-0.2.0-Beta-Mac.dmg`. Automated fixture tests: `python3 -m unittest discover -s tests -v`.

@@ -38,7 +38,16 @@ Download und erster Start
 3. Mirravel öffnen. Anleitung zeigt diese Hinweise; Terminal-Menü startet das lokale Menü.
 4. Im Terminal zuerst 1 – Diagnose wählen. Dabei werden keine Systemeinstellungen geändert und keine Administratorrechte angefordert.
 
-Die Beta ist ad-hoc signiert, aber nicht mit einer Apple Developer ID signiert und nicht notarisiert. Wenn macOS den Start blockiert, nach einem Öffnungsversuch unter Systemeinstellungen → Datenschutz & Sicherheit → Dennoch öffnen / Open Anyway nachsehen und den gezielten Start bestätigen, sofern macOS ihn anbietet. Nicht alle Blockierungsarten bieten diese Option an. Gatekeeper oder SIP nicht systemweit deaktivieren.
+Beim ersten Start in macOS freigeben
+
+Diese Beta ist ad-hoc signiert und nicht notarisiert. macOS kann deshalb „Mirravel.app was blocked to protect your Mac“ anzeigen.
+
+1. Nach dem Kopieren nach Applications einmal versuchen, Mirravel.app zu öffnen.
+2. System Settings → Privacy & Security öffnen und zum Abschnitt Security scrollen.
+3. Neben der Meldung zu Mirravel.app auf Open Anyway klicken – genau dieser Schalter ist für die Freigabe vorgesehen.
+4. Die lokale macOS-Abfrage bestätigen und Mirravel erneut öffnen; falls angeboten, Open wählen.
+
+Diese App-Freigabe ist ein eigener Schritt. Für den experimentellen Patch benötigt Terminal zusätzlich Full Disk Access, wie im nächsten Abschnitt beschrieben. Gatekeeper oder SIP nicht systemweit deaktivieren.
 
 Alternative ohne fertige App: Mirravel-0.2.0-Beta-Quellpaket.zip vollständig entpacken, alle Dateien zusammenlassen und Mirravel.command öffnen. Das Menü ist dasselbe. Nicht einzelne Dateien aus der GitHub-Vorschau herunterladen; vollständiges ZIP verwenden.
 

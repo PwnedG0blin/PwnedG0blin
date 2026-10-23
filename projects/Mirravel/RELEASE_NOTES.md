@@ -25,6 +25,17 @@ Nach dem Start Menü **1 – Diagnose** verwenden. Meldet der Mac nach einem Upd
 
 Die Rücknahme bleibt über Menü **3** möglich. Diagnose, Sicherung und Rücknahme laufen lokal. Kostenlos und Open Source unter der MIT-Lizenz.
 
+## First launch: allow Mirravel in macOS
+
+This beta is ad-hoc signed and not notarized, so macOS may show **“Mirravel.app was blocked to protect your Mac.”**
+
+1. After copying the app to **Applications**, try opening **Mirravel.app** once.
+2. Open **System Settings → Privacy & Security** and scroll to **Security**.
+3. Click **Open Anyway** next to the message about **Mirravel.app**.
+4. Confirm the local macOS prompt, then open Mirravel again and choose **Open** if prompted.
+
+Allowing the app to open is separate from granting **Terminal → Full Disk Access**, which is also required to apply the experimental patch.
+
 ## Testumfang
 
 Der Gerätetest aus der EU bestätigt die erfolgreiche Verbindung mit den beiden 27.2-RCs. Langzeitstabilität und andere Geräte- oder Versionskombinationen sind damit nicht geprüft. Frühere Betatests hatten Timeouts gezeigt. Die Beta verändert nur die Mac-Seite; ein lokaler Wert `4` allein ist kein Verbindungstest.
