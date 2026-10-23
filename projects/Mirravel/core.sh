@@ -89,6 +89,29 @@ prepare() {
   /bin/cat "$PLIST" > "$SNAPSHOT"
   /bin/cat "$SNAPSHOT" > "$WORK"
 }
+archive_previous_build() {
+  local current_build=$1 saved_build archive name
+  # Only called with the state lock held and the current plist schema checked.
+  for name in original.plist build path active; do
+    [ -f "$STATE/$name" ] && [ ! -L "$STATE/$name" ] || fail 'Die frühere Sicherung ist unvollständig. Keine Änderung.'
+  done
+  saved_build=$(/bin/cat "$STATE/build")
+  [ -n "$saved_build" ] || fail 'Die Buildnummer der früheren Sicherung fehlt.'
+  [ "$saved_build" != "$current_build" ] || fail 'Eine frühere Änderung für diesen macOS-Build ist gespeichert. Zuerst Menü 3 verwenden.'
+  [ "$(/bin/cat "$STATE/path")" = "$PLIST" ] || fail 'Eligibility-Pfad hat sich geändert. Keine Änderung.'
+  /usr/bin/plutil -lint "$STATE/original.plist" >/dev/null || fail 'Die frühere Sicherung ist nicht lesbar. Keine Änderung.'
+  archive=$(/usr/bin/mktemp -d "$STATE/previous-build.XXXXXX")
+  # Keep the old baseline before allowing prepare() to capture the new build.
+  # A failed copy leaves the active marker intact and prevents any plist write.
+  for name in original.plist build path active; do
+    /bin/cp -p "$STATE/$name" "$archive/$name"
+    /usr/bin/cmp -s "$STATE/$name" "$archive/$name" || fail 'Archivierung konnte nicht verifiziert werden. Keine Änderung.'
+  done
+  /bin/rm "$STATE/active"
+  printf '\nmacOS-Build gewechselt: %s → %s\n' "$saved_build" "$current_build"
+  printf 'Frühere Sicherung aufbewahrt: %s\n' "$archive"
+  printf 'Der aktuelle macOS-Zustand wird vor dem neuen Patch separat gesichert.\n'
+}
 diagnose() {
   printf '\nmacOS: '; /usr/bin/sw_vers -productVersion
   printf 'Build: '; /usr/bin/sw_vers -buildVersion
@@ -119,7 +142,7 @@ apply_patch() {
     echo 'Mac meldet bereits berechtigt. Kein Patch nötig; iPhone-Seite und Verbindungsprotokoll prüfen.'; return
   fi
   if [ -f "$STATE/active" ]; then
-    fail 'Eine frühere Änderung ist gespeichert. Zuerst zurücknehmen. Nach einem Systemupdate Anleitung lesen.'
+    archive_previous_build "$build"
   fi
   # Capture a consistent baseline. Never replace it with a later patched state.
   prepare
@@ -180,3 +203,4 @@ main() {
   esac
 }
 main "$@"
+

@@ -1,14 +1,14 @@
 # Mirravel — iPhone Mirroring Diagnostics for Mac
 
-**Free, open-source macOS helper for iPhone Mirroring diagnostics and experimental configuration. Version 0.1.1 Beta.**
+**Free, open-source macOS helper for iPhone Mirroring diagnostics and experimental configuration. Version 0.2.0 Beta.**
 
 Inspect local requirements, view Mac logs, and back up or restore settings changed by this tool. **Experimental beta; a successful mirroring connection is not guaranteed.** Previously called RegionPilot.
 
-[Download beta](https://github.com/PwnedG0blin/PwnedG0blin/releases/tag/mirravel-v0.1.1-beta) · [Detailed German guide](README.md)
+[Download beta](https://github.com/PwnedG0blin/PwnedG0blin/releases/tag/mirravel-v0.2.0-beta) · [Detailed German guide](README.md)
 
 ## EU purpose and experimental bypass
 
-Mirravel is intended for users in the European Union and aims to experimentally bypass Apple’s regional restriction on iPhone Mirroring. It provides diagnostics and Mac-side configuration changes with backup and restore of its own changes. A successful or reliably working bypass has not been established; iPhone-side eligibility checks may still prevent a connection.
+Mirravel is intended for users in the European Union and aims to experimentally bypass Apple’s regional restriction on iPhone Mirroring. It provides diagnostics and Mac-side configuration changes with backup and restore of its own changes. On 23 October 2026, PwnedG0blin confirmed a working iPhone Mirroring connection from within the EU with iOS 27.2 RC and macOS 27.2 RC. iPhone-side eligibility checks and future system updates may still affect connectivity.
 
 Apple lists iPhone Mirroring as unavailable in the EU: [Apple Support](https://support.apple.com/en-euro/120421).
 
@@ -19,16 +19,17 @@ Apple lists iPhone Mirroring as unavailable in the EU: [Apple Support](https://s
 - Save the original values and restore only its own changes under the documented validation rules.
 - Open iPhone Mirroring, relevant privacy settings and local diagnostic logs.
 
-Mirravel does not change the iPhone's location or its regional eligibility checks. A local answer value of 4 is not proof of a working connection. The documented hardware test showed timeouts; a reliable ongoing connection has not been established.
+Mirravel does not change the iPhone's location or its regional eligibility checks. A local answer value of 4 is not proof of a working connection. The latest device test on 23 October 2026 confirmed a working connection from within the EU with iOS 27.2 RC and macOS 27.2 RC after reapplying the Mac patch. Exact RC build numbers were not supplied. Earlier beta tests had shown timeouts; long-term stability and other device combinations remain untested.
 
 ## Updates and data
 
-The existing RegionPilot bundle ID and `/private/var/db/regionpilot` backup directory remain unchanged so previous backups can still be used. Restore before a macOS upgrade where possible; an old backup is not automatically applied to a different macOS build.
+The existing RegionPilot bundle ID and `/private/var/db/regionpilot` backup directory remain unchanged so previous backups can still be used. If an update resets Mac eligibility to answer 2, menu 2 can reapply the patch. On a build change, the previous backup is copied to a private `previous-build.XXXXXX` directory and verified byte for byte before the current macOS state is saved as the new baseline. Old system values are never restored over a new build. The same-build safeguard remains in place.
 
 The app is ad-hoc signed, not Developer ID signed or notarized. Build and isolated regression tests do not replace hardware, Full Disk Access or end-to-end connection testing. Do not disable SIP or Gatekeeper globally.
 
 ## Build and support
 
-On a Mac run `bash scripts/build-macos.sh`; the output is `dist/Mirravel-0.1.1-Beta-Mac.dmg`. Automated fixture tests: `python3 -m unittest discover -s tests -v`.
+On a Mac run `bash scripts/build-macos.sh`; the output is `dist/Mirravel-0.2.0-Beta-Mac.dmg`. Automated fixture tests: `python3 -m unittest discover -s tests -v`.
 
 Developed by **PwnedG0blin**, [MIT license](LICENSE). [GitHub Sponsors](https://github.com/sponsors/PwnedG0blin) · [Patreon](https://www.patreon.com/cw/PwnedG0blinApp) · [X](https://x.com/PwnedG0blin)
+

@@ -44,6 +44,19 @@ else:
     print(Path(os.environ['RP_FLAGS']).read_text())
 ''')
         self.tool('chflags', "Path(os.environ['RP_FLAGS']).write_text('uchg' if sys.argv[1] == 'uchg' else '')")
+        self.tool('cp', '''
+import shutil
+source, destination = map(Path, sys.argv[-2:])
+if os.environ.get('RP_FAIL_ARCHIVE_COPY') and 'previous-build.' in str(destination) and destination.name == 'build':
+    sys.exit(1)
+shutil.copy2(source, destination)
+''')
+        self.tool('cmp', '''
+source, destination = map(Path, sys.argv[-2:])
+if os.environ.get('RP_FAIL_ARCHIVE_COMPARE') and 'previous-build.' in str(destination):
+    sys.exit(1)
+sys.exit(0 if source.read_bytes() == destination.read_bytes() else 1)
+''')
         self.tool('cat', '''
 p = Path(sys.argv[1]); marker = Path(os.environ['RP_MARKER'])
 if p.name.startswith('work.'):
@@ -85,6 +98,8 @@ except (OSError, KeyError, ValueError, plistlib.InvalidFileException):
         for command in ['plutil', 'stat', 'chflags', 'sw_vers']:
             source = source.replace('/usr/bin/' + command, shlex.quote(str(self.tools / command)))
         source = source.replace('/bin/cat', shlex.quote(str(self.tools / 'cat')))
+        source = source.replace('/bin/cp', shlex.quote(str(self.tools / 'cp')))
+        source = source.replace('/usr/bin/cmp', shlex.quote(str(self.tools / 'cmp')))
         source = source.replace('$(uname -s)', '$(' + shlex.quote(str(self.tools / 'uname')) + ' -s)')
         source = source.replace('$(id -u)', '$(' + shlex.quote(str(self.tools / 'id')) + ' -u)')
         assert all(path not in source for path in ['/private/var/db/regionpilot', '/private/var/db/os_eligibility/eligibility.plist', '/private/var/os_eligibility/eligibility.plist']), 'A real system path must never survive in test copy'
@@ -213,6 +228,102 @@ except (OSError, KeyError, ValueError, plistlib.InvalidFileException):
         self.assertEqual(self.live.read_bytes(), self.original_bytes)
         self.assertEqual(self.flags.read_text(), 'schg')
 
+    def simulate_system_update(self):
+        self.run_core('apply')
+        saved = {name: (self.state / name).read_bytes()
+                 for name in ('original.plist', 'build', 'path', 'active')}
+        self.build.write_text('TEST-BUILD-B')
+        updated = plistlib.loads(self.original_bytes)
+        updated['OTHER_FEATURE']['fromNewBuild'] = 'keep new state'
+        self.write(updated)
+        return saved, self.live.read_bytes()
+
+    def test_reapply_after_update_archives_old_baseline_and_restores_new_one(self):
+        saved, current = self.simulate_system_update()
+        self.run_core('apply')
+        archives = list(self.state.glob('previous-build.*'))
+        self.assertEqual(len(archives), 1)
+        self.assertEqual(stat.S_IMODE(archives[0].stat().st_mode), 0o700)
+        for name, content in saved.items():
+            self.assertEqual((archives[0] / name).read_bytes(), content)
+        self.assertEqual((self.state / 'original.plist').read_bytes(), current)
+        self.assertEqual((self.state / 'build').read_text().strip(), 'TEST-BUILD-B')
+        self.assertEqual(self.read()[DOMAIN]['os_eligibility_answer_t'], 4)
+        self.assertEqual(self.read()['OTHER_FEATURE']['fromNewBuild'], 'keep new state')
+        self.run_core('restore')
+        self.assertEqual(self.live.read_bytes(), current)
+        for name, content in saved.items():
+            self.assertEqual((archives[0] / name).read_bytes(), content)
+
+    def test_same_build_reset_does_not_overwrite_previous_backup(self):
+        self.run_core('apply')
+        self.write(self.initial)
+        previous = self.live.read_bytes()
+        self.run_core('apply', False)
+        self.assertEqual(self.live.read_bytes(), previous)
+        self.assertEqual((self.state / 'original.plist').read_bytes(), self.original_bytes)
+        self.assertEqual(list(self.state.glob('previous-build.*')), [])
+
+    def test_failed_archive_copy_preserves_previous_state_and_live_file(self):
+        saved, current = self.simulate_system_update()
+        self.run_core('apply', False, RP_FAIL_ARCHIVE_COPY='1')
+        self.assertEqual(self.live.read_bytes(), current)
+        for name, content in saved.items():
+            self.assertEqual((self.state / name).read_bytes(), content)
+        self.assertFalse((self.state / 'lock').exists())
+
+    def test_failed_archive_verification_preserves_previous_state(self):
+        saved, current = self.simulate_system_update()
+        self.run_core('apply', False, RP_FAIL_ARCHIVE_COMPARE='1')
+        self.assertEqual(self.live.read_bytes(), current)
+        for name, content in saved.items():
+            self.assertEqual((self.state / name).read_bytes(), content)
+        self.assertFalse((self.state / 'lock').exists())
+
+    def test_update_with_missing_backup_metadata_is_rejected(self):
+        saved, current = self.simulate_system_update()
+        (self.state / 'path').unlink()
+        self.run_core('apply', False)
+        self.assertEqual(self.live.read_bytes(), current)
+        self.assertEqual((self.state / 'original.plist').read_bytes(), saved['original.plist'])
+        self.assertTrue((self.state / 'active').exists())
+
+    def test_update_with_symlinked_backup_is_rejected(self):
+        saved, current = self.simulate_system_update()
+        backup = self.state / 'original.plist'
+        target = self.root / 'old-original.plist'
+        backup.rename(target)
+        backup.symlink_to(target)
+        self.run_core('apply', False)
+        self.assertEqual(self.live.read_bytes(), current)
+        self.assertEqual(target.read_bytes(), saved['original.plist'])
+        self.assertTrue((self.state / 'active').exists())
+
+    def test_update_with_corrupt_old_backup_is_rejected(self):
+        _, current = self.simulate_system_update()
+        (self.state / 'original.plist').write_bytes(b'corrupt backup')
+        self.run_core('apply', False)
+        self.assertEqual(self.live.read_bytes(), current)
+        self.assertTrue((self.state / 'active').exists())
+
+    def test_update_with_changed_path_is_rejected(self):
+        _, current = self.simulate_system_update()
+        (self.state / 'path').write_text('/different/eligibility.plist\n')
+        self.run_core('apply', False)
+        self.assertEqual(self.live.read_bytes(), current)
+        self.assertTrue((self.state / 'active').exists())
+
+    def test_write_failure_after_archiving_preserves_both_baselines(self):
+        saved, current = self.simulate_system_update()
+        self.run_core('apply', False, RP_FAIL_WRITE='1')
+        self.assertEqual(self.live.read_bytes(), current)
+        self.assertEqual((self.state / 'original.plist').read_bytes(), current)
+        archives = list(self.state.glob('previous-build.*'))
+        self.assertEqual(len(archives), 1)
+        self.assertEqual((archives[0] / 'original.plist').read_bytes(), saved['original.plist'])
+        self.assertFalse((self.state / 'lock').exists())
+
 
 if __name__ == '__main__':
     unittest.main()
+

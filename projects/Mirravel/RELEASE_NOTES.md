@@ -1,30 +1,36 @@
-# Mirravel 0.1.1 Beta
+# Mirravel 0.2.0 Beta
+
+Nach einem macOS-Update kann die lokale Mirroring-Berechtigung wieder auf `2` zurückgesetzt sein. Diese Version ermöglicht die erneute Anwendung des Mac-Patches, auch wenn eine Sicherung des vorherigen macOS-Builds vorhanden ist.
+
+## Erfolgreich aus der EU mit iOS und macOS 27.2 RC getestet
+
+**PwnedG0blin hat am 23.10.2026 aus der Europäischen Union eine funktionierende iPhone-Mirroring-Verbindung mit iOS 27.2 RC und macOS 27.2 RC bestätigt.** Nach dem Update war die Mac-Berechtigung wieder `2`; nach erneuter Anwendung der Korrektur funktionierte Mirroring wieder. Der Gerätetest erfolgte mit dem lokalen RegionPilot-0.2-Paket; dessen Korrektur ist in diese Mirravel-Version übernommen. Die genauen RC-Buildnummern wurden nicht angegeben.
+
+## Änderungen
+
+- Erkennt beim erneuten Anwenden einen anderen macOS-Build.
+- Bewahrt die bisherige Sicherung in einem privaten `previous-build.XXXXXX`-Ordner auf und prüft die Kopien byteweise.
+- Sichert den aktuellen macOS-Zustand als neue Ausgangsbasis, bevor die drei Mirroring-Werte geändert werden.
+- Menü 3 verwendet weiterhin ausschließlich die Sicherung des aktuellen Builds. Alte Systemdateien werden nicht über einen neuen macOS-Build geschrieben.
+- Bricht bei unvollständigen Sicherungen, geänderten Pfaden sowie Kopier- oder Vergleichsfehlern ab.
+- Behält vorhandene RegionPilot-/Mirravel-Sicherungsordner und die Bundle-ID bei.
+
+## Downloads und Installation
+
+- **Mirravel-0.2.0-Beta-Mac.dmg:** öffnen und `Mirravel.app` nach `Applications` ziehen; eine ältere Mirravel-App ersetzen.
+- **Mirravel-0.2.0-Beta-Quellpaket.zip:** vollständige Quellen, Anleitung, Tests und lokaler DMG-Bau ohne Xcode.
+- **SHA256SUMS.txt:** Prüfsummen der beiden Pakete.
+
+Nach dem Start Menü **1 – Diagnose** verwenden. Meldet der Mac nach einem Update wieder Antwort `2`, Menü **2** wählen, **TEST** eingeben und die lokale Administratorabfrage bestätigen. Anschließend iPhone Mirroring vollständig beenden und erneut öffnen. Terminal benötigt **Full Disk Access**.
+
+Die Rücknahme bleibt über Menü **3** möglich. Diagnose, Sicherung und Rücknahme laufen lokal. Kostenlos und Open Source unter der MIT-Lizenz.
+
+## Testumfang
+
+Der Gerätetest aus der EU bestätigt die erfolgreiche Verbindung mit den beiden 27.2-RCs. Langzeitstabilität und andere Geräte- oder Versionskombinationen sind damit nicht geprüft. Frühere Betatests hatten Timeouts gezeigt. Die Beta verändert nur die Mac-Seite; ein lokaler Wert `4` allein ist kein Verbindungstest.
+
+Die automatisierten Prüfungen verwenden ausschließlich temporäre Systemdateien. Der macOS-Paketbau prüft zusätzlich AppleScript, App-Ressourcen, Ad-hoc-Signatur und DMG. Die App ist nicht Developer-ID-signiert und nicht notarisiert.
 
 Entwickelt von **PwnedG0blin** · Copyright (c) 2026 PwnedG0blin.
 
-Umbenennung von RegionPilot zu Mirravel; Funktion und dokumentierte Grenzen des experimentellen iPhone-Mirroring-Helfers bleiben erhalten.
-Bundle-ID und vorhandener Sicherungsordner bleiben kompatibel.
-
-## Downloads
-
-- **Mirravel-0.1.1-Beta-Mac.dmg:** App nach Programme ziehen; die App startet ein lokales Terminal-Menü.
-- **Mirravel-0.1.1-Beta-Quellpaket.zip:** vollständige Quellen, Anleitung, Tests und lokaler DMG-Bau ohne Xcode.
-- **SHA256SUMS.txt:** Prüfsummen der beiden Pakete.
-
-## Enthalten
-
-Diagnose ohne Schreibzugriff, ausdrücklich bestätigter Mac-Patch, Sicherung der Originaldatei, Rücknahme der drei eigenen Schlüssel und ein erweiterter lokaler Mac-Protokollfilter. Alle Schritte sind in der beiliegenden Anleitung und im Projekt-README beschrieben.
-
-## Vor dem ersten Test
-
-Zuerst Menü **1 – Diagnose** verwenden. Für einen Patch braucht Terminal **Festplattenvollzugriff** und einen vollständigen Neustart. Menü **2** verändert erst nach Eingabe **TEST** und lokaler `sudo`-Abfrage die Systemdatei. Menü **3** nimmt eigene Werte unter den dokumentierten Voraussetzungen zurück.
-
-**Getestet laut Nutzerangabe vom 18.10.2026:** iOS 27.2 und die zum Testzeitpunkt aktuelle macOS-Developer-Beta. Eine genaue macOS-Buildnummer wurde für diese Veröffentlichung nicht neu angegeben.
-
-**Experimentell:** In einem früheren manuellen Test wurde kurz ein Bild angezeigt; danach gab es Timeouts. Ein dauerhaft zuverlässiger Verbindungsaufbau ist damit nicht bestätigt. Eine lokale Antwort `4` ist kein erfolgreicher Verbindungstest. Die Beta verändert weder den iPhone-Standort noch dessen Regionsprüfung. Vor einem macOS-Update möglichst zurücknehmen; alte Backups werden nicht automatisch über neue Builds geschrieben.
-
-Die App ist ad-hoc signiert, nicht Developer-ID-signiert und nicht notarisiert. macOS kann beim ersten Start eine gezielte Freigabe verlangen. Gatekeeper und SIP nicht global deaktivieren.
-
-Tests mit simulierten Systemdateien und der macOS-Paketbau prüfen die Implementierung und Verpackung; sie ersetzen keinen Hardware-, TCC- oder Mirroring-Test.
-
-[Ausführliche Anleitung und Quellcode](https://github.com/PwnedG0blin/PwnedG0blin/tree/master/projects/Mirravel) · [Fehler melden](https://github.com/PwnedG0blin/PwnedG0blin/issues/new)
+[Anleitung und Quellcode](https://github.com/PwnedG0blin/PwnedG0blin/tree/master/projects/Mirravel) · [Fehler melden](https://github.com/PwnedG0blin/PwnedG0blin/issues/new)

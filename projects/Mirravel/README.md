@@ -1,16 +1,16 @@
 # Mirravel — iPhone Mirroring Diagnostics for Mac
 
-**Version 0.1.1 Beta** · [English](README.en.md)
+**Version 0.2.0 Beta** · [English](README.en.md)
 
 **Experimenteller macOS-Helfer für iPhone Mirroring. Kostenlos und Open Source unter der MIT-Lizenz.**
 
 Entwickelt von **PwnedG0blin**. **Mirravel hieß bisher RegionPilot.**
 
-[Beta herunterladen](https://github.com/PwnedG0blin/PwnedG0blin/releases/tag/mirravel-v0.1.1-beta) · [Profil](https://github.com/PwnedG0blin) · [Fehler melden](https://github.com/PwnedG0blin/PwnedG0blin/issues/new)
+[Beta herunterladen](https://github.com/PwnedG0blin/PwnedG0blin/releases/tag/mirravel-v0.2.0-beta) · [Profil](https://github.com/PwnedG0blin) · [Fehler melden](https://github.com/PwnedG0blin/PwnedG0blin/issues/new)
 
 ## EU-Zweck und experimentelle Umgehung
 
-Mirravel richtet sich an Nutzerinnen und Nutzer in der Europäischen Union und verfolgt das Ziel, Apples regionale Einschränkung für iPhone Mirroring experimentell zu umgehen. Dafür bietet es Diagnose und Änderungen auf der Mac-Seite mit Sicherung und Rücknahme eigener Änderungen. Eine erfolgreiche oder dauerhaft stabile Umgehung ist nicht bestätigt; Prüfungen auf dem iPhone können die Verbindung weiterhin verhindern.
+Mirravel richtet sich an Nutzerinnen und Nutzer in der Europäischen Union und verfolgt das Ziel, Apples regionale Einschränkung für iPhone Mirroring experimentell zu umgehen. Dafür bietet es Diagnose und Änderungen auf der Mac-Seite mit Sicherung und Rücknahme eigener Änderungen. Am 23.10.2026 hat PwnedG0blin eine funktionierende iPhone-Mirroring-Verbindung aus der EU mit iOS 27.2 RC und macOS 27.2 RC bestätigt. Prüfungen auf dem iPhone und spätere Systemupdates können die Verbindung weiterhin beeinflussen.
 
 ## Was die Beta kann
 
@@ -27,20 +27,20 @@ Für iPhone Mirroring nennt Apple einen Mac mit Apple Silicon oder T2-Chip, macO
 
 Apple führt iPhone Mirroring weiterhin als in der EU nicht verfügbar (Quellenprüfung: 18.10.2026). Diese Beta ist ein experimenteller Eingriff in eine undokumentierte macOS-Systemdatenbank, keine von Apple unterstützte Funktion.
 
-**Bestätigter Geräteteststand (Nutzerangabe vom 18.10.2026): iOS 27.2 und die zum Testzeitpunkt aktuelle macOS-Developer-Beta.** Eine genaue macOS-Buildnummer wurde für diese Veröffentlichung nicht neu angegeben. Dieser Teststand ist keine Zusage, dass jede frühere oder künftige Kombination funktioniert.
+**Erfolgreicher Gerätetest durch PwnedG0blin am 23.10.2026: iOS 27.2 RC und macOS 27.2 RC.** Der Test fand aus der Europäischen Union statt. Nach erneuter Anwendung des Mac-Patches wurde eine funktionierende iPhone-Mirroring-Verbindung bestätigt. Die genauen RC-Buildnummern wurden für diesen Test nicht angegeben.
 
-**Bekannte Probleme:** In einem früheren manuellen Test wurde der Bildschirm kurz angezeigt; anschließend traten wiederholt Verbindungs-Timeouts auf. Ein dauerhaft zuverlässiger Verbindungsaufbau ist dadurch nicht bestätigt. Ein erfolgreicher Paket-Build ist kein erfolgreicher Mirroring-Test.
+**Testumfang:** Der aktuelle Gerätetest bestätigt den erfolgreichen Verbindungsaufbau mit beiden 27.2-RCs. Langzeitstabilität und andere Geräte- oder Versionskombinationen wurden damit nicht geprüft. In früheren Betas waren Verbindungs-Timeouts aufgetreten.
 
 ## Download und erster Start
 
-1. Auf der [Beta-Seite](https://github.com/PwnedG0blin/PwnedG0blin/releases/tag/mirravel-v0.1.1-beta) unter **Assets** `Mirravel-0.1.1-Beta-Mac.dmg` laden.
+1. Auf der [Beta-Seite](https://github.com/PwnedG0blin/PwnedG0blin/releases/tag/mirravel-v0.2.0-beta) unter **Assets** `Mirravel-0.2.0-Beta-Mac.dmg` laden.
 2. DMG öffnen und **Mirravel.app** nach **Programme / Applications** ziehen. Die Anleitung liegt ebenfalls im DMG.
 3. Mirravel öffnen. **Anleitung** zeigt diese Hinweise; **Terminal-Menü** startet das lokale Menü.
 4. Im Terminal zuerst **1 – Diagnose** wählen. Dabei werden keine Systemeinstellungen geändert und keine Administratorrechte angefordert.
 
 Die Beta ist ad-hoc signiert, aber **nicht mit einer Apple Developer ID signiert und nicht notarisiert**. Wenn macOS den Start blockiert, nach einem Öffnungsversuch unter **Systemeinstellungen → Datenschutz & Sicherheit → Dennoch öffnen / Open Anyway** nachsehen und den gezielten Start bestätigen, sofern macOS ihn anbietet. Nicht alle Blockierungsarten bieten diese Option an. Gatekeeper oder SIP nicht systemweit deaktivieren.
 
-Alternative ohne fertige App: `Mirravel-0.1.1-Beta-Quellpaket.zip` vollständig entpacken, alle Dateien zusammenlassen und `Mirravel.command` öffnen. Das Menü ist dasselbe. Nicht einzelne Dateien aus der GitHub-Vorschau herunterladen; vollständiges ZIP verwenden.
+Alternative ohne fertige App: `Mirravel-0.2.0-Beta-Quellpaket.zip` vollständig entpacken, alle Dateien zusammenlassen und `Mirravel.command` öffnen. Das Menü ist dasselbe. Nicht einzelne Dateien aus der GitHub-Vorschau herunterladen; vollständiges ZIP verwenden.
 
 ## Optional: experimentellen Mac-Patch testen
 
@@ -79,7 +79,7 @@ Es werden keine Dienste, Autostarts, geplanten Aufgaben, Profile, VPNs oder auto
 3. Das Programm setzt nur seine drei Schlüssel auf die gespeicherten Originalwerte zurück. Andere inzwischen geänderte Bereiche werden beibehalten.
 4. Anschließend iPhone Mirroring erneut öffnen oder beenden, je nachdem, ob du es weiter nutzen möchtest.
 
-Die Rücknahme wird verweigert, wenn Sicherung, Pfad oder macOS-Build nicht passen oder einer der drei Werte inzwischen einen anderen Zustand hat. **Vor einem geplanten macOS-Update möglichst zurücknehmen.** Nach einem Update keine komplette alte Eligibility-Datei über den neuen Zustand kopieren. Sicherung behalten und einen bereinigten Fehlerbericht erstellen; die Beta enthält dafür keinen automatischen Migrationsweg.
+Die Rücknahme wird verweigert, wenn Sicherung, Pfad oder macOS-Build nicht passen oder einer der drei Werte inzwischen einen anderen Zustand hat. **Vor einem geplanten macOS-Update möglichst zurücknehmen.** Nach einem Update keine komplette alte Eligibility-Datei über den neuen Zustand kopieren. Wenn der Mac nach dem Update wieder Antwort `2` meldet, kann Menü **2** den Patch erneut anwenden. Bei erkanntem Buildwechsel werden die vier bisherigen Sicherungsdateien zunächst unter `/private/var/db/regionpilot/previous-build.XXXXXX` kopiert und byteweise geprüft. Erst danach sichert der Helfer den aktuellen macOS-Zustand als neue Ausgangsbasis. Alte Systemwerte werden nicht über den neuen Build geschrieben. Bei gleichem Build bleibt der bisherige Schutz gegen eine doppelte Anwendung aktiv.
 
 ## Fehlerdiagnose
 
@@ -91,7 +91,7 @@ Die Rücknahme wird verweigert, wenn Sicherung, Pfad oder macOS-Build nicht pass
 | `SFAuthenticationErrorCodeRegionLocked` im tatsächlichen Verbindungsprotokoll | Eine zusätzliche Ablehnung auf der iPhone-Seite ist möglich; die Beta verändert das iPhone nicht. |
 | Timeout oder kurz sichtbarer Bildschirm | Kein Nachweis einer dauerhaft funktionierenden Freischaltung. Apples Verbindungsdiagnose und lokale Protokolle prüfen. |
 | Frühere Änderung gespeichert / anderer Vorgang läuft | Keine parallelen Instanzen starten. Zuerst regulär zurücknehmen. Bei einem abgebrochenen Vorgang keine Sicherung oder Sperre blind löschen. |
-| macOS-Build hat sich geändert | Alte Sicherung behalten. Die automatische Rücknahme wird absichtlich verweigert. |
+| macOS-Build hat sich geändert und Antwort `2` | Menü **2** erneut verwenden: alte Sicherung archivieren, neuen Ausgangszustand sichern und Patch anwenden. Menü **3** spielt keine Werte eines alten Builds zurück. |
 
 **Mac-Protokoll:** Zuerst einen fehlgeschlagenen Verbindungsversuch auslösen, danach Menü **5** wählen. Es zeigt die letzten fünf Minuten mit bis zu 160 Zeilen, einschließlich relevanter Verbindungs- und Aktivierungsmeldungen. Das ist nur das Mac-Protokoll. Die erklärenden Zeilen unter der Ausgabe sind keine gefundenen Fehlermeldungen. Keine Treffer beweisen weder Erfolg noch eine fehlende Regionssperre.
 
@@ -115,7 +115,7 @@ Auf einem Mac das vollständige Quellpaket entpacken und **`DMG_erstellen.comman
 /bin/bash scripts/build-macos.sh
 ```
 
-Die fertige DMG liegt unter `dist/Mirravel-0.1.1-Beta-Mac.dmg`. AppleScript-Compiler, Signaturwerkzeuge und DMG-Werkzeuge gehören zu macOS; Xcode ist für diesen lokalen Paketbau nicht erforderlich. Projekt und temporäre Paketdateien bleiben im gewählten Ausgabeordner. Der Build führt keinen Patch aus.
+Die fertige DMG liegt unter `dist/Mirravel-0.2.0-Beta-Mac.dmg`. AppleScript-Compiler, Signaturwerkzeuge und DMG-Werkzeuge gehören zu macOS; Xcode ist für diesen lokalen Paketbau nicht erforderlich. Projekt und temporäre Paketdateien bleiben im gewählten Ausgabeordner. Der Build führt keinen Patch aus.
 
 Für die automatisierten Regressionstests wird Python 3 benötigt:
 
@@ -144,4 +144,5 @@ Lizenz: [MIT](LICENSE). Der Hinweis auf den experimentellen Beta-Status gehört 
 
 ## Kompatibilität beim Namenswechsel
 
-Die Bundle-ID `io.github.pwnedg0blin.RegionPilot` und der geschützte Sicherungsordner `/private/var/db/regionpilot` bleiben erhalten. So kann Mirravel vorhandene eigene RegionPilot-Sicherungen unter denselben Prüfbedingungen wiederherstellen. Es wird keine Sicherung verschoben oder ersetzt.
+Die Bundle-ID `io.github.pwnedg0blin.RegionPilot` und der geschützte Sicherungsordner `/private/var/db/regionpilot` bleiben erhalten. So kann Mirravel vorhandene eigene RegionPilot-Sicherungen unter denselben Prüfbedingungen wiederherstellen. Bei erneuter Anwendung nach einem macOS-Buildwechsel wird die frühere Sicherung aufbewahrt und der neue Ausgangszustand separat gesichert.
+

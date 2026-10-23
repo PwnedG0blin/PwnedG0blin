@@ -1,4 +1,4 @@
-name: Mirravel 0.1.1 Beta
+name: Mirravel 0.2.0 Beta
 on:
   push:
     branches: [master]
@@ -28,7 +28,9 @@ jobs:
       - uses: actions/checkout@v4
       - name: Shell syntax and isolated regression tests
         run: |
-          bash -n core.sh Mirravel.command DMG_erstellen.command scripts/build-macos.sh scripts/verify-macos.sh
+          for shell_file in core.sh Mirravel.command DMG_erstellen.command scripts/build-macos.sh scripts/verify-macos.sh; do
+            bash -n "$shell_file"
+          done
           python3 -m unittest discover -s tests -v
       - name: Build and verify Mac application and DMG
         run: |
@@ -38,14 +40,14 @@ jobs:
         run: |
           python3 scripts/package-source.py
           cd dist
-          shasum -a 256 Mirravel-0.1.1-Beta-Mac.dmg Mirravel-0.1.1-Beta-Quellpaket.zip > SHA256SUMS.txt
+          shasum -a 256 Mirravel-0.2.0-Beta-Mac.dmg Mirravel-0.2.0-Beta-Quellpaket.zip > SHA256SUMS.txt
       - name: Upload checked beta package
         uses: actions/upload-artifact@v7
         with:
-          name: Mirravel-0.1.1-Beta
+          name: Mirravel-0.2.0-Beta
           path: |
-            projects/Mirravel/dist/Mirravel-0.1.1-Beta-Mac.dmg
-            projects/Mirravel/dist/Mirravel-0.1.1-Beta-Quellpaket.zip
+            projects/Mirravel/dist/Mirravel-0.2.0-Beta-Mac.dmg
+            projects/Mirravel/dist/Mirravel-0.2.0-Beta-Quellpaket.zip
             projects/Mirravel/dist/SHA256SUMS.txt
           retention-days: 14
           if-no-files-found: error
@@ -56,9 +58,10 @@ jobs:
           GH_REPO: ${{ github.repository }}
           RELEASE_TARGET: ${{ github.sha }}
         run: |
-          tag='mirravel-v0.1.1-beta'
+          tag='mirravel-v0.2.0-beta'
           if gh release view "$tag" >/dev/null 2>&1; then
             echo 'Diese Beta wurde bereits veröffentlicht und wird nicht still überschrieben.'
             exit 0
           fi
-          gh release create "$tag" --target "$RELEASE_TARGET" --prerelease --title 'Mirravel 0.1.1 Beta' --notes-file RELEASE_NOTES.md dist/Mirravel-0.1.1-Beta-Mac.dmg dist/Mirravel-0.1.1-Beta-Quellpaket.zip dist/SHA256SUMS.txt
+          gh release create "$tag" --target "$RELEASE_TARGET" --prerelease --title 'Mirravel 0.2.0 Beta' --notes-file RELEASE_NOTES.md dist/Mirravel-0.2.0-Beta-Mac.dmg dist/Mirravel-0.2.0-Beta-Quellpaket.zip dist/SHA256SUMS.txt
+
