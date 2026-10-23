@@ -2,7 +2,7 @@
 # Copyright (c) 2026 PwnedG0blin · Developed by PwnedG0blin · SPDX-License-Identifier: MIT
 set -euo pipefail
 project="$(cd -- "$(dirname -- "$0")/.." && pwd -P)"
-image="$project/dist/Mirravel-0.2.0-Beta-Mac.dmg"
+image="$project/dist/Mirravel-0.2.1-Beta-Mac.dmg"
 mountpoint="$(mktemp -d "${TMPDIR:-/tmp}/Mirravel-verify.XXXXXX")"
 attached=0
 cleanup() {
@@ -14,7 +14,9 @@ hdiutil attach "$image" -readonly -nobrowse -mountpoint "$mountpoint"
 attached=1
 app="$mountpoint/Mirravel.app"
 codesign --verify --strict "$app"
-[[ "$(/usr/libexec/PlistBuddy -c 'Print :CFBundleShortVersionString' "$app/Contents/Info.plist")" == 0.2.0 ]]
+[[ "$(/usr/libexec/PlistBuddy -c 'Print :CFBundleShortVersionString' "$app/Contents/Info.plist")" == 0.2.1 ]]
+[[ "$(/usr/libexec/PlistBuddy -c 'Print :CFBundleIdentifier' "$app/Contents/Info.plist")" == io.github.pwnedg0blin.Mirravel ]]
+[[ "$(/usr/libexec/PlistBuddy -c 'Print :CFBundleName' "$app/Contents/Info.plist")" == Mirravel ]]
 [[ -x "$app/Contents/Resources/Mirravel.command" ]]
 for file in Mirravel.command core.sh Anleitung.txt README.md AUTHORS.md LICENSE; do
   cmp "$project/$file" "$app/Contents/Resources/$file"

@@ -1,12 +1,12 @@
 # Mirravel — iPhone Mirroring Diagnostics for Mac
 
-**Version 0.2.0 Beta** · [English](README.en.md)
+**Version 0.2.1 Beta** · [English](README.en.md)
 
 **Experimenteller macOS-Helfer für iPhone Mirroring. Kostenlos und Open Source unter der MIT-Lizenz.**
 
-Entwickelt von **PwnedG0blin**. **Mirravel hieß bisher RegionPilot.**
+Entwickelt von **PwnedG0blin**.
 
-[Beta herunterladen](https://github.com/PwnedG0blin/PwnedG0blin/releases/tag/mirravel-v0.2.0-beta) · [Profil](https://github.com/PwnedG0blin) · [Fehler melden](https://github.com/PwnedG0blin/PwnedG0blin/issues/new)
+[Beta herunterladen](https://github.com/PwnedG0blin/PwnedG0blin/releases/tag/mirravel-v0.2.1-beta) · [Profil](https://github.com/PwnedG0blin) · [Fehler melden](https://github.com/PwnedG0blin/PwnedG0blin/issues/new)
 
 ## EU-Zweck und experimentelle Umgehung
 
@@ -33,7 +33,7 @@ Apple führt iPhone Mirroring weiterhin als in der EU nicht verfügbar (Quellenp
 
 ## Download und erster Start
 
-1. Auf der [Beta-Seite](https://github.com/PwnedG0blin/PwnedG0blin/releases/tag/mirravel-v0.2.0-beta) unter **Assets** `Mirravel-0.2.0-Beta-Mac.dmg` laden.
+1. Auf der [Beta-Seite](https://github.com/PwnedG0blin/PwnedG0blin/releases/tag/mirravel-v0.2.1-beta) unter **Assets** `Mirravel-0.2.1-Beta-Mac.dmg` laden.
 2. DMG öffnen und **Mirravel.app** nach **Programme / Applications** ziehen. Die Anleitung liegt ebenfalls im DMG.
 3. Mirravel öffnen. **Anleitung** zeigt diese Hinweise; **Terminal-Menü** startet das lokale Menü.
 4. Im Terminal zuerst **1 – Diagnose** wählen. Dabei werden keine Systemeinstellungen geändert und keine Administratorrechte angefordert.
@@ -49,7 +49,7 @@ Diese Beta ist ad-hoc signiert und nicht notarisiert. macOS kann deshalb **„Mi
 
 Diese App-Freigabe ist ein eigener Schritt. Für den experimentellen Patch benötigt **Terminal** zusätzlich **Full Disk Access**, wie im nächsten Abschnitt beschrieben. Gatekeeper oder SIP nicht systemweit deaktivieren.
 
-Alternative ohne fertige App: `Mirravel-0.2.0-Beta-Quellpaket.zip` vollständig entpacken, alle Dateien zusammenlassen und `Mirravel.command` öffnen. Das Menü ist dasselbe. Nicht einzelne Dateien aus der GitHub-Vorschau herunterladen; vollständiges ZIP verwenden.
+Alternative ohne fertige App: `Mirravel-0.2.1-Beta-Source.zip` vollständig entpacken, alle Dateien zusammenlassen und `Mirravel.command` öffnen. Das Menü ist dasselbe. Nicht einzelne Dateien aus der GitHub-Vorschau herunterladen; vollständiges ZIP verwenden.
 
 ## Optional: experimentellen Mac-Patch testen
 
@@ -75,9 +75,9 @@ Nur diese drei **vorhandenen Ganzzahlwerte** unter `OS_ELIGIBILITY_DOMAIN_IRON` 
 
 Bekannte Dateipfade sind `/private/var/db/os_eligibility/eligibility.plist` und `/private/var/os_eligibility/eligibility.plist`. Bei fehlenden oder unbekannten Schlüsseln/Typen bricht das Programm ab.
 
-Vor dem Schreiben wird die Ausgangsdatei unter **`/private/var/db/regionpilot/original.plist`** gesichert. Der Ordner gehört `root` und hat Modus `700`. macOS-Build und Quellpfad werden ebenfalls gespeichert. Ein vorhandener `uchg`-Schreibschutz wird nur vorübergehend gelöst und anschließend wiederhergestellt; es wird kein neuer dauerhafter Schutz eingerichtet. Die Originaldatei behält ihren Inode, ihre Rechte, ACLs und erweiterten Attribute.
+Vor dem Schreiben wird die Ausgangsdatei unter **`/private/var/db/mirravel/original.plist`** gesichert. Der Ordner gehört `root` und hat Modus `700`. macOS-Build und Quellpfad werden ebenfalls gespeichert. Ein vorhandener `uchg`-Schreibschutz wird nur vorübergehend gelöst und anschließend wiederhergestellt; es wird kein neuer dauerhafter Schutz eingerichtet. Die Originaldatei behält ihren Inode, ihre Rechte, ACLs und erweiterten Attribute.
 
-Die Sicherung liegt bewusst im geschützten Systembereich des Macs, auch wenn die App auf einer externen SSD liegt. Sie ist klein und enthält keine iPhone-Apps oder Nutzerdatenträger.
+Die Sicherung liegt bewusst im geschützten Systembereich des Macs, auch wenn die App auf einer externen SSD liegt. Sie ist klein und enthält keine iPhone-Apps oder Nutzerdatenträger. Bei einer bestehenden Installation verwendet Mirravel den vorhandenen Sicherungsordner weiter. Werden zwei Sicherungsordner gefunden, bricht es vor einer Änderung ab. [Details zur Kompatibilität](COMPATIBILITY.md).
 
 Es werden keine Dienste, Autostarts, geplanten Aufgaben, Profile, VPNs oder automatischen Dauer-Patches eingerichtet. Mirravel selbst tätigt keine Netzwerkanfragen; GitHub-Downloads und Apples Mirroring-Dienste sind davon getrennt.
 
@@ -88,7 +88,7 @@ Es werden keine Dienste, Autostarts, geplanten Aufgaben, Profile, VPNs oder auto
 3. Das Programm setzt nur seine drei Schlüssel auf die gespeicherten Originalwerte zurück. Andere inzwischen geänderte Bereiche werden beibehalten.
 4. Anschließend iPhone Mirroring erneut öffnen oder beenden, je nachdem, ob du es weiter nutzen möchtest.
 
-Die Rücknahme wird verweigert, wenn Sicherung, Pfad oder macOS-Build nicht passen oder einer der drei Werte inzwischen einen anderen Zustand hat. **Vor einem geplanten macOS-Update möglichst zurücknehmen.** Nach einem Update keine komplette alte Eligibility-Datei über den neuen Zustand kopieren. Wenn der Mac nach dem Update wieder Antwort `2` meldet, kann Menü **2** den Patch erneut anwenden. Bei erkanntem Buildwechsel werden die vier bisherigen Sicherungsdateien zunächst unter `/private/var/db/regionpilot/previous-build.XXXXXX` kopiert und byteweise geprüft. Erst danach sichert der Helfer den aktuellen macOS-Zustand als neue Ausgangsbasis. Alte Systemwerte werden nicht über den neuen Build geschrieben. Bei gleichem Build bleibt der bisherige Schutz gegen eine doppelte Anwendung aktiv.
+Die Rücknahme wird verweigert, wenn Sicherung, Pfad oder macOS-Build nicht passen oder einer der drei Werte inzwischen einen anderen Zustand hat. **Vor einem geplanten macOS-Update möglichst zurücknehmen.** Nach einem Update keine komplette alte Eligibility-Datei über den neuen Zustand kopieren. Wenn der Mac nach dem Update wieder Antwort `2` meldet, kann Menü **2** den Patch erneut anwenden. Bei erkanntem Buildwechsel werden die vier bisherigen Sicherungsdateien zunächst unter `/private/var/db/mirravel/previous-build.XXXXXX` kopiert und byteweise geprüft. Erst danach sichert der Helfer den aktuellen macOS-Zustand als neue Ausgangsbasis. Alte Systemwerte werden nicht über den neuen Build geschrieben. Bei gleichem Build bleibt der bisherige Schutz gegen eine doppelte Anwendung aktiv.
 
 ## Fehlerdiagnose
 
@@ -124,7 +124,7 @@ Auf einem Mac das vollständige Quellpaket entpacken und **`DMG_erstellen.comman
 /bin/bash scripts/build-macos.sh
 ```
 
-Die fertige DMG liegt unter `dist/Mirravel-0.2.0-Beta-Mac.dmg`. AppleScript-Compiler, Signaturwerkzeuge und DMG-Werkzeuge gehören zu macOS; Xcode ist für diesen lokalen Paketbau nicht erforderlich. Projekt und temporäre Paketdateien bleiben im gewählten Ausgabeordner. Der Build führt keinen Patch aus.
+Die fertige DMG liegt unter `dist/Mirravel-0.2.1-Beta-Mac.dmg`. AppleScript-Compiler, Signaturwerkzeuge und DMG-Werkzeuge gehören zu macOS; Xcode ist für diesen lokalen Paketbau nicht erforderlich. Projekt und temporäre Paketdateien bleiben im gewählten Ausgabeordner. Der Build führt keinen Patch aus.
 
 Für die automatisierten Regressionstests wird Python 3 benötigt:
 
@@ -151,7 +151,7 @@ Urheberhinweis: **Copyright (c) 2026 PwnedG0blin** · [Entwicklung / AUTHORS](AU
 Lizenz: [MIT](LICENSE). Der Hinweis auf den experimentellen Beta-Status gehört zur Beschreibung dieser Veröffentlichung.
 
 
-## Kompatibilität beim Namenswechsel
+## Kompatibilität mit vorhandenen Sicherungen
 
-Die Bundle-ID `io.github.pwnedg0blin.RegionPilot` und der geschützte Sicherungsordner `/private/var/db/regionpilot` bleiben erhalten. So kann Mirravel vorhandene eigene RegionPilot-Sicherungen unter denselben Prüfbedingungen wiederherstellen. Bei erneuter Anwendung nach einem macOS-Buildwechsel wird die frühere Sicherung aufbewahrt und der neue Ausgangszustand separat gesichert.
+App, Startdatei, Pakete, Workflow und aktuelle Projektseiten heißen einheitlich **Mirravel**. Die App verwendet die Bundle-ID `io.github.pwnedg0blin.Mirravel`. Neue Installationen sichern unter `/private/var/db/mirravel`; vorhandene ältere Sicherungen werden weiterhin erkannt und unter den bisherigen Prüfbedingungen verwendet. Die Rücknahme bleibt auf den passenden macOS-Build und die drei eigenen Werte begrenzt. [Upgrade-Hinweise](COMPATIBILITY.md).
 

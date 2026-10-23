@@ -2,7 +2,7 @@
 
 **Entwickelt von PwnedG0blin.**
 
-Projekt: Mirravel · Version 0.2.0 Beta.
+Projekt: Mirravel · Version 0.2.1 Beta.
 
 Copyright (c) 2026 PwnedG0blin.
 

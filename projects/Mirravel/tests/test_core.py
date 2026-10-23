@@ -21,6 +21,7 @@ class CoreTests(unittest.TestCase):
         self.tools.mkdir()
         self.live = self.root / 'eligibility.plist'
         self.state = self.root / 'state'
+        self.legacy_state = self.root / 'legacy-state'
         self.flags = self.root / 'flags'
         self.flags.write_text('')
         self.build = self.root / 'build'
@@ -32,38 +33,38 @@ class CoreTests(unittest.TestCase):
             'OTHER_FEATURE': {'enabled': True}}
         self.write(self.initial)
         self.original_bytes = self.live.read_bytes()
-        self.env = os.environ | {'RP_LIVE': str(self.live), 'RP_FLAGS': str(self.flags),
-                                 'RP_BUILD': str(self.build), 'RP_MARKER': str(self.marker)}
+        self.env = os.environ | {'MR_LIVE': str(self.live), 'MR_FLAGS': str(self.flags),
+                                 'MR_BUILD': str(self.build), 'MR_MARKER': str(self.marker)}
         self.tool('uname', "print('Darwin')")
         self.tool('id', "print('0')")
-        self.tool('sw_vers', "print(Path(os.environ['RP_BUILD']).read_text() if '-buildVersion' in sys.argv else '27.2')")
+        self.tool('sw_vers', "print(Path(os.environ['MR_BUILD']).read_text() if '-buildVersion' in sys.argv else '27.2')")
         self.tool('stat', '''
 if sys.argv[2] == '%u:%Lp':
     print('0:' + format(stat.S_IMODE(os.stat(sys.argv[3]).st_mode), 'o'))
 else:
-    print(Path(os.environ['RP_FLAGS']).read_text())
+    print(Path(os.environ['MR_FLAGS']).read_text())
 ''')
-        self.tool('chflags', "Path(os.environ['RP_FLAGS']).write_text('uchg' if sys.argv[1] == 'uchg' else '')")
+        self.tool('chflags', "Path(os.environ['MR_FLAGS']).write_text('uchg' if sys.argv[1] == 'uchg' else '')")
         self.tool('cp', '''
 import shutil
 source, destination = map(Path, sys.argv[-2:])
-if os.environ.get('RP_FAIL_ARCHIVE_COPY') and 'previous-build.' in str(destination) and destination.name == 'build':
+if os.environ.get('MR_FAIL_ARCHIVE_COPY') and 'previous-build.' in str(destination) and destination.name == 'build':
     sys.exit(1)
 shutil.copy2(source, destination)
 ''')
         self.tool('cmp', '''
 source, destination = map(Path, sys.argv[-2:])
-if os.environ.get('RP_FAIL_ARCHIVE_COMPARE') and 'previous-build.' in str(destination):
+if os.environ.get('MR_FAIL_ARCHIVE_COMPARE') and 'previous-build.' in str(destination):
     sys.exit(1)
 sys.exit(0 if source.read_bytes() == destination.read_bytes() else 1)
 ''')
         self.tool('cat', '''
-p = Path(sys.argv[1]); marker = Path(os.environ['RP_MARKER'])
+p = Path(sys.argv[1]); marker = Path(os.environ['MR_MARKER'])
 if p.name.startswith('work.'):
     marker.touch()
-    if os.environ.get('RP_FAIL_WRITE'):
+    if os.environ.get('MR_FAIL_WRITE'):
         sys.stdout.buffer.write(b'incomplete write'); sys.exit(1)
-if p.name.startswith('snapshot.') and marker.exists() and os.environ.get('RP_FAIL_ROLLBACK'):
+if p.name.startswith('snapshot.') and marker.exists() and os.environ.get('MR_FAIL_ROLLBACK'):
     sys.exit(1)
 sys.stdout.buffer.write(p.read_bytes())
 ''')
@@ -72,11 +73,11 @@ args = sys.argv[1:]; path = Path(args[-1])
 try:
     data = plistlib.loads(path.read_bytes())
     if args[0] == '-lint':
-        if path.name.startswith('work.') and os.environ.get('RP_RACE'):
-            live = Path(os.environ['RP_LIVE']); changed = plistlib.loads(live.read_bytes())
+        if path.name.startswith('work.') and os.environ.get('MR_RACE'):
+            live = Path(os.environ['MR_LIVE']); changed = plistlib.loads(live.read_bytes())
             changed['OTHER_FEATURE']['systemUpdate'] = 'preserve this'
             live.write_bytes(plistlib.dumps(changed))
-        if path == Path(os.environ['RP_LIVE']) and Path(os.environ['RP_MARKER']).exists() and os.environ.get('RP_FAIL_VERIFY'):
+        if path == Path(os.environ['MR_LIVE']) and Path(os.environ['MR_MARKER']).exists() and os.environ.get('MR_FAIL_VERIFY'):
             sys.exit(1)
         sys.exit(0)
     keys = args[1].split('.'); node = data
@@ -92,7 +93,8 @@ except (OSError, KeyError, ValueError, plistlib.InvalidFileException):
     sys.exit(1)
 ''')
         source = (PROJECT / 'core.sh').read_text()
-        source = source.replace('STATE=/private/var/db/regionpilot', 'STATE=' + shlex.quote(str(self.state)))
+        source = source.replace('STATE=/private/var/db/mirravel', 'STATE=' + shlex.quote(str(self.state)))
+        source = source.replace('LEGACY_STATE=/private/var/db/regionpilot', 'LEGACY_STATE=' + shlex.quote(str(self.legacy_state)))
         for old in ['/private/var/db/os_eligibility/eligibility.plist', '/private/var/os_eligibility/eligibility.plist']:
             source = source.replace(old, shlex.quote(str(self.live if '/db/' in old else self.root / 'missing.plist')))
         for command in ['plutil', 'stat', 'chflags', 'sw_vers']:
@@ -102,7 +104,7 @@ except (OSError, KeyError, ValueError, plistlib.InvalidFileException):
         source = source.replace('/usr/bin/cmp', shlex.quote(str(self.tools / 'cmp')))
         source = source.replace('$(uname -s)', '$(' + shlex.quote(str(self.tools / 'uname')) + ' -s)')
         source = source.replace('$(id -u)', '$(' + shlex.quote(str(self.tools / 'id')) + ' -u)')
-        assert all(path not in source for path in ['/private/var/db/regionpilot', '/private/var/db/os_eligibility/eligibility.plist', '/private/var/os_eligibility/eligibility.plist']), 'A real system path must never survive in test copy'
+        assert all(path not in source for path in ['/private/var/db/mirravel', '/private/var/db/regionpilot', '/private/var/db/os_eligibility/eligibility.plist', '/private/var/os_eligibility/eligibility.plist']), 'A real system path must never survive in test copy'
         self.script = self.root / 'core-under-test.sh'
         self.script.write_text(source)
 
@@ -206,18 +208,18 @@ except (OSError, KeyError, ValueError, plistlib.InvalidFileException):
         self.run_core('restore'); self.assertEqual(self.flags.read_text(), 'uchg')
 
     def test_verification_failure_restores_snapshot_and_original_flag(self):
-        self.flags.write_text('uchg'); self.run_core('apply', False, RP_FAIL_VERIFY='1')
+        self.flags.write_text('uchg'); self.run_core('apply', False, MR_FAIL_VERIFY='1')
         self.assertEqual(self.live.read_bytes(), self.original_bytes)
         self.assertEqual(self.flags.read_text(), 'uchg')
         self.assertFalse((self.state / 'lock').exists())
 
     def test_concurrent_system_change_is_not_overwritten(self):
-        self.run_core('apply', False, RP_RACE='1')
+        self.run_core('apply', False, MR_RACE='1')
         self.assertEqual(self.read()['OTHER_FEATURE']['systemUpdate'], 'preserve this')
         self.assertEqual(self.read()[DOMAIN]['os_eligibility_answer_t'], 2)
 
     def test_failed_rollback_preserves_recovery_snapshot(self):
-        result = self.run_core('apply', False, RP_FAIL_WRITE='1', RP_FAIL_ROLLBACK='1')
+        result = self.run_core('apply', False, MR_FAIL_WRITE='1', MR_FAIL_ROLLBACK='1')
         snapshots = list(self.state.glob('snapshot.*'))
         self.assertEqual(len(snapshots), 1)
         self.assertEqual(snapshots[0].read_bytes(), self.original_bytes)
@@ -227,6 +229,58 @@ except (OSError, KeyError, ValueError, plistlib.InvalidFileException):
         self.flags.write_text('schg'); self.run_core('apply', False)
         self.assertEqual(self.live.read_bytes(), self.original_bytes)
         self.assertEqual(self.flags.read_text(), 'schg')
+
+    def test_empty_legacy_directory_is_reused_for_apply_and_restore(self):
+        self.legacy_state.mkdir(mode=0o700)
+        self.run_core('apply')
+        self.assertFalse(self.state.exists())
+        self.assertEqual((self.legacy_state / 'original.plist').read_bytes(), self.original_bytes)
+        self.run_core('restore')
+        self.assertEqual(self.live.read_bytes(), self.original_bytes)
+        self.assertFalse((self.legacy_state / 'active').exists())
+
+    def test_existing_legacy_backup_can_be_restored(self):
+        self.run_core('apply')
+        self.state.rename(self.legacy_state)
+        self.run_core('restore')
+        self.assertEqual(self.live.read_bytes(), self.original_bytes)
+        self.assertFalse(self.state.exists())
+        self.assertFalse((self.legacy_state / 'lock').exists())
+
+    def test_legacy_backup_can_be_reapplied_after_system_update(self):
+        saved, current = self.simulate_system_update()
+        self.state.rename(self.legacy_state)
+        self.run_core('apply')
+        self.assertFalse(self.state.exists())
+        archives = list(self.legacy_state.glob('previous-build.*'))
+        self.assertEqual(len(archives), 1)
+        self.assertEqual((archives[0] / 'original.plist').read_bytes(), saved['original.plist'])
+        self.assertEqual((self.legacy_state / 'original.plist').read_bytes(), current)
+        self.run_core('restore')
+        self.assertEqual(self.live.read_bytes(), current)
+
+    def test_conflicting_backup_directories_abort_before_writing(self):
+        self.state.mkdir(mode=0o700)
+        self.legacy_state.mkdir(mode=0o700)
+        self.run_core('apply', False)
+        self.assertEqual(self.live.read_bytes(), self.original_bytes)
+        self.assertEqual(list(self.state.iterdir()), [])
+        self.assertEqual(list(self.legacy_state.iterdir()), [])
+
+    def test_legacy_directory_symlink_is_rejected(self):
+        outside = self.root / 'outside'; outside.mkdir()
+        self.legacy_state.symlink_to(outside, target_is_directory=True)
+        self.run_core('apply', False)
+        self.assertEqual(self.live.read_bytes(), self.original_bytes)
+        self.assertEqual(list(outside.iterdir()), [])
+        self.assertFalse(self.state.exists())
+
+    def test_insecure_legacy_directory_permissions_are_rejected(self):
+        self.legacy_state.mkdir(mode=0o755)
+        self.legacy_state.chmod(0o755)
+        self.run_core('apply', False)
+        self.assertEqual(self.live.read_bytes(), self.original_bytes)
+        self.assertFalse(self.state.exists())
 
     def simulate_system_update(self):
         self.run_core('apply')
@@ -266,7 +320,7 @@ except (OSError, KeyError, ValueError, plistlib.InvalidFileException):
 
     def test_failed_archive_copy_preserves_previous_state_and_live_file(self):
         saved, current = self.simulate_system_update()
-        self.run_core('apply', False, RP_FAIL_ARCHIVE_COPY='1')
+        self.run_core('apply', False, MR_FAIL_ARCHIVE_COPY='1')
         self.assertEqual(self.live.read_bytes(), current)
         for name, content in saved.items():
             self.assertEqual((self.state / name).read_bytes(), content)
@@ -274,7 +328,7 @@ except (OSError, KeyError, ValueError, plistlib.InvalidFileException):
 
     def test_failed_archive_verification_preserves_previous_state(self):
         saved, current = self.simulate_system_update()
-        self.run_core('apply', False, RP_FAIL_ARCHIVE_COMPARE='1')
+        self.run_core('apply', False, MR_FAIL_ARCHIVE_COMPARE='1')
         self.assertEqual(self.live.read_bytes(), current)
         for name, content in saved.items():
             self.assertEqual((self.state / name).read_bytes(), content)
@@ -315,7 +369,7 @@ except (OSError, KeyError, ValueError, plistlib.InvalidFileException):
 
     def test_write_failure_after_archiving_preserves_both_baselines(self):
         saved, current = self.simulate_system_update()
-        self.run_core('apply', False, RP_FAIL_WRITE='1')
+        self.run_core('apply', False, MR_FAIL_WRITE='1')
         self.assertEqual(self.live.read_bytes(), current)
         self.assertEqual((self.state / 'original.plist').read_bytes(), current)
         archives = list(self.state.glob('previous-build.*'))

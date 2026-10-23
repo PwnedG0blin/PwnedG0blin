@@ -1,10 +1,10 @@
 # Mirravel — iPhone Mirroring Diagnostics for Mac
 
-**Free, open-source macOS helper for iPhone Mirroring diagnostics and experimental configuration. Version 0.2.0 Beta.**
+**Free, open-source macOS helper for iPhone Mirroring diagnostics and experimental configuration. Version 0.2.1 Beta.**
 
-Inspect local requirements, view Mac logs, and back up or restore settings changed by this tool. **Experimental beta; a successful mirroring connection is not guaranteed.** Previously called RegionPilot.
+Inspect local requirements, view Mac logs, and back up or restore settings changed by this tool. **Experimental beta; a successful mirroring connection is not guaranteed.**
 
-[Download beta](https://github.com/PwnedG0blin/PwnedG0blin/releases/tag/mirravel-v0.2.0-beta) · [Detailed German guide](README.md)
+[Download beta](https://github.com/PwnedG0blin/PwnedG0blin/releases/tag/mirravel-v0.2.1-beta) · [Detailed German guide](README.md)
 
 ## EU purpose and experimental bypass
 
@@ -23,7 +23,7 @@ Mirravel does not change the iPhone's location or its regional eligibility check
 
 ## Updates and data
 
-The existing RegionPilot bundle ID and `/private/var/db/regionpilot` backup directory remain unchanged so previous backups can still be used. If an update resets Mac eligibility to answer 2, menu 2 can reapply the patch. On a build change, the previous backup is copied to a private `previous-build.XXXXXX` directory and verified byte for byte before the current macOS state is saved as the new baseline. Old system values are never restored over a new build. The same-build safeguard remains in place.
+The app, launcher, packages, workflow and current project pages consistently use **Mirravel**. The app bundle ID is `io.github.pwnedg0blin.Mirravel`. New installations use `/private/var/db/mirravel`; existing older backups are detected and reused with the same validation rules. If both backup directories exist, the tool stops before making changes. [Upgrade compatibility](COMPATIBILITY.md). If an update resets Mac eligibility to answer 2, menu 2 can reapply the patch. On a build change, the previous backup is copied to a private `previous-build.XXXXXX` directory and verified byte for byte before the current macOS state is saved as the new baseline. Old system values are never restored over a new build. The same-build safeguard remains in place.
 
 The app is ad-hoc signed, not Developer ID signed or notarized. Build and isolated regression tests do not replace hardware, Full Disk Access or end-to-end connection testing. Do not disable SIP or Gatekeeper globally.
 
@@ -40,7 +40,7 @@ Allowing the app to open is separate from granting **Terminal → Full Disk Acce
 
 ## Build and support
 
-On a Mac run `bash scripts/build-macos.sh`; the output is `dist/Mirravel-0.2.0-Beta-Mac.dmg`. Automated fixture tests: `python3 -m unittest discover -s tests -v`.
+On a Mac run `bash scripts/build-macos.sh`; the output is `dist/Mirravel-0.2.1-Beta-Mac.dmg`. Automated fixture tests: `python3 -m unittest discover -s tests -v`.
 
 Developed by **PwnedG0blin**, [MIT license](LICENSE). [GitHub Sponsors](https://github.com/sponsors/PwnedG0blin) · [Patreon](https://www.patreon.com/cw/PwnedG0blinApp) · [X](https://x.com/PwnedG0blin)
 

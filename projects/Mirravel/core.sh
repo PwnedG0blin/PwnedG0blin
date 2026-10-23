@@ -8,7 +8,8 @@ umask 077
 DOMAIN=OS_ELIGIBILITY_DOMAIN_IRON
 KEYS=("$DOMAIN.os_eligibility_answer_t" "$DOMAIN.status.OS_ELIGIBILITY_INPUT_COUNTRY_BILLING" "$DOMAIN.status.OS_ELIGIBILITY_INPUT_COUNTRY_LOCATION")
 PATCHED=(4 3 3)
-STATE=/private/var/db/regionpilot
+STATE=/private/var/db/mirravel
+LEGACY_STATE=/private/var/db/regionpilot
 PLIST=
 WORK=
 SNAPSHOT=
@@ -58,6 +59,15 @@ cleanup() {
   [ -z "$SNAPSHOT" ] || /bin/rm -f "$SNAPSHOT"
   if [ "$LOCKED" -eq 1 ]; then /bin/rmdir "$STATE/lock"; fi
   exit "$code"
+}
+select_state() {
+  # Reuse an existing backup without moving it or changing its permissions.
+  if [ -e "$LEGACY_STATE" ] || [ -L "$LEGACY_STATE" ]; then
+    if [ -e "$STATE" ] || [ -L "$STATE" ]; then
+      fail 'Zwei Sicherungsordner gefunden. Keine Änderung; die vorhandenen Sicherungen zuerst prüfen.'
+    fi
+    STATE=$LEGACY_STATE
+  fi
 }
 secure_state() {
   [ ! -L "$STATE" ] || fail 'Sicherungsordner ist ein Symlink.'
@@ -134,7 +144,7 @@ diagnose() {
   printf 'Beta: dokumentierten Geräteteststand und bekannte Verbindungsprobleme in der Anleitung beachten.\n'
 }
 apply_patch() {
-  find_plist; schema; secure_state
+  find_plist; schema; select_state; secure_state
   local build answer i
   build=$(/usr/bin/sw_vers -buildVersion)
   answer=$(value "${KEYS[0]}" "$PLIST")
@@ -166,7 +176,7 @@ apply_patch() {
   printf 'macOS kann die Werte jederzeit neu berechnen. Kein Hintergrunddienst installiert.\n'
 }
 restore_patch() {
-  find_plist; schema; secure_state
+  find_plist; schema; select_state; secure_state
   [ -f "$STATE/active" ] || fail 'Keine eigene aktive Sicherung gefunden.'
   [ -f "$STATE/original.plist" ] && [ ! -L "$STATE/original.plist" ] || fail 'Sicherung fehlt.'
   [ "$(/bin/cat "$STATE/path")" = "$PLIST" ] || fail 'Eligibility-Pfad hat sich geändert. Kein altes Backup einspielen.'

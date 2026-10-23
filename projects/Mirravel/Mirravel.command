@@ -1,6 +1,6 @@
 #!/bin/bash
 # Copyright (c) 2026 PwnedG0blin · Developed by PwnedG0blin · SPDX-License-Identifier: MIT
-# Mirravel 0.2.0 Beta — local experimental iPhone Mirroring helper.
+# Mirravel 0.2.1 Beta — local experimental iPhone Mirroring helper.
 # Uses only tools shipped with macOS. Does not install a daemon.
 set -u
 export PATH=/usr/bin:/bin:/usr/sbin:/sbin
@@ -9,7 +9,7 @@ if [ "$(uname -s)" != Darwin ]; then
   echo 'Mirravel benötigt macOS.'; exit 1
 fi
 while :; do
-  printf '\nMirravel 0.2.0 Beta · iPhone Mirroring\n\n'
+  printf '\nMirravel 0.2.1 Beta · iPhone Mirroring\n\n'
   printf '1  Diagnose (nur lesen)\n2  Experimentellen Mac-Patch testen\n3  Eigene Änderung zurücknehmen\n4  iPhone Mirroring öffnen\n5  Verbindungsprotokoll anzeigen (letzte 5 Minuten)\n6  Systemeinstellungen: Full Disk Access\n0  Beenden\n\n'
   read -r -p 'Auswahl: ' choice || exit 0
   case "$choice" in

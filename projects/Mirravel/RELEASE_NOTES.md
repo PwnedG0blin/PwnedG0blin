@@ -1,47 +1,35 @@
-# Mirravel 0.2.0 Beta
+# Mirravel 0.2.1 Beta
 
-Nach einem macOS-Update kann die lokale Mirroring-Berechtigung wieder auf `2` zurückgesetzt sein. Diese Version ermöglicht die erneute Anwendung des Mac-Patches, auch wenn eine Sicherung des vorherigen macOS-Builds vorhanden ist.
+This update consistently uses **Mirravel** for the app, launcher, downloads, app identity, build workflow and current GitHub project pages.
 
-## Erfolgreich aus der EU mit iOS und macOS 27.2 RC getestet
+## Changes
 
-**PwnedG0blin hat am 23.10.2026 aus der Europäischen Union eine funktionierende iPhone-Mirroring-Verbindung mit iOS 27.2 RC und macOS 27.2 RC bestätigt.** Nach dem Update war die Mac-Berechtigung wieder `2`; nach erneuter Anwendung der Korrektur funktionierte Mirroring wieder. Der Gerätetest erfolgte mit dem lokalen RegionPilot-0.2-Paket; dessen Korrektur ist in diese Mirravel-Version übernommen. Die genauen RC-Buildnummern wurden nicht angegeben.
+- App: **Mirravel.app**; source launcher: **Mirravel.command**.
+- Downloads: **Mirravel-0.2.1-Beta-Mac.dmg** and **Mirravel-0.2.1-Beta-Source.zip**.
+- Build workflow: **mirravel-beta.yml**.
+- App name and bundle identifier now consistently use Mirravel.
+- New installations save backups in `/private/var/db/mirravel`.
+- Existing older backups are detected and reused, preserving restore and reapplication after macOS updates.
+- If both backup directories exist, the tool stops before changing system data.
+- Removed the old project directory from the current source tree; upgrade information is now in the Mirravel project.
 
-## Änderungen
+## First launch on macOS
 
-- Erkennt beim erneuten Anwenden einen anderen macOS-Build.
-- Bewahrt die bisherige Sicherung in einem privaten `previous-build.XXXXXX`-Ordner auf und prüft die Kopien byteweise.
-- Sichert den aktuellen macOS-Zustand als neue Ausgangsbasis, bevor die drei Mirroring-Werte geändert werden.
-- Menü 3 verwendet weiterhin ausschließlich die Sicherung des aktuellen Builds. Alte Systemdateien werden nicht über einen neuen macOS-Build geschrieben.
-- Bricht bei unvollständigen Sicherungen, geänderten Pfaden sowie Kopier- oder Vergleichsfehlern ab.
-- Behält vorhandene RegionPilot-/Mirravel-Sicherungsordner und die Bundle-ID bei.
+This beta is ad-hoc signed and not notarized. If macOS says **“Mirravel.app was blocked to protect your Mac”**:
 
-## Downloads und Installation
-
-- **Mirravel-0.2.0-Beta-Mac.dmg:** öffnen und `Mirravel.app` nach `Applications` ziehen; eine ältere Mirravel-App ersetzen.
-- **Mirravel-0.2.0-Beta-Quellpaket.zip:** vollständige Quellen, Anleitung, Tests und lokaler DMG-Bau ohne Xcode.
-- **SHA256SUMS.txt:** Prüfsummen der beiden Pakete.
-
-Nach dem Start Menü **1 – Diagnose** verwenden. Meldet der Mac nach einem Update wieder Antwort `2`, Menü **2** wählen, **TEST** eingeben und die lokale Administratorabfrage bestätigen. Anschließend iPhone Mirroring vollständig beenden und erneut öffnen. Terminal benötigt **Full Disk Access**.
-
-Die Rücknahme bleibt über Menü **3** möglich. Diagnose, Sicherung und Rücknahme laufen lokal. Kostenlos und Open Source unter der MIT-Lizenz.
-
-## First launch: allow Mirravel in macOS
-
-This beta is ad-hoc signed and not notarized, so macOS may show **“Mirravel.app was blocked to protect your Mac.”**
-
-1. After copying the app to **Applications**, try opening **Mirravel.app** once.
+1. Copy **Mirravel.app** to **Applications** and try opening it once.
 2. Open **System Settings → Privacy & Security** and scroll to **Security**.
-3. Click **Open Anyway** next to the message about **Mirravel.app**.
-4. Confirm the local macOS prompt, then open Mirravel again and choose **Open** if prompted.
+3. Click **Open Anyway** next to the Mirravel message and confirm the local prompt.
+4. Open Mirravel again and choose **Open** if prompted.
 
-Allowing the app to open is separate from granting **Terminal → Full Disk Access**, which is also required to apply the experimental patch.
+Terminal also needs **Full Disk Access** to apply the experimental Mac patch. Start with menu **1 – Diagnose**. Use menu **2**, enter **TEST** and confirm the local administrator prompt to apply; menu **3** restores the tool's own changes.
 
-## Testumfang
+## Compatibility and tests
 
-Der Gerätetest aus der EU bestätigt die erfolgreiche Verbindung mit den beiden 27.2-RCs. Langzeitstabilität und andere Geräte- oder Versionskombinationen sind damit nicht geprüft. Frühere Betatests hatten Timeouts gezeigt. Die Beta verändert nur die Mac-Seite; ein lokaler Wert `4` allein ist kein Verbindungstest.
+The Mac-side eligibility patch is unchanged. On 23 October 2026, PwnedG0blin confirmed a working iPhone Mirroring connection from within the EU using iOS 27.2 RC and macOS 27.2 RC with the previously corrected helper. This naming update adds automated coverage for existing-backup compatibility; a new hardware test of this package has not been reported.
 
-Die automatisierten Prüfungen verwenden ausschließlich temporäre Systemdateien. Der macOS-Paketbau prüft zusätzlich AppleScript, App-Ressourcen, Ad-hoc-Signatur und DMG. Die App ist nicht Developer-ID-signiert und nicht notarisiert.
+The release workflow checks shell syntax, isolated regression tests, the compiled AppleScript app, app identity, signatures, mounted DMG and source archive. Long-term connection stability and other device combinations remain outside that test scope.
 
-Entwickelt von **PwnedG0blin** · Copyright (c) 2026 PwnedG0blin.
+Free and open source under the MIT license. Developed by **PwnedG0blin**.
 
-[Anleitung und Quellcode](https://github.com/PwnedG0blin/PwnedG0blin/tree/master/projects/Mirravel) · [Fehler melden](https://github.com/PwnedG0blin/PwnedG0blin/issues/new)
+[Download and source documentation](https://github.com/PwnedG0blin/PwnedG0blin/tree/master/projects/Mirravel) · [Upgrade compatibility](https://github.com/PwnedG0blin/PwnedG0blin/blob/master/projects/Mirravel/COMPATIBILITY.md)
