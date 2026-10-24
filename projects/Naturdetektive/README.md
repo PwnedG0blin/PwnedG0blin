@@ -1,5 +1,7 @@
 # Wimmelwelt: Naturdetektive — Nature Learning & Hidden Object Game for Kids
 
+[Website](https://pwnedg0blin.pages.dev/) · [Alle Projekte / All projects](https://pwnedg0blin.pages.dev/projekte) · [Unterstützen / Support](https://pwnedg0blin.pages.dev/support)
+
 ## Deutsch — kostenloses Natur-Lernspiel für Kinder
 
 Wimmelwelt: Naturdetektive ist ein kostenloses Wimmel- und Lernspiel in Entwicklung. Kinder entdecken Tiere und Lebensräume und lernen spielerisch, wie sie Natur, Tiere und Umwelt schützen können. Die App ist für iPhone, iPad und Android-Smartphones sowie Tablets geplant.
