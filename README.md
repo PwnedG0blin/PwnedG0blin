@@ -8,6 +8,8 @@
 
 **Independent software development:** Android emulation, Windows ARM64 and Ubuntu ARM virtual machines for Mac, video editing for iPhone and iPad, and nature learning games for children.
 
+[**Website**](https://pwnedg0blin.pages.dev/) · [**Projektübersicht / Project overview**](https://pwnedg0blin.pages.dev/projekte) · [**Support**](https://pwnedg0blin.pages.dev/support)
+
 [Projekte / Projects](#projekte--projects) · [Testversionen / Downloads](#testversionen--downloads) · [Kontakt und Unterstützung](#kontakt-und-unterstützung)
 
 ## Projekte / Projects
