@@ -1,5 +1,7 @@
 # Mirravel — iPhone Mirroring Diagnostics for Mac
 
+[Website](https://pwnedg0blin.pages.dev/) · [Alle Projekte / All projects](https://pwnedg0blin.pages.dev/projekte) · [Unterstützen / Support](https://pwnedg0blin.pages.dev/support)
+
 **Version 0.2.1 Beta** · [English](README.en.md)
 
 **Experimenteller macOS-Helfer für iPhone Mirroring. Kostenlos und Open Source unter der MIT-Lizenz.**
