@@ -1,5 +1,7 @@
 # Scenalto — Video Editor for iPhone & iPad
 
+[Website](https://pwnedg0blin.pages.dev/) · [Alle Projekte / All projects](https://pwnedg0blin.pages.dev/projekte) · [Unterstützen / Support](https://pwnedg0blin.pages.dev/support)
+
 **Deutsch:** Videoeditor für iPhone und iPad mit Touch-Bedienung und präzisem Videoschnitt. Entwickelt für iOS und iPadOS. **In Entwicklung.**
 
 **English:** Video editor for iPhone and iPad, designed for touch controls and precise video editing on iOS and iPadOS. **In development.**
