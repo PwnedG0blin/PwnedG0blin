@@ -25,6 +25,19 @@ Mirravel richtet sich an Nutzerinnen und Nutzer in der Europäischen Union und v
 
 ## Voraussetzungen und Grenzen
 
+### Apple Silicon und Intel mit T2
+
+Die veröffentlichte **Mirravel 0.2.1 Beta ist eine Universal-App**. Das geprüfte App-Paket enthält `arm64` und `x86_64`; dieselbe DMG ist für beide Mac-Typen vorgesehen.
+
+| Mac | Architektur | Hardware-Voraussetzung |
+| :--- | :--- | :--- |
+| Apple Silicon | `arm64` | Mac mit Apple-Chip |
+| Intel | `x86_64` | Eingebauter **Apple T2 Security Chip** erforderlich |
+
+Für beide gelten **macOS Sequoia 15 oder neuer** und ein **iPhone mit iOS 18 oder neuer**. Intel-Macs ohne T2-Chip gehören nicht zu Apples unterstützten Geräten für iPhone Mirroring.
+
+**Teststand:** Die beiden Architekturen wurden im [Paket-Build der veröffentlichten Beta](https://github.com/PwnedG0blin/PwnedG0blin/actions/runs/39943764031) nachgewiesen. Ein echter Mirroring-Gerätetest auf Intel/T2 wurde bislang nicht gemeldet. Die experimentelle Regionskonfiguration ist damit auf Intel noch nicht als funktionierend bestätigt.
+
 Für iPhone Mirroring nennt Apple einen Mac mit Apple Silicon oder T2-Chip, macOS 15 oder neuer und ein iPhone mit iOS 18 oder neuer. Beide Geräte müssen denselben Apple Account mit Zwei-Faktor-Authentifizierung verwenden, WLAN und Bluetooth müssen eingeschaltet sein und das iPhone muss gesperrt in der Nähe liegen. AirPlay, Sidecar und Internetfreigabe am Mac sollen währenddessen nicht aktiv sein. [Apple-Anleitung](https://support.apple.com/en-euro/120421).
 
 Apple führt iPhone Mirroring weiterhin als in der EU nicht verfügbar (Quellenprüfung: 18.10.2026). Diese Beta ist ein experimenteller Eingriff in eine undokumentierte macOS-Systemdatenbank, keine von Apple unterstützte Funktion.

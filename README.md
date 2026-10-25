@@ -32,7 +32,7 @@ Mirravel richtet sich an Nutzerinnen und Nutzer in der Europäischen Union und v
 
 Mirravel is intended for users in the European Union and aims to experimentally bypass Apple’s regional restriction on iPhone Mirroring. It provides diagnostics and Mac-side configuration changes with backup and restore of its own changes. On 23 October 2026, PwnedG0blin confirmed a working iPhone Mirroring connection from within the EU with iOS 27.2 RC and macOS 27.2 RC. iPhone-side eligibility checks and future system updates may still affect connectivity.
 
-Kostenloser Open-Source-Helfer für iPhone-Mirroring-Diagnose und experimentelle Mac-Konfiguration mit Sicherung und Rücknahme eigener Änderungen. **macOS · 0.2.1 Beta.**
+Kostenloser Open-Source-Helfer für iPhone-Mirroring-Diagnose und experimentelle Mac-Konfiguration mit Sicherung und Rücknahme eigener Änderungen. **macOS 15+ · Apple Silicon oder Intel mit T2 · 0.2.1 Beta.**
 
 Free, open-source macOS helper for iPhone Mirroring diagnostics and experimental configuration, including backup and restore of its own changes. **Experimental beta; a successful mirroring connection is not guaranteed.**
 

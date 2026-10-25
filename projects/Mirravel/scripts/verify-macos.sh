@@ -25,6 +25,7 @@ for shell_file in Mirravel.command core.sh; do
   bash -n "$app/Contents/Resources/$shell_file"
 done
 osadecompile "$app/Contents/Resources/Scripts/main.scpt" >/dev/null
+/usr/bin/lipo -verify_arch x86_64 arm64 "$app/Contents/MacOS/applet"
 lipo -archs "$app/Contents/MacOS/applet"
 echo 'App-Ressourcen, Version, AppleScript, Signatur und gemountete DMG geprüft. Kein System-Patch ausgeführt.'
 

@@ -12,6 +12,19 @@ Mirravel is intended for users in the European Union and aims to experimentally 
 
 Apple lists iPhone Mirroring as unavailable in the EU: [Apple Support](https://support.apple.com/en-euro/120421).
 
+## Apple silicon and Intel with T2
+
+The published **Mirravel 0.2.1 Beta is a universal app**. Its verified app bundle contains both `arm64` and `x86_64`; the same DMG is intended for both Mac types.
+
+| Mac | Architecture | Hardware requirement |
+| :--- | :--- | :--- |
+| Apple silicon | `arm64` | Mac with Apple silicon |
+| Intel | `x86_64` | Built-in **Apple T2 Security Chip** required |
+
+Both require **macOS Sequoia 15 or later** and an **iPhone with iOS 18 or later**, as listed in [Apple's requirements](https://support.apple.com/en-us/120421). Intel Macs without T2 are not supported by Apple's iPhone Mirroring requirements.
+
+**Test status:** Both architectures were confirmed in the [published beta's package build](https://github.com/PwnedG0blin/PwnedG0blin/actions/runs/39943764031). No end-to-end mirroring test on Intel/T2 hardware has been reported yet. The experimental regional configuration is therefore not confirmed to work on Intel.
+
 ## What it does
 
 - Read local eligibility and macOS version information without making changes.

@@ -10,6 +10,8 @@ output="$(cd "$output" && pwd -P)"
 stage="$(mktemp -d "$output/.Mirravel-stage.XXXXXX")"
 trap 'rm -rf -- "$stage"' EXIT
 osacompile -o "$stage/Mirravel.app" "$project/Mirravel.applescript"
+# Refuse a package that cannot run natively on both supported Mac architectures.
+/usr/bin/lipo -verify_arch x86_64 arm64 "$stage/Mirravel.app/Contents/MacOS/applet"
 resources="$stage/Mirravel.app/Contents/Resources"
 cp "$project/Mirravel.command" "$project/core.sh" "$project/Anleitung.txt" "$project/README.md" "$project/AUTHORS.md" "$project/LICENSE" "$resources/"
 chmod 755 "$resources/Mirravel.command" "$resources/core.sh"
