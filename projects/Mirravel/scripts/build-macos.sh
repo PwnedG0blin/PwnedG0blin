@@ -11,7 +11,7 @@ stage="$(mktemp -d "$output/.Mirravel-stage.XXXXXX")"
 trap 'rm -rf -- "$stage"' EXIT
 osacompile -o "$stage/Mirravel.app" "$project/Mirravel.applescript"
 # Refuse a package that cannot run natively on both supported Mac architectures.
-/usr/bin/lipo -verify_arch x86_64 arm64 "$stage/Mirravel.app/Contents/MacOS/applet"
+/usr/bin/lipo "$stage/Mirravel.app/Contents/MacOS/applet" -verify_arch x86_64 arm64
 resources="$stage/Mirravel.app/Contents/Resources"
 cp "$project/Mirravel.command" "$project/core.sh" "$project/Anleitung.txt" "$project/README.md" "$project/AUTHORS.md" "$project/LICENSE" "$resources/"
 chmod 755 "$resources/Mirravel.command" "$resources/core.sh"
@@ -34,6 +34,7 @@ for size in 16 32 128 256 512; do
   /usr/bin/sips -z "$double" "$double" "$icon_source" --out "$iconset/icon_${size}x${size}@2x.png" >/dev/null
 done
 /usr/bin/iconutil -c icns "$iconset" -o "$resources/Mirravel.icns"
+/bin/rm -rf -- "$iconset"
 /usr/libexec/PlistBuddy -c 'Set :CFBundleIconFile Mirravel.icns' "$info" || /usr/libexec/PlistBuddy -c 'Add :CFBundleIconFile string Mirravel.icns' "$info"
 /usr/libexec/PlistBuddy -c 'Delete :CFBundleIconName' "$info" >/dev/null 2>&1 || true
 codesign --force --sign - "$stage/Mirravel.app"

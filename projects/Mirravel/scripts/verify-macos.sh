@@ -14,6 +14,7 @@ cleanup() {
 trap cleanup EXIT
 hdiutil attach "$image" -readonly -nobrowse -mountpoint "$mountpoint"
 attached=1
+[[ ! -e "$mountpoint/Mirravel.iconset" ]]
 app="$mountpoint/Mirravel.app"
 codesign --verify --strict "$app"
 [[ "$(/usr/libexec/PlistBuddy -c 'Print :CFBundleShortVersionString' "$app/Contents/Info.plist")" == 0.2.2 ]]
@@ -33,13 +34,13 @@ for shell_file in Mirravel.command core.sh; do
   bash -n "$app/Contents/Resources/$shell_file"
 done
 osadecompile "$app/Contents/Resources/Scripts/main.scpt" >/dev/null
-/usr/bin/lipo -verify_arch x86_64 arm64 "$app/Contents/MacOS/applet"
+/usr/bin/lipo "$app/Contents/MacOS/applet" -verify_arch x86_64 arm64
 lipo -archs "$app/Contents/MacOS/applet"
 # Independently extract and verify the directly downloadable .app archive.
 /usr/bin/ditto -x -k "$project/dist/Mirravel-0.2.2-Beta-App.zip" "$work/app-zip"
 zip_app="$work/app-zip/Mirravel.app"
 codesign --verify --strict "$zip_app"
-/usr/bin/lipo -verify_arch x86_64 arm64 "$zip_app/Contents/MacOS/applet"
+/usr/bin/lipo "$zip_app/Contents/MacOS/applet" -verify_arch x86_64 arm64
 cmp "$app/Contents/Resources/Mirravel.icns" "$zip_app/Contents/Resources/Mirravel.icns"
 cmp "$app/Contents/Resources/core.sh" "$zip_app/Contents/Resources/core.sh"
 echo 'App-ZIP, Mirror-Glass-Icon, Ressourcen, Version, AppleScript, Signatur und DMG geprüft. Kein System-Patch ausgeführt.'
