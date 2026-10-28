@@ -1,10 +1,10 @@
 # Mirravel — iPhone Mirroring Diagnostics for Mac
 
-**Free, open-source macOS helper for iPhone Mirroring diagnostics and experimental configuration. Version 0.2.1 Beta.**
+**Free, open-source macOS helper for iPhone Mirroring diagnostics and experimental configuration. Version 0.2.2 Beta.**
 
 Inspect local requirements, view Mac logs, and back up or restore settings changed by this tool. **Experimental beta; a successful mirroring connection is not guaranteed.**
 
-[Download beta](https://github.com/PwnedG0blin/PwnedG0blin/releases/tag/mirravel-v0.2.1-beta) · [Detailed German guide](README.md)
+[Download beta](https://github.com/PwnedG0blin/PwnedG0blin/releases/tag/mirravel-v0.2.2-beta) · [Detailed German guide](README.md)
 
 ## EU purpose and experimental bypass
 
@@ -14,7 +14,7 @@ Apple lists iPhone Mirroring as unavailable in the EU: [Apple Support](https://s
 
 ## Apple silicon and Intel with T2
 
-The published **Mirravel 0.2.1 Beta is a universal app**. Its verified app bundle contains both `arm64` and `x86_64`; the same DMG is intended for both Mac types.
+The Mirravel app package is built as a **universal app**. Its verified app bundle contains both `arm64` and `x86_64`; the same DMG is intended for both Mac types.
 
 | Mac | Architecture | Hardware requirement |
 | :--- | :--- | :--- |
@@ -40,6 +40,10 @@ The app, launcher, packages, workflow and current project pages consistently use
 
 The app is ad-hoc signed, not Developer ID signed or notarized. Build and isolated regression tests do not replace hardware, Full Disk Access or end-to-end connection testing. Do not disable SIP or Gatekeeper globally.
 
+## Download the ready-made app
+
+Download **Mirravel-0.2.2-Beta-App.zip** from the release assets, extract it completely and copy **Mirravel.app** to **Applications**. The app uses the selected **Mirror Glass** icon in Finder and the Dock. It opens the existing Terminal menu for diagnostics, applying the patch and restoring its changes. A DMG installer and complete source ZIP are also provided.
+
 ## First launch: allow Mirravel in macOS
 
 This beta is ad-hoc signed and not notarized, so macOS may show **“Mirravel.app was blocked to protect your Mac.”**
@@ -53,7 +57,7 @@ Allowing the app to open is separate from granting **Terminal → Full Disk Acce
 
 ## Build and support
 
-On a Mac run `bash scripts/build-macos.sh`; the output is `dist/Mirravel-0.2.1-Beta-Mac.dmg`. Automated fixture tests: `python3 -m unittest discover -s tests -v`.
+On a Mac run `bash scripts/build-macos.sh`; the output is `dist/Mirravel-0.2.2-Beta-Mac.dmg`. Automated fixture tests: `python3 -m unittest discover -s tests -v`.
 
 Developed by **PwnedG0blin**, [MIT license](LICENSE). [GitHub Sponsors](https://github.com/sponsors/PwnedG0blin) · [Patreon](https://www.patreon.com/cw/PwnedG0blinApp) · [X](https://x.com/PwnedG0blin)
 

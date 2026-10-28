@@ -1,4 +1,4 @@
-name: Mirravel 0.2.1 Beta
+name: Mirravel 0.2.2 Beta
 on:
   push:
     branches: [master]
@@ -40,14 +40,15 @@ jobs:
         run: |
           python3 scripts/package-source.py
           cd dist
-          shasum -a 256 Mirravel-0.2.1-Beta-Mac.dmg Mirravel-0.2.1-Beta-Source.zip > SHA256SUMS.txt
+          shasum -a 256 Mirravel-0.2.2-Beta-App.zip Mirravel-0.2.2-Beta-Mac.dmg Mirravel-0.2.2-Beta-Source.zip > SHA256SUMS.txt
       - name: Upload checked beta package
         uses: actions/upload-artifact@v7
         with:
-          name: Mirravel-0.2.1-Beta
+          name: Mirravel-0.2.2-Beta
           path: |
-            projects/Mirravel/dist/Mirravel-0.2.1-Beta-Mac.dmg
-            projects/Mirravel/dist/Mirravel-0.2.1-Beta-Source.zip
+            projects/Mirravel/dist/Mirravel-0.2.2-Beta-App.zip
+            projects/Mirravel/dist/Mirravel-0.2.2-Beta-Mac.dmg
+            projects/Mirravel/dist/Mirravel-0.2.2-Beta-Source.zip
             projects/Mirravel/dist/SHA256SUMS.txt
           retention-days: 14
           if-no-files-found: error
@@ -58,11 +59,11 @@ jobs:
           GH_REPO: ${{ github.repository }}
           RELEASE_TARGET: ${{ github.sha }}
         run: |
-          tag='mirravel-v0.2.1-beta'
+          tag='mirravel-v0.2.2-beta'
           if gh release view "$tag" >/dev/null 2>&1; then
             gh release edit "$tag" --notes-file RELEASE_NOTES.md
             echo 'Release-Hinweise aktualisiert. Bereits veröffentlichte Pakete bleiben unverändert.'
             exit 0
           fi
-          gh release create "$tag" --target "$RELEASE_TARGET" --prerelease --title 'Mirravel 0.2.1 Beta' --notes-file RELEASE_NOTES.md dist/Mirravel-0.2.1-Beta-Mac.dmg dist/Mirravel-0.2.1-Beta-Source.zip dist/SHA256SUMS.txt
+          gh release create "$tag" --target "$RELEASE_TARGET" --prerelease --title 'Mirravel 0.2.2 Beta' --notes-file RELEASE_NOTES.md dist/Mirravel-0.2.2-Beta-App.zip dist/Mirravel-0.2.2-Beta-Mac.dmg dist/Mirravel-0.2.2-Beta-Source.zip dist/SHA256SUMS.txt
 

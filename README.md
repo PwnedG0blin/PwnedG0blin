@@ -32,7 +32,7 @@ Mirravel richtet sich an Nutzerinnen und Nutzer in der Europäischen Union und v
 
 Mirravel is intended for users in the European Union and aims to experimentally bypass Apple’s regional restriction on iPhone Mirroring. It provides diagnostics and Mac-side configuration changes with backup and restore of its own changes. On 23 October 2026, PwnedG0blin confirmed a working iPhone Mirroring connection from within the EU with iOS 27.2 RC and macOS 27.2 RC. iPhone-side eligibility checks and future system updates may still affect connectivity.
 
-Kostenloser Open-Source-Helfer für iPhone-Mirroring-Diagnose und experimentelle Mac-Konfiguration mit Sicherung und Rücknahme eigener Änderungen. **macOS 15+ · Apple Silicon oder Intel mit T2 · 0.2.1 Beta.**
+Kostenloser Open-Source-Helfer für iPhone-Mirroring-Diagnose und experimentelle Mac-Konfiguration mit Sicherung und Rücknahme eigener Änderungen. **macOS 15+ · Apple Silicon oder Intel mit T2 · 0.2.2 Beta.**
 
 Free, open-source macOS helper for iPhone Mirroring diagnostics and experimental configuration, including backup and restore of its own changes. **Experimental beta; a successful mirroring connection is not guaranteed.**
 
@@ -47,7 +47,7 @@ Free nature learning and hidden object game for kids about wildlife, habitats an
 ## Testversionen / Downloads
 
 - **[Stratovo: Einrichtung und Mac-Test-Builds](https://github.com/PwnedG0blin/OpenGuest#install-or-build)** — Android-Emulator, Windows-ARM64- und Ubuntu-ARM-VMs; Voraussetzungen und Grenzen stehen direkt beim Projekt.
-- **[Mirravel 0.2.1 Beta](https://github.com/PwnedG0blin/PwnedG0blin/releases/tag/mirravel-v0.2.1-beta)** — Mac-App, Quellen und Prüfsummen. Wiederanwendung nach macOS-Updates; erfolgreiche Verbindung mit iOS und macOS 27.2 RC bestätigt.
+- **[Mirravel 0.2.2 Beta](https://github.com/PwnedG0blin/PwnedG0blin/releases/tag/mirravel-v0.2.2-beta)** — Mac-App, Quellen und Prüfsummen. Wiederanwendung nach macOS-Updates; erfolgreiche Verbindung mit iOS und macOS 27.2 RC bestätigt.
 - Scenalto und Naturdetektive befinden sich in Entwicklung; auf diesen Projektseiten wird kein bereits veröffentlichter App-Store-Download behauptet.
 
 Funktionsumfang und Verfügbarkeit richten sich nach dem jeweiligen Entwicklungsstand. Tests, Lizenzhinweise und bekannte Einschränkungen stehen direkt beim Projekt.

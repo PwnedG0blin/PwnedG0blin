@@ -1,35 +1,28 @@
-# Mirravel 0.2.1 Beta
+# Mirravel 0.2.2 Beta — Mirror Glass
 
-This update consistently uses **Mirravel** for the app, launcher, downloads, app identity, build workflow and current GitHub project pages.
+Mirravel now uses the selected **Mirror Glass** app icon and is available as a ready-to-extract **Mirravel.app** ZIP as well as a DMG.
 
-## Changes
+## Downloads
 
-- App: **Mirravel.app**; source launcher: **Mirravel.command**.
-- Downloads: **Mirravel-0.2.1-Beta-Mac.dmg** and **Mirravel-0.2.1-Beta-Source.zip**.
-- Build workflow: **mirravel-beta.yml**.
-- App name and bundle identifier now consistently use Mirravel.
-- New installations save backups in `/private/var/db/mirravel`.
-- Existing older backups are detected and reused, preserving restore and reapplication after macOS updates.
-- If both backup directories exist, the tool stops before changing system data.
-- Removed the old project directory from the current source tree; upgrade information is now in the Mirravel project.
+- **Mirravel-0.2.2-Beta-App.zip** — extract and copy Mirravel.app to Applications.
+- **Mirravel-0.2.2-Beta-Mac.dmg** — open and drag Mirravel.app to Applications.
+- **Mirravel-0.2.2-Beta-Source.zip** — complete source code, artwork, guide and build scripts.
+- **SHA256SUMS.txt** — package checksums.
 
-## First launch on macOS
+The same signed app is supplied in the App ZIP and DMG. Its app icon includes standard and Retina sizes up to 1024 pixels. Finder, the Dock and the application bundle use the new icon.
 
-This beta is ad-hoc signed and not notarized. If macOS says **“Mirravel.app was blocked to protect your Mac”**:
+## How it works
 
-1. Copy **Mirravel.app** to **Applications** and try opening it once.
-2. Open **System Settings → Privacy & Security** and scroll to **Security**.
-3. Click **Open Anyway** next to the Mirravel message and confirm the local prompt.
-4. Open Mirravel again and choose **Open** if prompted.
+Open Mirravel.app to access the existing Terminal menu. Menu 1 reads diagnostics, menu 2 applies the experimental Mac-side patch after entering TEST and confirming the local administrator prompt, and menu 3 restores the tool's changes under the existing backup checks. The patch and backup logic are unchanged in this release.
 
-Terminal also needs **Full Disk Access** to apply the experimental Mac patch. Start with menu **1 – Diagnose**. Use menu **2**, enter **TEST** and confirm the local administrator prompt to apply; menu **3** restores the tool's own changes.
+On first launch, macOS may block this ad-hoc-signed, non-notarized beta. Go to **System Settings → Privacy & Security → Open Anyway**, confirm the prompt and reopen Mirravel. Terminal also needs **Full Disk Access** for the patch.
 
-## Compatibility and tests
+## Apple silicon and Intel
 
-The Mac-side eligibility patch is unchanged. On 23 October 2026, PwnedG0blin confirmed a working iPhone Mirroring connection from within the EU using iOS 27.2 RC and macOS 27.2 RC with the previously corrected helper. This naming update adds automated coverage for existing-backup compatibility; a new hardware test of this package has not been reported.
+The app is universal: **arm64** and **x86_64** are verified in both download packages. Intel Macs require an **Apple T2 Security Chip**. Apple's iPhone Mirroring requirements also include **macOS 15 or later** and **iOS 18 or later**. A real Intel/T2 mirroring test has not been reported.
 
-The release workflow checks shell syntax, isolated regression tests, the compiled AppleScript app, app identity, signatures, mounted DMG and source archive. Long-term connection stability and other device combinations remain outside that test scope.
+On 23 October 2026, PwnedG0blin confirmed a working iPhone Mirroring connection from within the EU using iOS 27.2 RC and macOS 27.2 RC with the corrected helper. This release packages that existing logic with the selected icon; it is not a new end-to-end hardware test. Long-term stability and other device combinations remain untested.
 
 Free and open source under the MIT license. Developed by **PwnedG0blin**.
 
-[Download and source documentation](https://github.com/PwnedG0blin/PwnedG0blin/tree/master/projects/Mirravel) · [Upgrade compatibility](https://github.com/PwnedG0blin/PwnedG0blin/blob/master/projects/Mirravel/COMPATIBILITY.md)
+[Documentation](https://github.com/PwnedG0blin/PwnedG0blin/tree/master/projects/Mirravel) · [Upgrade compatibility](https://github.com/PwnedG0blin/PwnedG0blin/blob/master/projects/Mirravel/COMPATIBILITY.md)

@@ -16,19 +16,33 @@ resources="$stage/Mirravel.app/Contents/Resources"
 cp "$project/Mirravel.command" "$project/core.sh" "$project/Anleitung.txt" "$project/README.md" "$project/AUTHORS.md" "$project/LICENSE" "$resources/"
 chmod 755 "$resources/Mirravel.command" "$resources/core.sh"
 info="$stage/Mirravel.app/Contents/Info.plist"
-/usr/libexec/PlistBuddy -c 'Set :CFBundleShortVersionString 0.2.1' "$info" || /usr/libexec/PlistBuddy -c 'Add :CFBundleShortVersionString string 0.2.1' "$info"
-/usr/libexec/PlistBuddy -c 'Add :CFBundleVersion string 4' "$info" || /usr/libexec/PlistBuddy -c 'Set :CFBundleVersion 4' "$info"
+/usr/libexec/PlistBuddy -c 'Set :CFBundleShortVersionString 0.2.2' "$info" || /usr/libexec/PlistBuddy -c 'Add :CFBundleShortVersionString string 0.2.2' "$info"
+/usr/libexec/PlistBuddy -c 'Add :CFBundleVersion string 5' "$info" || /usr/libexec/PlistBuddy -c 'Set :CFBundleVersion 5' "$info"
 /usr/libexec/PlistBuddy -c 'Set :CFBundleIdentifier io.github.pwnedg0blin.Mirravel' "$info" || /usr/libexec/PlistBuddy -c 'Add :CFBundleIdentifier string io.github.pwnedg0blin.Mirravel' "$info"
 /usr/libexec/PlistBuddy -c 'Set :CFBundleName Mirravel' "$info" || /usr/libexec/PlistBuddy -c 'Add :CFBundleName string Mirravel' "$info"
 /usr/libexec/PlistBuddy -c 'Add :CFBundleDisplayName string Mirravel Beta' "$info" || /usr/libexec/PlistBuddy -c 'Set :CFBundleDisplayName Mirravel Beta' "$info"
 /usr/libexec/PlistBuddy -c 'Add :LSMinimumSystemVersion string 15.0' "$info" || /usr/libexec/PlistBuddy -c 'Set :LSMinimumSystemVersion 15.0' "$info"
 /usr/libexec/PlistBuddy -c 'Add :NSHumanReadableCopyright string Copyright (c) 2026 PwnedG0blin' "$info" || /usr/libexec/PlistBuddy -c 'Set :NSHumanReadableCopyright Copyright (c) 2026 PwnedG0blin' "$info"
+# Build the selected Mirror Glass artwork into every standard macOS icon size.
+icon_source="$project/assets/MirrorGlass.png"
+[[ -f "$icon_source" ]] || { echo 'Mirravel icon source is missing.' >&2; exit 1; }
+iconset="$stage/Mirravel.iconset"
+mkdir "$iconset"
+for size in 16 32 128 256 512; do
+  /usr/bin/sips -z "$size" "$size" "$icon_source" --out "$iconset/icon_${size}x${size}.png" >/dev/null
+  double=$((size * 2))
+  /usr/bin/sips -z "$double" "$double" "$icon_source" --out "$iconset/icon_${size}x${size}@2x.png" >/dev/null
+done
+/usr/bin/iconutil -c icns "$iconset" -o "$resources/Mirravel.icns"
+/usr/libexec/PlistBuddy -c 'Set :CFBundleIconFile Mirravel.icns' "$info" || /usr/libexec/PlistBuddy -c 'Add :CFBundleIconFile string Mirravel.icns' "$info"
+/usr/libexec/PlistBuddy -c 'Delete :CFBundleIconName' "$info" >/dev/null 2>&1 || true
 codesign --force --sign - "$stage/Mirravel.app"
 codesign --verify --strict "$stage/Mirravel.app"
+/usr/bin/ditto -c -k --sequesterRsrc --keepParent "$stage/Mirravel.app" "$output/Mirravel-0.2.2-Beta-App.zip"
 cp "$project/Anleitung.txt" "$project/LICENSE" "$stage/"
 ln -s /Applications "$stage/Applications"
-hdiutil create -volname 'Mirravel 0.2.1 Beta' -srcfolder "$stage" -ov -format UDZO "$output/Mirravel-0.2.1-Beta-Mac.dmg"
-hdiutil verify "$output/Mirravel-0.2.1-Beta-Mac.dmg"
-echo "DMG erstellt: $output/Mirravel-0.2.1-Beta-Mac.dmg"
+hdiutil create -volname 'Mirravel 0.2.2 Beta' -srcfolder "$stage" -ov -format UDZO "$output/Mirravel-0.2.2-Beta-Mac.dmg"
+hdiutil verify "$output/Mirravel-0.2.2-Beta-Mac.dmg"
+echo "DMG erstellt: $output/Mirravel-0.2.2-Beta-Mac.dmg"
 echo 'Ad-hoc signierte Beta, nicht von Apple notarisiert. Keine Systemeinstellungen wurden vom Build geändert.'
 

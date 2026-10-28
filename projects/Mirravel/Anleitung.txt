@@ -1,12 +1,14 @@
 Mirravel — iPhone Mirroring Diagnostics for Mac
 
-Version 0.2.1 Beta · English (README.en.md)
+Website (https://pwnedg0blin.pages.dev/) · Alle Projekte / All projects (https://pwnedg0blin.pages.dev/projekte) · Unterstützen / Support (https://pwnedg0blin.pages.dev/support)
+
+Version 0.2.2 Beta · English (README.en.md)
 
 Experimenteller macOS-Helfer für iPhone Mirroring. Kostenlos und Open Source unter der MIT-Lizenz.
 
 Entwickelt von PwnedG0blin.
 
-Beta herunterladen (https://github.com/PwnedG0blin/PwnedG0blin/releases/tag/mirravel-v0.2.1-beta) · Profil (https://github.com/PwnedG0blin) · Fehler melden (https://github.com/PwnedG0blin/PwnedG0blin/issues/new)
+Beta herunterladen (https://github.com/PwnedG0blin/PwnedG0blin/releases/tag/mirravel-v0.2.2-beta) · Profil (https://github.com/PwnedG0blin) · Fehler melden (https://github.com/PwnedG0blin/PwnedG0blin/issues/new)
 
 EU-Zweck und experimentelle Umgehung
 
@@ -25,7 +27,7 @@ Voraussetzungen und Grenzen
 
 Apple Silicon und Intel mit T2
 
-Die veröffentlichte Mirravel 0.2.1 Beta ist eine Universal-App. Das geprüfte App-Paket enthält arm64 und x86_64; dieselbe DMG ist für beide Mac-Typen vorgesehen.
+Das Mirravel-App-Paket ist als Universal-App für beide Architekturen ausgelegt. Das geprüfte App-Paket enthält arm64 und x86_64; dieselbe DMG ist für beide Mac-Typen vorgesehen.
 
 | Mac | Architektur | Hardware-Voraussetzung |
 | :--- | :--- | :--- |
@@ -46,7 +48,11 @@ Testumfang: Der aktuelle Gerätetest bestätigt den erfolgreichen Verbindungsauf
 
 Download und erster Start
 
-1. Auf der Beta-Seite (https://github.com/PwnedG0blin/PwnedG0blin/releases/tag/mirravel-v0.2.1-beta) unter Assets Mirravel-0.2.1-Beta-Mac.dmg laden.
+Direkt als App: Unter Assets Mirravel-0.2.2-Beta-App.zip laden, vollständig entpacken und Mirravel.app nach Applications kopieren. Die App verwendet das gewählte Mirror-Glass-Logo als Dock- und Finder-Icon. Sie öffnet das bewährte Terminal-Menü für Diagnose, Patch und Rücknahme.
+
+Alternativ per DMG:
+
+1. Auf der Beta-Seite (https://github.com/PwnedG0blin/PwnedG0blin/releases/tag/mirravel-v0.2.2-beta) unter Assets Mirravel-0.2.2-Beta-Mac.dmg laden.
 2. DMG öffnen und Mirravel.app nach Programme / Applications ziehen. Die Anleitung liegt ebenfalls im DMG.
 3. Mirravel öffnen. Anleitung zeigt diese Hinweise; Terminal-Menü startet das lokale Menü.
 4. Im Terminal zuerst 1 – Diagnose wählen. Dabei werden keine Systemeinstellungen geändert und keine Administratorrechte angefordert.
@@ -62,7 +68,7 @@ Diese Beta ist ad-hoc signiert und nicht notarisiert. macOS kann deshalb „Mirr
 
 Diese App-Freigabe ist ein eigener Schritt. Für den experimentellen Patch benötigt Terminal zusätzlich Full Disk Access, wie im nächsten Abschnitt beschrieben. Gatekeeper oder SIP nicht systemweit deaktivieren.
 
-Alternative ohne fertige App: Mirravel-0.2.1-Beta-Source.zip vollständig entpacken, alle Dateien zusammenlassen und Mirravel.command öffnen. Das Menü ist dasselbe. Nicht einzelne Dateien aus der GitHub-Vorschau herunterladen; vollständiges ZIP verwenden.
+Alternative ohne fertige App: Mirravel-0.2.2-Beta-Source.zip vollständig entpacken, alle Dateien zusammenlassen und Mirravel.command öffnen. Das Menü ist dasselbe. Nicht einzelne Dateien aus der GitHub-Vorschau herunterladen; vollständiges ZIP verwenden.
 
 Optional: experimentellen Mac-Patch testen
 
@@ -137,7 +143,7 @@ bash
 /bin/bash scripts/build-macos.sh
 
 
-Die fertige DMG liegt unter dist/Mirravel-0.2.1-Beta-Mac.dmg. AppleScript-Compiler, Signaturwerkzeuge und DMG-Werkzeuge gehören zu macOS; Xcode ist für diesen lokalen Paketbau nicht erforderlich. Projekt und temporäre Paketdateien bleiben im gewählten Ausgabeordner. Der Build führt keinen Patch aus.
+Die fertige DMG liegt unter dist/Mirravel-0.2.2-Beta-Mac.dmg. AppleScript-Compiler, Signaturwerkzeuge und DMG-Werkzeuge gehören zu macOS; Xcode ist für diesen lokalen Paketbau nicht erforderlich. Projekt und temporäre Paketdateien bleiben im gewählten Ausgabeordner. Der Build führt keinen Patch aus.
 
 Für die automatisierten Regressionstests wird Python 3 benötigt:
 
