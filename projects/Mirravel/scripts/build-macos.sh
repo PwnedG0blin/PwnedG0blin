@@ -16,11 +16,11 @@ resources="$stage/Mirravel.app/Contents/Resources"
 cp "$project/Mirravel.command" "$project/core.sh" "$project/Anleitung.txt" "$project/README.md" "$project/AUTHORS.md" "$project/LICENSE" "$resources/"
 chmod 755 "$resources/Mirravel.command" "$resources/core.sh"
 info="$stage/Mirravel.app/Contents/Info.plist"
-/usr/libexec/PlistBuddy -c 'Set :CFBundleShortVersionString 0.2.2' "$info" || /usr/libexec/PlistBuddy -c 'Add :CFBundleShortVersionString string 0.2.2' "$info"
-/usr/libexec/PlistBuddy -c 'Add :CFBundleVersion string 5' "$info" || /usr/libexec/PlistBuddy -c 'Set :CFBundleVersion 5' "$info"
+/usr/libexec/PlistBuddy -c 'Set :CFBundleShortVersionString 1.0.0' "$info" || /usr/libexec/PlistBuddy -c 'Add :CFBundleShortVersionString string 1.0.0' "$info"
+/usr/libexec/PlistBuddy -c 'Add :CFBundleVersion string 6' "$info" || /usr/libexec/PlistBuddy -c 'Set :CFBundleVersion 6' "$info"
 /usr/libexec/PlistBuddy -c 'Set :CFBundleIdentifier io.github.pwnedg0blin.Mirravel' "$info" || /usr/libexec/PlistBuddy -c 'Add :CFBundleIdentifier string io.github.pwnedg0blin.Mirravel' "$info"
 /usr/libexec/PlistBuddy -c 'Set :CFBundleName Mirravel' "$info" || /usr/libexec/PlistBuddy -c 'Add :CFBundleName string Mirravel' "$info"
-/usr/libexec/PlistBuddy -c 'Add :CFBundleDisplayName string Mirravel Beta' "$info" || /usr/libexec/PlistBuddy -c 'Set :CFBundleDisplayName Mirravel Beta' "$info"
+/usr/libexec/PlistBuddy -c 'Add :CFBundleDisplayName string Mirravel' "$info" || /usr/libexec/PlistBuddy -c 'Set :CFBundleDisplayName Mirravel' "$info"
 /usr/libexec/PlistBuddy -c 'Add :LSMinimumSystemVersion string 15.0' "$info" || /usr/libexec/PlistBuddy -c 'Set :LSMinimumSystemVersion 15.0' "$info"
 /usr/libexec/PlistBuddy -c 'Add :NSHumanReadableCopyright string Copyright (c) 2026 PwnedG0blin' "$info" || /usr/libexec/PlistBuddy -c 'Set :NSHumanReadableCopyright Copyright (c) 2026 PwnedG0blin' "$info"
 # Build the selected Mirror Glass artwork into every standard macOS icon size.
@@ -39,11 +39,32 @@ done
 /usr/libexec/PlistBuddy -c 'Delete :CFBundleIconName' "$info" >/dev/null 2>&1 || true
 codesign --force --sign - "$stage/Mirravel.app"
 codesign --verify --strict "$stage/Mirravel.app"
-/usr/bin/ditto -c -k --sequesterRsrc --keepParent "$stage/Mirravel.app" "$output/Mirravel-0.2.2-Beta-App.zip"
+/usr/bin/ditto -c -k --sequesterRsrc --keepParent "$stage/Mirravel.app" "$output/Mirravel-1.0.0-App.zip"
 cp "$project/Anleitung.txt" "$project/LICENSE" "$stage/"
 ln -s /Applications "$stage/Applications"
-hdiutil create -volname 'Mirravel 0.2.2 Beta' -srcfolder "$stage" -ov -format UDZO "$output/Mirravel-0.2.2-Beta-Mac.dmg"
-hdiutil verify "$output/Mirravel-0.2.2-Beta-Mac.dmg"
-echo "DMG erstellt: $output/Mirravel-0.2.2-Beta-Mac.dmg"
-echo 'Ad-hoc signierte Beta, nicht von Apple notarisiert. Keine Systemeinstellungen wurden vom Build geändert.'
+mkdir -p "$stage/.background"
+cp "$project/assets/mirravel-dmg-background.png" "$stage/.background/background.png"
+layout_python="${MIRRAVEL_LAYOUT_PYTHON:-python3}"
+rw="$output/.Mirravel-layout.dmg"
+mountpoint="$stage/.mount"
+# Keep the mountpoint outside the image content tree.
+mountpoint="$(mktemp -d "$output/.Mirravel-mount.XXXXXX")"
+attached=0
+cleanup() {
+  if [[ "$attached" == 1 ]]; then hdiutil detach "$mountpoint" -quiet || true; fi
+  rm -rf -- "$stage" "$mountpoint"
+  rm -f -- "$rw"
+}
+trap cleanup EXIT
+hdiutil create -volname 'Mirravel 1.0.0' -srcfolder "$stage" -ov -format UDRW "$rw"
+hdiutil attach -readwrite -nobrowse -mountpoint "$mountpoint" "$rw"
+attached=1
+"$layout_python" "$project/scripts/dmg-layout.py" "$mountpoint"
+sync
+hdiutil detach "$mountpoint" -quiet
+attached=0
+hdiutil convert "$rw" -format UDZO -o "$output/Mirravel-1.0.0-Mac.dmg"
+hdiutil verify "$output/Mirravel-1.0.0-Mac.dmg"
+echo "DMG erstellt: $output/Mirravel-1.0.0-Mac.dmg"
+echo 'Ad-hoc signierte Version, nicht von Apple notarisiert. Keine Systemeinstellungen wurden vom Build geändert.'
 

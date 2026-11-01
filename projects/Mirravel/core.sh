@@ -141,7 +141,7 @@ diagnose() {
   printf '\nAnswer 4 bedeutet lokal als berechtigt markiert, 2 lokal nicht berechtigt.\n'
   printf 'Das bestätigt keine erfolgreiche Verbindung zum iPhone.\n'
   printf 'iPhone-Store-Land und physischer Standort werden hier nicht ausgelesen.\n'
-  printf 'Beta: dokumentierten Geräteteststand und bekannte Verbindungsprobleme in der Anleitung beachten.\n'
+  printf 'Experimentelle Konfiguration: dokumentierten Geräteteststand und bekannte Verbindungsprobleme in der Anleitung beachten.\n'
 }
 apply_patch() {
   find_plist; schema; select_state; secure_state

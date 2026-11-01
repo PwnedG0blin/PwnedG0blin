@@ -1,28 +1,31 @@
-# Mirravel 0.2.2 Beta — Mirror Glass
+# Mirravel 1.0.0 – reguläre Veröffentlichung
 
-Mirravel now uses the selected **Mirror Glass** app icon and is available as a ready-to-extract **Mirravel.app** ZIP as well as a DMG.
+**Kostenlos · Open Source (MIT) · macOS 15+**
+
+Mirravel bündelt iPhone-Mirroring-Diagnose, eine experimentelle EU-Konfiguration auf dem Mac sowie Sicherung und kontrollierte Rücknahme der eigenen Änderungen. Die bereits getestete Programmfunktion bleibt erhalten. Neu sind die reguläre Versionierung ohne Beta-Zusatz sowie das fertige Universal-App- und DMG-Paket mit dem **Mirror-Glass-Appsymbol**.
 
 ## Downloads
 
-- **Mirravel-0.2.2-Beta-App.zip** — extract and copy Mirravel.app to Applications.
-- **Mirravel-0.2.2-Beta-Mac.dmg** — open and drag Mirravel.app to Applications.
-- **Mirravel-0.2.2-Beta-Source.zip** — complete source code, artwork, guide and build scripts.
-- **SHA256SUMS.txt** — package checksums.
+- **Mirravel-1.0.0-Mac.dmg** – empfohlen: öffnen und Mirravel.app nach Applications ziehen.
+- **Mirravel-1.0.0-App.zip** – direkt entpackbare Universal-Mac-App.
+- **Mirravel-1.0.0-Source.zip** – Quellcode der Veröffentlichung.
+- **SHA256SUMS.txt** – SHA-256-Prüfsummen.
 
-The same signed app is supplied in the App ZIP and DMG. Its app icon includes standard and Retina sizes up to 1024 pixels. Finder, the Dock and the application bundle use the new icon.
+## Funktionen und Sicherheit
 
-## How it works
+- Diagnose des lokalen Status; Terminal-Menü und Protokollansicht.
+- Optionaler macOS-Patch erst nach ausdrücklicher Eingabe **TEST** und lokaler Administratorbestätigung.
+- Sicherung und bedingte Rücknahme ausschließlich der drei vom Tool verwalteten Eligibility-Werte.
+- Keine Telemetrie, kein automatischer Log-Upload und keine Deaktivierung von SIP.
 
-Open Mirravel.app to access the existing Terminal menu. Menu 1 reads diagnostics, menu 2 applies the experimental Mac-side patch after entering TEST and confirming the local administrator prompt, and menu 3 restores the tool's changes under the existing backup checks. The patch and backup logic are unchanged in this release.
+## Voraussetzungen und Teststand
 
-On first launch, macOS may block this ad-hoc-signed, non-notarized beta. Go to **System Settings → Privacy & Security → Open Anyway**, confirm the prompt and reopen Mirravel. Terminal also needs **Full Disk Access** for the patch.
+**Mac:** Apple Silicon oder Intel mit **T2 Security Chip**, macOS 15 oder neuer. **iPhone:** iOS 18 oder neuer; reguläre iPhone-Mirroring-Voraussetzungen gelten weiterhin.
 
-## Apple silicon and Intel
+Ein erfolgreicher Mirroring-Test aus der EU wurde am **23. Oktober 2026** mit iOS 27.2 RC und macOS 27.2 RC bestätigt. Ein realer Intel-/T2-Gerätetest und die langfristige Stabilität auf anderen Systemversionen sind nicht nachgewiesen. Die regionale Konfiguration bleibt experimentell; Apple-Updates können die Funktion ändern. „Reguläre Veröffentlichung“ ist kein universelles Kompatibilitätsversprechen.
 
-The app is universal: **arm64** and **x86_64** are verified in both download packages. Intel Macs require an **Apple T2 Security Chip**. Apple's iPhone Mirroring requirements also include **macOS 15 or later** and **iOS 18 or later**. A real Intel/T2 mirroring test has not been reported.
+Die App ist **ad-hoc signiert und nicht Apple-notarisiert**. Bei Blockierung des Erststarts: **System Settings → Privacy & Security → Open Anyway**. Für den optionalen Patch benötigt Apples **Terminal** zusätzlich **Full Disk Access**. Bitte SIP nicht deaktivieren.
 
-On 23 October 2026, PwnedG0blin confirmed a working iPhone Mirroring connection from within the EU using iOS 27.2 RC and macOS 27.2 RC with the corrected helper. This release packages that existing logic with the selected icon; it is not a new end-to-end hardware test. Long-term stability and other device combinations remain untested.
+[Anleitung und Quellcode](https://github.com/PwnedG0blin/PwnedG0blin/tree/master/projects/Mirravel) · [Fehler melden](https://github.com/PwnedG0blin/PwnedG0blin/issues)
 
-Free and open source under the MIT license. Developed by **PwnedG0blin**.
-
-[Documentation](https://github.com/PwnedG0blin/PwnedG0blin/tree/master/projects/Mirravel) · [Upgrade compatibility](https://github.com/PwnedG0blin/PwnedG0blin/blob/master/projects/Mirravel/COMPATIBILITY.md)
+© 2026 PwnedG0blin · MIT-Lizenz
