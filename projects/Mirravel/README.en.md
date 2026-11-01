@@ -34,6 +34,15 @@ Both require **macOS Sequoia 15 or later** and an **iPhone with iOS 18 or later*
 
 Mirravel does not change the iPhone's location or its regional eligibility checks. A local answer value of 4 is not proof of a working connection. In my device test on 23 October 2026, I established a working connection from within the EU with iOS 27.2 RC and macOS 27.2 RC after reapplying the Mac patch. I did not record the exact RC build numbers. Earlier beta tests had shown timeouts; long-term stability and other device combinations remain untested.
 
+## If iPhone Mirroring does not work with German selected
+
+In my testing, language and region settings can also matter after setting up Mirravel:
+
+1. Change the system language on both the Mac and iPhone to **English**, then try iPhone Mirroring again.
+2. If it still does not work, also change the system region to **United States**, then try again.
+
+I have not found changing language and region alone to be a reliable solution. In my test, the combination with the Mirravel configuration worked. This reflects my personal test results, not a guarantee for every device or system version. This refers to the system region in **Language & Region**, not the country of your Apple Account.
+
 ## Updates and data
 
 The app, launcher, packages, workflow and current project pages consistently use **Mirravel**. The app bundle ID is `io.github.pwnedg0blin.Mirravel`. New installations use `/private/var/db/mirravel`; existing older backups are detected and reused with the same validation rules. If both backup directories exist, the tool stops before making changes. [Upgrade compatibility](COMPATIBILITY.md). If an update resets Mac eligibility to answer 2, menu 2 can reapply the patch. On a build change, the previous backup is copied to a private `previous-build.XXXXXX` directory and verified byte for byte before the current macOS state is saved as the new baseline. Old system values are never restored over a new build. The same-build safeguard remains in place.

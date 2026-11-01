@@ -46,6 +46,15 @@ Apple führt iPhone Mirroring weiterhin als in der EU nicht verfügbar (Quellenp
 
 **Testumfang:** Der aktuelle Gerätetest bestätigt den erfolgreichen Verbindungsaufbau mit beiden 27.2-RCs. Langzeitstabilität und andere Geräte- oder Versionskombinationen wurden damit nicht geprüft. In früheren Betas waren Verbindungs-Timeouts aufgetreten.
 
+### Falls iPhone Mirroring mit deutscher Sprache nicht funktioniert
+
+Nach meinem bisherigen Test können zusätzlich zur Einrichtung mit Mirravel die Sprach- und Regionseinstellungen entscheidend sein:
+
+1. Stelle die Systemsprache auf dem Mac und dem iPhone auf **English** um und teste iPhone Mirroring erneut.
+2. Falls es weiterhin nicht funktioniert, stelle zusätzlich die Systemregion auf **United States (Vereinigte Staaten)** um und teste erneut.
+
+Den Sprach- und Regionswechsel allein habe ich nicht als verlässliche Lösung erlebt. In meinem Test hat die Kombination mit der Mirravel-Konfiguration funktioniert. Das ist mein persönlicher Teststand und keine Garantie für alle Geräte oder Systemversionen. Gemeint ist die Systemregion in **Language & Region**, nicht ein Wechsel des Apple-Account-Landes.
+
 ## Download und erster Start
 
 **Direkt als App:** Unter **Assets** `Mirravel-1.0.0-App.zip` laden, vollständig entpacken und **Mirravel.app** nach **Applications** kopieren. Die App verwendet das gewählte **Mirror-Glass-Logo** als Dock- und Finder-Icon. Sie öffnet das bewährte Terminal-Menü für Diagnose, Patch und Rücknahme.
