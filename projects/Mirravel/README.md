@@ -53,7 +53,7 @@ Nach meinem bisherigen Test können zusätzlich zur Einrichtung mit Mirravel die
 1. Stelle die Systemsprache auf dem Mac und dem iPhone auf **English** um und teste iPhone Mirroring erneut.
 2. Falls es weiterhin nicht funktioniert, stelle zusätzlich die Systemregion auf **United States (Vereinigte Staaten)** um und teste erneut.
 
-Den Sprach- und Regionswechsel allein habe ich nicht als verlässliche Lösung erlebt. In meinem Test hat die Kombination mit der Mirravel-Konfiguration funktioniert. Das ist mein persönlicher Teststand und keine Garantie für alle Geräte oder Systemversionen. Gemeint ist die Systemregion in **Language & Region**, nicht ein Wechsel des Apple-Account-Landes.
+Nach meinem bisherigen Test reicht die Umstellung von Sprache und Region allein nicht aus. In Kombination mit Mirravel konnte ich iPhone Mirroring erfolgreich nutzen. Das ist mein persönlicher Teststand und keine Garantie für alle Geräte oder Systemversionen. Gemeint ist die Systemregion in **Language & Region**, nicht ein Wechsel des Apple-Account-Landes.
 
 ## Download und erster Start
 
