@@ -2,7 +2,7 @@ name: Mirravel release
 on:
   push:
     branches: [master]
-    paths: ['projects/Mirravel/VERSION']
+    paths: ['projects/Mirravel/VERSION', '.github/workflows/mirravel-release.yml']
   workflow_dispatch:
 permissions:
   contents: read

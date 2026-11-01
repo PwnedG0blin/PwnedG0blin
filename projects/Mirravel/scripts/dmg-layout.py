@@ -5,7 +5,7 @@ from ds_store import DSStore
 from mac_alias import Alias
 
 root = Path(sys.argv[1]).resolve()
-with DSStore.open(root / '.DS_Store', 'w+') as store:
+with DSStore.open(str(root / '.DS_Store'), 'w+') as store:
     store['.']['vSrn'] = ('long', 1)
     store['.']['vstl'] = ('type', b'icnv')
     store['.']['bwsp'] = {'ShowToolbar': False, 'ShowStatusBar': False,

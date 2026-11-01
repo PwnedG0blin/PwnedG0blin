@@ -24,7 +24,7 @@ import sys
 from ds_store import DSStore
 from mac_alias import Alias
 root = Path(sys.argv[1])
-with DSStore.open(root / '.DS_Store', 'r') as store:
+with DSStore.open(str(root / '.DS_Store'), 'r') as store:
     assert store['Mirravel.app']['Iloc'] == (230, 340)
     assert store['Applications']['Iloc'] == (770, 340)
     options = store['.']['icvp']
