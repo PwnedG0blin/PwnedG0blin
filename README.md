@@ -28,9 +28,9 @@ Video editor for iPhone and iPad, designed for touch controls and precise video 
 
 ### [Mirravel — iPhone Mirroring Diagnostics for Mac](projects/Mirravel)
 
-Mirravel richtet sich an Nutzerinnen und Nutzer in der Europäischen Union und verfolgt das Ziel, Apples regionale Einschränkung für iPhone Mirroring experimentell zu umgehen. Dafür bietet es Diagnose und Änderungen auf der Mac-Seite mit Sicherung und Rücknahme eigener Änderungen. Am 23.10.2026 hat PwnedG0blin eine funktionierende iPhone-Mirroring-Verbindung aus der EU mit iOS 27.2 RC und macOS 27.2 RC bestätigt. Prüfungen auf dem iPhone und spätere Systemupdates können die Verbindung weiterhin beeinflussen.
+Mirravel richtet sich an Nutzerinnen und Nutzer in der Europäischen Union und verfolgt das Ziel, Apples regionale Einschränkung für iPhone Mirroring experimentell zu umgehen. Dafür bietet es Diagnose und Änderungen auf der Mac-Seite mit Sicherung und Rücknahme eigener Änderungen. Am 23. Oktober 2026 habe ich iPhone Mirroring aus der EU mit iOS 27.2 RC und macOS 27.2 RC erfolgreich getestet. Prüfungen auf dem iPhone und spätere Systemupdates können die Verbindung weiterhin beeinflussen.
 
-Mirravel is intended for users in the European Union and aims to experimentally bypass Apple’s regional restriction on iPhone Mirroring. It provides diagnostics and Mac-side configuration changes with backup and restore of its own changes. On 23 October 2026, PwnedG0blin confirmed a working iPhone Mirroring connection from within the EU with iOS 27.2 RC and macOS 27.2 RC. iPhone-side eligibility checks and future system updates may still affect connectivity.
+Mirravel is intended for users in the European Union and aims to experimentally bypass Apple’s regional restriction on iPhone Mirroring. It provides diagnostics and Mac-side configuration changes with backup and restore of its own changes. On 23 October 2026, I successfully tested iPhone Mirroring from within the EU with iOS 27.2 RC and macOS 27.2 RC. iPhone-side eligibility checks and future system updates may still affect connectivity.
 
 Kostenloser Open-Source-Helfer für iPhone-Mirroring-Diagnose und experimentelle Mac-Konfiguration mit Sicherung und Rücknahme eigener Änderungen. **macOS 15+ · Apple Silicon oder Intel mit T2 · 1.0.0 Release.**
 

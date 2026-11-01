@@ -22,7 +22,7 @@ Mirravel bündelt iPhone-Mirroring-Diagnose, eine experimentelle EU-Konfiguratio
 
 **Mac:** Apple Silicon oder Intel mit **T2 Security Chip**, macOS 15 oder neuer. **iPhone:** iOS 18 oder neuer; reguläre iPhone-Mirroring-Voraussetzungen gelten weiterhin.
 
-Ein erfolgreicher Mirroring-Test aus der EU wurde am **23. Oktober 2026** mit iOS 27.2 RC und macOS 27.2 RC bestätigt. Ein realer Intel-/T2-Gerätetest und die langfristige Stabilität auf anderen Systemversionen sind nicht nachgewiesen. Die regionale Konfiguration bleibt experimentell; Apple-Updates können die Funktion ändern. „Reguläre Veröffentlichung“ ist kein universelles Kompatibilitätsversprechen.
+Am **23. Oktober 2026** habe ich iPhone Mirroring aus der EU mit iOS 27.2 RC und macOS 27.2 RC erfolgreich getestet. Ein realer Intel-/T2-Gerätetest und die langfristige Stabilität auf anderen Systemversionen sind nicht nachgewiesen. Die regionale Konfiguration bleibt experimentell; Apple-Updates können die Funktion ändern. „Reguläre Veröffentlichung“ ist kein universelles Kompatibilitätsversprechen.
 
 Die App ist **ad-hoc signiert und nicht Apple-notarisiert**. Bei Blockierung des Erststarts: **System Settings → Privacy & Security → Open Anyway**. Für den optionalen Patch benötigt Apples **Terminal** zusätzlich **Full Disk Access**. Bitte SIP nicht deaktivieren.
 

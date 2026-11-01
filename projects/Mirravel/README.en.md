@@ -8,7 +8,7 @@ Inspect local requirements, view Mac logs, and back up or restore settings chang
 
 ## EU purpose and experimental bypass
 
-Mirravel is intended for users in the European Union and aims to experimentally bypass Apple’s regional restriction on iPhone Mirroring. It provides diagnostics and Mac-side configuration changes with backup and restore of its own changes. On 23 October 2026, PwnedG0blin confirmed a working iPhone Mirroring connection from within the EU with iOS 27.2 RC and macOS 27.2 RC. iPhone-side eligibility checks and future system updates may still affect connectivity.
+Mirravel is intended for users in the European Union and aims to experimentally bypass Apple’s regional restriction on iPhone Mirroring. It provides diagnostics and Mac-side configuration changes with backup and restore of its own changes. On 23 October 2026, I successfully tested iPhone Mirroring from within the EU with iOS 27.2 RC and macOS 27.2 RC. iPhone-side eligibility checks and future system updates may still affect connectivity.
 
 Apple lists iPhone Mirroring as unavailable in the EU: [Apple Support](https://support.apple.com/en-euro/120421).
 
@@ -32,7 +32,7 @@ Both require **macOS Sequoia 15 or later** and an **iPhone with iOS 18 or later*
 - Save the original values and restore only its own changes under the documented validation rules.
 - Open iPhone Mirroring, relevant privacy settings and local diagnostic logs.
 
-Mirravel does not change the iPhone's location or its regional eligibility checks. A local answer value of 4 is not proof of a working connection. The latest device test on 23 October 2026 confirmed a working connection from within the EU with iOS 27.2 RC and macOS 27.2 RC after reapplying the Mac patch. Exact RC build numbers were not supplied. Earlier beta tests had shown timeouts; long-term stability and other device combinations remain untested.
+Mirravel does not change the iPhone's location or its regional eligibility checks. A local answer value of 4 is not proof of a working connection. In my device test on 23 October 2026, I established a working connection from within the EU with iOS 27.2 RC and macOS 27.2 RC after reapplying the Mac patch. I did not record the exact RC build numbers. Earlier beta tests had shown timeouts; long-term stability and other device combinations remain untested.
 
 ## Updates and data
 
@@ -59,5 +59,5 @@ Allowing the app to open is separate from granting **Terminal → Full Disk Acce
 
 On a Mac run `bash scripts/build-macos.sh`; the output is `dist/Mirravel-1.0.0-Mac.dmg`. Automated fixture tests: `python3 -m unittest discover -s tests -v`.
 
-Developed by **PwnedG0blin**, [MIT license](LICENSE). [GitHub Sponsors](https://github.com/sponsors/PwnedG0blin) · [Patreon](https://www.patreon.com/cw/PwnedG0blinApp) · [X](https://x.com/PwnedG0blin)
+I develop Mirravel as **PwnedG0blin**, [MIT license](LICENSE). [GitHub Sponsors](https://github.com/sponsors/PwnedG0blin) · [Patreon](https://www.patreon.com/cw/PwnedG0blinApp) · [X](https://x.com/PwnedG0blin)
 

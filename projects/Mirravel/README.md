@@ -6,13 +6,13 @@
 
 **Experimenteller macOS-Helfer für iPhone Mirroring. Kostenlos und Open Source unter der MIT-Lizenz.**
 
-Entwickelt von **PwnedG0blin**.
+Ich entwickle Mirravel unter dem Namen **PwnedG0blin**.
 
 [Mirravel herunterladen](https://github.com/PwnedG0blin/PwnedG0blin/releases/tag/mirravel-v1.0.0) · [Profil](https://github.com/PwnedG0blin) · [Fehler melden](https://github.com/PwnedG0blin/PwnedG0blin/issues/new)
 
 ## EU-Zweck und experimentelle Umgehung
 
-Mirravel richtet sich an Nutzerinnen und Nutzer in der Europäischen Union und verfolgt das Ziel, Apples regionale Einschränkung für iPhone Mirroring experimentell zu umgehen. Dafür bietet es Diagnose und Änderungen auf der Mac-Seite mit Sicherung und Rücknahme eigener Änderungen. Am 23.10.2026 hat PwnedG0blin eine funktionierende iPhone-Mirroring-Verbindung aus der EU mit iOS 27.2 RC und macOS 27.2 RC bestätigt. Prüfungen auf dem iPhone und spätere Systemupdates können die Verbindung weiterhin beeinflussen.
+Mirravel richtet sich an Nutzerinnen und Nutzer in der Europäischen Union und verfolgt das Ziel, Apples regionale Einschränkung für iPhone Mirroring experimentell zu umgehen. Dafür bietet es Diagnose und Änderungen auf der Mac-Seite mit Sicherung und Rücknahme eigener Änderungen. Am 23. Oktober 2026 habe ich iPhone Mirroring aus der EU mit iOS 27.2 RC und macOS 27.2 RC erfolgreich getestet. Prüfungen auf dem iPhone und spätere Systemupdates können die Verbindung weiterhin beeinflussen.
 
 ## Funktionen
 
@@ -42,7 +42,7 @@ Für iPhone Mirroring nennt Apple einen Mac mit Apple Silicon oder T2-Chip, macO
 
 Apple führt iPhone Mirroring weiterhin als in der EU nicht verfügbar (Quellenprüfung: 18.10.2026). Diese Version ist ein experimenteller Eingriff in eine undokumentierte macOS-Systemdatenbank, keine von Apple unterstützte Funktion.
 
-**Erfolgreicher Gerätetest durch PwnedG0blin am 23.10.2026: iOS 27.2 RC und macOS 27.2 RC.** Der Test fand aus der Europäischen Union statt. Nach erneuter Anwendung des Mac-Patches wurde eine funktionierende iPhone-Mirroring-Verbindung bestätigt. Die genauen RC-Buildnummern wurden für diesen Test nicht angegeben.
+**Mein erfolgreicher Gerätetest am 23. Oktober 2026: iOS 27.2 RC und macOS 27.2 RC.** Ich habe den Test aus der Europäischen Union durchgeführt. Nach erneuter Anwendung des Mac-Patches konnte ich eine funktionierende iPhone-Mirroring-Verbindung herstellen. Die genauen RC-Buildnummern habe ich bei diesem Test nicht dokumentiert.
 
 **Testumfang:** Der aktuelle Gerätetest bestätigt den erfolgreichen Verbindungsaufbau mit beiden 27.2-RCs. Langzeitstabilität und andere Geräte- oder Versionskombinationen wurden damit nicht geprüft. In früheren Betas waren Verbindungs-Timeouts aufgetreten.
 
