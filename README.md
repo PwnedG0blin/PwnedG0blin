@@ -16,9 +16,11 @@
 
 ### [Stratovo — Android, Windows & Ubuntu for Mac](https://github.com/PwnedG0blin/Stratovo)
 
-Kostenlose Open-Source-App für Android-Emulation sowie Windows-ARM64- und Ubuntu-ARM-VMs auf Macs mit Apple Silicon. APK-Installation, eigene Playerfenster und dauerhaft gespeicherte Gastsysteme. **macOS 14+ · Öffentliche Testversion.**
+Kostenlose Open-Source-App für Android-Emulation sowie Windows-ARM64- und Ubuntu-ARM-VMs auf Macs mit Apple Silicon. APK-Installation, eigene Playerfenster und dauerhaft gespeicherte Gastsysteme. **macOS 14+ · Öffentliche Beta 7.7.**
 
-Free, open-source macOS app for Android emulation, Windows ARM64 and Ubuntu ARM virtual machines on Apple silicon, with APK installation and persistent guest storage. One guest runs at a time. **Public test version.** [English documentation](https://github.com/PwnedG0blin/Stratovo#readme).
+Neu: aufgeräumte Systemübersicht, beschriftete Einstellungsbuttons und Installationen mit ihren lokalen Daten über den macOS-Papierkorb entfernen. [Beta 7.7 herunterladen und Änderungen ansehen](https://github.com/PwnedG0blin/Stratovo/releases/tag/v1.0.0-beta.7.7).
+
+Free, open-source macOS app for Android emulation, Windows ARM64 and Ubuntu ARM virtual machines on Apple silicon, with APK installation and persistent guest storage. One guest runs at a time. **Public Beta 7.7.** Includes a compact system library, labeled settings buttons and guest installation removal through the macOS Trash. [Release notes and downloads](https://github.com/PwnedG0blin/Stratovo/releases/tag/v1.0.0-beta.7.7). [English documentation](https://github.com/PwnedG0blin/Stratovo#readme).
 
 ### [Scenalto — Video Editor for iPhone & iPad](projects/Scenalto)
 
