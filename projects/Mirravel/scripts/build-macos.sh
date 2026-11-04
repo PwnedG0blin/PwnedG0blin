@@ -9,15 +9,25 @@ mkdir -p "$output"
 output="$(cd "$output" && pwd -P)"
 stage="$(mktemp -d "$output/.Mirravel-stage.XXXXXX")"
 trap 'rm -rf -- "$stage"' EXIT
-osacompile -o "$stage/Mirravel.app" "$project/Mirravel.applescript"
-# Refuse a package that cannot run natively on both supported Mac architectures.
-/usr/bin/lipo "$stage/Mirravel.app/Contents/MacOS/applet" -verify_arch x86_64 arm64
-resources="$stage/Mirravel.app/Contents/Resources"
+app="$stage/Mirravel.app"
+resources="$app/Contents/Resources"
+mkdir -p "$app/Contents/MacOS" "$resources"
+sdk="$(xcrun --sdk macosx --show-sdk-path)"
+for arch in arm64 x86_64; do
+  xcrun swiftc -sdk "$sdk" -swift-version 5 -parse-as-library -O -target "$arch-apple-macos15.0" \
+    "$project/app/Mirravel.swift" "$project/app/Release.swift" -o "$stage/Mirravel-$arch"
+done
+/usr/bin/lipo -create "$stage/Mirravel-arm64" "$stage/Mirravel-x86_64" -output "$app/Contents/MacOS/Mirravel"
+/usr/bin/lipo "$app/Contents/MacOS/Mirravel" -verify_arch x86_64 arm64
+rm "$stage/Mirravel-arm64" "$stage/Mirravel-x86_64"
 cp "$project/Mirravel.command" "$project/core.sh" "$project/Anleitung.txt" "$project/README.md" "$project/AUTHORS.md" "$project/LICENSE" "$resources/"
 chmod 755 "$resources/Mirravel.command" "$resources/core.sh"
-info="$stage/Mirravel.app/Contents/Info.plist"
-/usr/libexec/PlistBuddy -c 'Set :CFBundleShortVersionString 1.0.0' "$info" || /usr/libexec/PlistBuddy -c 'Add :CFBundleShortVersionString string 1.0.0' "$info"
-/usr/libexec/PlistBuddy -c 'Add :CFBundleVersion string 6' "$info" || /usr/libexec/PlistBuddy -c 'Set :CFBundleVersion 6' "$info"
+info="$app/Contents/Info.plist"
+/usr/libexec/PlistBuddy -c 'Add :CFBundleExecutable string Mirravel' "$info"
+/usr/libexec/PlistBuddy -c 'Add :CFBundlePackageType string APPL' "$info"
+/usr/libexec/PlistBuddy -c 'Add :NSHighResolutionCapable bool true' "$info"
+/usr/libexec/PlistBuddy -c 'Set :CFBundleShortVersionString 1.1.0' "$info" || /usr/libexec/PlistBuddy -c 'Add :CFBundleShortVersionString string 1.1.0' "$info"
+/usr/libexec/PlistBuddy -c 'Add :CFBundleVersion string 7' "$info" || /usr/libexec/PlistBuddy -c 'Set :CFBundleVersion 7' "$info"
 /usr/libexec/PlistBuddy -c 'Set :CFBundleIdentifier io.github.pwnedg0blin.Mirravel' "$info" || /usr/libexec/PlistBuddy -c 'Add :CFBundleIdentifier string io.github.pwnedg0blin.Mirravel' "$info"
 /usr/libexec/PlistBuddy -c 'Set :CFBundleName Mirravel' "$info" || /usr/libexec/PlistBuddy -c 'Add :CFBundleName string Mirravel' "$info"
 /usr/libexec/PlistBuddy -c 'Add :CFBundleDisplayName string Mirravel' "$info" || /usr/libexec/PlistBuddy -c 'Set :CFBundleDisplayName Mirravel' "$info"
@@ -39,7 +49,7 @@ done
 /usr/libexec/PlistBuddy -c 'Delete :CFBundleIconName' "$info" >/dev/null 2>&1 || true
 codesign --force --sign - "$stage/Mirravel.app"
 codesign --verify --strict "$stage/Mirravel.app"
-/usr/bin/ditto -c -k --sequesterRsrc --keepParent "$stage/Mirravel.app" "$output/Mirravel-1.0.0-App.zip"
+/usr/bin/ditto -c -k --sequesterRsrc --keepParent "$stage/Mirravel.app" "$output/Mirravel-1.1.0-App.zip"
 cp "$project/Anleitung.txt" "$project/LICENSE" "$stage/"
 ln -s /Applications "$stage/Applications"
 mkdir -p "$stage/.background"
@@ -56,15 +66,15 @@ cleanup() {
   rm -f -- "$rw"
 }
 trap cleanup EXIT
-hdiutil create -volname 'Mirravel 1.0.0' -srcfolder "$stage" -ov -format UDRW "$rw"
+hdiutil create -volname 'Mirravel 1.1.0' -srcfolder "$stage" -ov -format UDRW "$rw"
 hdiutil attach -readwrite -nobrowse -mountpoint "$mountpoint" "$rw"
 attached=1
 "$layout_python" "$project/scripts/dmg-layout.py" "$mountpoint"
 sync
 hdiutil detach "$mountpoint" -quiet
 attached=0
-hdiutil convert "$rw" -format UDZO -o "$output/Mirravel-1.0.0-Mac.dmg"
-hdiutil verify "$output/Mirravel-1.0.0-Mac.dmg"
-echo "DMG erstellt: $output/Mirravel-1.0.0-Mac.dmg"
+hdiutil convert "$rw" -format UDZO -o "$output/Mirravel-1.1.0-Mac.dmg"
+hdiutil verify "$output/Mirravel-1.1.0-Mac.dmg"
+echo "DMG erstellt: $output/Mirravel-1.1.0-Mac.dmg"
 echo 'Ad-hoc signierte Version, nicht von Apple notarisiert. Keine Systemeinstellungen wurden vom Build geändert.'
 

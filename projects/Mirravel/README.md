@@ -2,13 +2,13 @@
 
 [Website](https://pwnedg0blin.pages.dev/) · [Alle Projekte / All projects](https://pwnedg0blin.pages.dev/projekte) · [Unterstützen / Support](https://pwnedg0blin.pages.dev/support)
 
-**Version 1.0.0** · [English](README.en.md)
+**Version 1.1.0** · [English](README.en.md)
 
 **Experimenteller macOS-Helfer für iPhone Mirroring. Kostenlos und Open Source unter der MIT-Lizenz.**
 
 Ich entwickle Mirravel unter dem Namen **PwnedG0blin**.
 
-[Mirravel herunterladen](https://github.com/PwnedG0blin/PwnedG0blin/releases/tag/mirravel-v1.0.0) · [Profil](https://github.com/PwnedG0blin) · [Fehler melden](https://github.com/PwnedG0blin/PwnedG0blin/issues/new)
+[Mirravel herunterladen](https://github.com/PwnedG0blin/PwnedG0blin/releases/tag/mirravel-v1.1.0) · [Profil](https://github.com/PwnedG0blin) · [Fehler melden](https://github.com/PwnedG0blin/PwnedG0blin/issues/new)
 
 ## EU-Zweck und experimentelle Umgehung
 
@@ -57,14 +57,15 @@ Nach meinem bisherigen Test reicht die Umstellung von Sprache und Region allein 
 
 ## Download und erster Start
 
-**Direkt als App:** Unter **Assets** `Mirravel-1.0.0-App.zip` laden, vollständig entpacken und **Mirravel.app** nach **Applications** kopieren. Die App verwendet das gewählte **Mirror-Glass-Logo** als Dock- und Finder-Icon. Sie öffnet das bewährte Terminal-Menü für Diagnose, Patch und Rücknahme.
+**Direkt als App:** Unter **Assets** `Mirravel-1.1.0-App.zip` laden, vollständig entpacken und **Mirravel.app** nach **Applications** kopieren. Die App verwendet das gewählte **Mirror-Glass-Logo** als Dock- und Finder-Icon. Sie öffnet ein eigenes Fenster für Diagnose, Patch, Rücknahme und die manuelle GitHub-Update-Prüfung.
 
 Alternativ per DMG:
 
-1. Auf der [Release-Seite](https://github.com/PwnedG0blin/PwnedG0blin/releases/tag/mirravel-v1.0.0) unter **Assets** `Mirravel-1.0.0-Mac.dmg` laden.
+1. Auf der [Release-Seite](https://github.com/PwnedG0blin/PwnedG0blin/releases/tag/mirravel-v1.1.0) unter **Assets** `Mirravel-1.1.0-Mac.dmg` laden.
 2. DMG öffnen und **Mirravel.app** nach **Programme / Applications** ziehen. Die Anleitung liegt ebenfalls im DMG.
-3. Mirravel öffnen. **Anleitung** zeigt diese Hinweise; **Terminal-Menü** startet das lokale Menü.
-4. Im Terminal zuerst **1 – Diagnose** wählen. Dabei werden keine Systemeinstellungen geändert und keine Administratorrechte angefordert.
+3. Mirravel öffnen. Die App prüft die lokalen Werte beim Start. **Diagnose kopieren** übernimmt nur Systemversion, Build, Architektur und den lokalen Freigabestatus.
+4. **Anwenden** wählen, den Hinweis bestätigen und die lokale Administratorabfrage von macOS bestätigen. **Wiederherstellen** nimmt die drei gesicherten Werte für denselben macOS-Build zurück.
+5. iPhone Mirroring vollständig beenden und über **iPhone Mirroring öffnen** erneut starten. Das iPhone muss gesperrt in der Nähe liegen.
 
 ### Beim ersten Start in macOS freigeben
 
@@ -75,17 +76,17 @@ Diese Version ist ad-hoc signiert und nicht notarisiert. macOS kann deshalb **�
 3. Neben der Meldung zu **Mirravel.app** auf **Open Anyway** klicken – genau dieser Schalter ist für die Freigabe vorgesehen.
 4. Die lokale macOS-Abfrage bestätigen und Mirravel erneut öffnen; falls angeboten, **Open** wählen.
 
-Diese App-Freigabe ist ein eigener Schritt. Für den experimentellen Patch benötigt **Terminal** zusätzlich **Full Disk Access**, wie im nächsten Abschnitt beschrieben. Gatekeeper oder SIP nicht systemweit deaktivieren.
+Diese App-Freigabe ist ein eigener Schritt. Für den experimentellen Patch benötigt **Mirravel** zusätzlich **Full Disk Access**, wie im nächsten Abschnitt beschrieben. Gatekeeper oder SIP nicht systemweit deaktivieren.
 
-Alternative ohne fertige App: `Mirravel-1.0.0-Source.zip` vollständig entpacken, alle Dateien zusammenlassen und `Mirravel.command` öffnen. Das Menü ist dasselbe. Nicht einzelne Dateien aus der GitHub-Vorschau herunterladen; vollständiges ZIP verwenden.
+Alternative ohne fertige App: `Mirravel-1.1.0-Source.zip` vollständig entpacken, alle Dateien zusammenlassen und `Mirravel.command` öffnen. Das separate Terminal-Menü bleibt als Alternative verfügbar. Nicht einzelne Dateien aus der GitHub-Vorschau herunterladen; vollständiges ZIP verwenden.
 
 ## Optional: experimentellen Mac-Patch testen
 
-1. **Systemeinstellungen → Datenschutz & Sicherheit → Festplattenvollzugriff / Full Disk Access** öffnen. Menüpunkt **6** führt dorthin.
-2. **Terminal.app** hinzufügen und einschalten. Bei Nutzung des mitgelieferten Launchers läuft der Helfer in Apples Terminal.
-3. Terminal mit **⌘Q vollständig beenden**, danach Mirravel erneut starten. Eine schon offene Terminal-Sitzung übernimmt die Freigabe unter Umständen nicht.
-4. iPhone Mirroring vollständig beenden. Im Menü **2** wählen, die Hinweise lesen und ausdrücklich **TEST** eingeben. Ohne diese Eingabe erfolgt kein Patch.
-5. Das Mac-Administratorpasswort wird lokal von `sudo` abgefragt. Beim Tippen erscheinen keine Zeichen. Mirravel speichert oder überträgt das Passwort nicht.
+1. **Systemeinstellungen → Datenschutz & Sicherheit → Festplattenvollzugriff / Full Disk Access** öffnen. Im separaten Kommando-Menü führt Menüpunkt **6** dorthin.
+2. **Mirravel.app** hinzufügen und einschalten. Für das separate Kommando-Menü stattdessen **Terminal.app** freigeben.
+3. Die freigegebene App mit ⌘Q vollständig beenden und erneut öffnen.
+4. In der App **Anwenden** wählen und den Systemdialog bestätigen. Beim separaten Kommando-Menü: iPhone Mirroring vollständig beenden. Im Menü **2** wählen, die Hinweise lesen und ausdrücklich **TEST** eingeben. Ohne diese Eingabe erfolgt kein Patch.
+5. Im Kommando-Menü wird das Mac-Administratorpasswort lokal von `sudo` abgefragt. Beim Tippen erscheinen keine Zeichen. Mirravel speichert oder überträgt das Passwort nicht.
 6. Nach erfolgreicher Verifikation iPhone Mirroring erneut öffnen, beispielsweise über Menü **4**. iPhone sperren und neben den Mac legen.
 7. Verbindung tatsächlich testen. Bei Timeout oder Regionsfehlern nicht annehmen, dass der Patch die Verbindung bereits repariert hat; siehe Fehlerdiagnose.
 
@@ -107,7 +108,7 @@ Vor dem Schreiben wird die Ausgangsdatei unter **`/private/var/db/mirravel/origi
 
 Die Sicherung liegt bewusst im geschützten Systembereich des Macs, auch wenn die App auf einer externen SSD liegt. Sie ist klein und enthält keine iPhone-Apps oder Nutzerdatenträger. Bei einer bestehenden Installation verwendet Mirravel den vorhandenen Sicherungsordner weiter. Werden zwei Sicherungsordner gefunden, bricht es vor einer Änderung ab. [Details zur Kompatibilität](COMPATIBILITY.md).
 
-Es werden keine Dienste, Autostarts, geplanten Aufgaben, Profile, VPNs oder automatischen Dauer-Patches eingerichtet. Mirravel selbst tätigt keine Netzwerkanfragen; GitHub-Downloads und Apples Mirroring-Dienste sind davon getrennt.
+Es werden keine Dienste, Autostarts, geplanten Aufgaben, Profile, VPNs oder automatischen Dauer-Patches eingerichtet. Nur **Auf Updates prüfen** fragt öffentliche Release-Daten bei GitHub ab. Es werden weder Diagnosedaten übertragen noch Updates automatisch heruntergeladen oder installiert.
 
 ## Eigene Änderung zurücknehmen
 
@@ -122,7 +123,7 @@ Die Rücknahme wird verweigert, wenn Sicherung, Pfad oder macOS-Build nicht pass
 
 | Anzeige / Problem | Nächster Schritt |
 | :--- | :--- |
-| `Operation not permitted` / Datei unlesbar | Festplattenvollzugriff für Terminal einschalten, Terminal vollständig beenden und neu starten. `sudo` allein ersetzt diese Freigabe nicht. |
+| `Operation not permitted` / Datei unlesbar | Festplattenvollzugriff für Mirravel einschalten und die App neu starten (beim Kommando-Menü: Terminal). `sudo` allein ersetzt diese Freigabe nicht. |
 | Fehlender Schlüssel, unbekannter Typ oder unbekannter Wert | Nicht erzwingen. Der macOS-Aufbau passt nicht zu dieser Version; Systemversion und bereinigte Fehlermeldung melden. |
 | Mac meldet bereits berechtigt / Antwort `4` | Es wird nicht erneut gepatcht. iPhone-Seite und Verbindungsaufbau prüfen. |
 | `SFAuthenticationErrorCodeRegionLocked` im tatsächlichen Verbindungsprotokoll | Eine zusätzliche Ablehnung auf der iPhone-Seite ist möglich; Mirravel verändert das iPhone nicht. |
@@ -152,7 +153,7 @@ Auf einem Mac das vollständige Quellpaket entpacken und **`DMG_erstellen.comman
 /bin/bash scripts/build-macos.sh
 ```
 
-Die fertige DMG liegt unter `dist/Mirravel-1.0.0-Mac.dmg`. AppleScript-Compiler, Signaturwerkzeuge und DMG-Werkzeuge gehören zu macOS; Xcode ist für diesen lokalen Paketbau nicht erforderlich. Projekt und temporäre Paketdateien bleiben im gewählten Ausgabeordner. Der Build führt keinen Patch aus.
+Die fertige DMG liegt unter `dist/Mirravel-1.1.0-Mac.dmg`. Der lokale Paketbau benötigt eine aktive Xcode-Toolchain mit Swift und macOS-SDK sowie die in der Release-Workflow-Datei festgelegten DMG-Layout-Abhängigkeiten. Projekt und temporäre Paketdateien bleiben im gewählten Ausgabeordner. Der Build führt keinen Patch aus.
 
 Für die automatisierten Regressionstests wird Python 3 benötigt:
 
@@ -160,7 +161,7 @@ Für die automatisierten Regressionstests wird Python 3 benötigt:
 python3 -m unittest discover -s tests -v
 ```
 
-Die Tests arbeiten ausschließlich mit temporären Plist-Fixtures und simulierten macOS-Werkzeugen. Sie ändern niemals die echte Eligibility-Datei. Der macOS-Build prüft zusätzlich AppleScript-Kompilierung, App-Ressourcen, DMG und Ad-hoc-Signatur. TCC/Festplattenvollzugriff, echte Administratorabfragen und eine komplette Mac-iPhone-Verbindung werden dadurch nicht getestet.
+Die Tests arbeiten ausschließlich mit temporären Plist-Fixtures und simulierten macOS-Werkzeugen. Sie ändern niemals die echte Eligibility-Datei. Der macOS-Build prüft zusätzlich Swift-Kompilierung, App-Ressourcen, DMG und Ad-hoc-Signatur. TCC/Festplattenvollzugriff, echte Administratorabfragen und eine komplette Mac-iPhone-Verbindung werden dadurch nicht getestet.
 
 ## Quellen und Einordnung
 

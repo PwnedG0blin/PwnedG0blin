@@ -29,7 +29,7 @@ find_plist() {
   fail 'Keine bekannte Eligibility-Datei gefunden. Es wird keine Datei angelegt.'
 }
 schema() {
-  /usr/bin/plutil -lint "$PLIST" >/dev/null || fail 'Datei unlesbar. Terminal unter Privacy & Security > Full Disk Access erlauben; Terminal danach vollständig beenden und erneut öffnen.'
+  /usr/bin/plutil -lint "$PLIST" >/dev/null || fail 'Datei unlesbar. Mirravel (oder beim Kommando-Menü Terminal) unter Privacy & Security > Full Disk Access erlauben und danach vollständig neu öffnen.'
   local k v t
   for k in "${KEYS[@]}"; do
     t=$(/usr/bin/plutil -type "$k" "$PLIST") || fail 'Unbekanntes Dateiformat: erwarteter Mirroring-Schlüssel fehlt.'
@@ -122,6 +122,33 @@ archive_previous_build() {
   printf 'Frühere Sicherung aufbewahrt: %s\n' "$archive"
   printf 'Der aktuelle macOS-Zustand wird vor dem neuen Patch separat gesichert.\n'
 }
+status_report() {
+  local state=missing answer=unknown billing=unknown location=unknown
+  if (find_plist) >/dev/null 2>&1; then
+    find_plist
+    if ! /usr/bin/plutil -lint "$PLIST" >/dev/null 2>&1; then
+      state=unreadable
+    elif (schema) >/dev/null 2>&1; then
+      answer=$(value "${KEYS[0]}" "$PLIST") || answer=unknown
+      billing=$(value "${KEYS[1]}" "$PLIST") || billing=unknown
+      location=$(value "${KEYS[2]}" "$PLIST") || location=unknown
+      case "$answer:$billing:$location" in
+        4:3:3) state=patched ;;
+        4:[0-4]:[0-4]) state=mixed ;;
+        [0-3]:[0-4]:[0-4]) state=eligible-for-patch ;;
+        *) state=unknown ;;
+      esac
+    else
+      state=unknown
+    fi
+  fi
+  printf '%s\n' "$state"
+  printf 'macOS: '; /usr/bin/sw_vers -productVersion
+  printf 'Build: '; /usr/bin/sw_vers -buildVersion
+  printf 'Architektur: '; /usr/bin/uname -m
+  printf 'Status: %s\nFreigabewerte (Answer/Billing/Location): %s/%s/%s\n' "$state" "$answer" "$billing" "$location"
+}
+
 diagnose() {
   printf '\nmacOS: '; /usr/bin/sw_vers -productVersion
   printf 'Build: '; /usr/bin/sw_vers -buildVersion
@@ -206,6 +233,7 @@ main() {
   [ "$(uname -s)" = Darwin ] || fail 'macOS erforderlich.'
   case "${1:-}" in
     diagnose) diagnose ;;
+    status) status_report ;;
     apply|restore)
       [ "$(id -u)" -eq 0 ] || fail 'Über Mirravel mit Administratorrechten starten.'
       if [ "$1" = apply ]; then apply_patch; else restore_patch; fi ;;

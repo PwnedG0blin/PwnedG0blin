@@ -10,7 +10,7 @@ Menu 3 restores only the three saved eligibility values for the matching macOS b
 
 ## App identity and first launch
 
-The app identifier is now `io.github.pwnedg0blin.Mirravel`. Replace the older app with `Mirravel.app` from the new DMG. macOS may request a new first-launch approval under **System Settings → Privacy & Security → Open Anyway**. The patch still runs in Terminal, which needs its own **Full Disk Access** permission.
+The app identifier is now `io.github.pwnedg0blin.Mirravel`. Replace the older app with `Mirravel.app` from the new DMG. macOS may request a new first-launch approval under **System Settings → Privacy & Security → Open Anyway**. The native app needs **Full Disk Access**. The separate command menu still uses Terminal and requires that permission for Terminal.
 
 ## Current downloads
 

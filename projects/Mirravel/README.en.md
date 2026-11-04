@@ -1,10 +1,10 @@
 # Mirravel — iPhone Mirroring Diagnostics for Mac
 
-**Free, open-source macOS helper for iPhone Mirroring diagnostics and experimental configuration. Version 1.0.0.**
+**Free, open-source macOS helper for iPhone Mirroring diagnostics and experimental configuration. Version 1.1.0.**
 
 Inspect local requirements, view Mac logs, and back up or restore settings changed by this tool. **Experimental regional configuration; a successful mirroring connection is not guaranteed.**
 
-[Download Mirravel](https://github.com/PwnedG0blin/PwnedG0blin/releases/tag/mirravel-v1.0.0) · [Detailed German guide](README.md)
+[Download Mirravel](https://github.com/PwnedG0blin/PwnedG0blin/releases/tag/mirravel-v1.1.0) · [Detailed German guide](README.md)
 
 ## EU purpose and experimental bypass
 
@@ -51,7 +51,7 @@ The app is ad-hoc signed, not Developer ID signed or notarized. Build and isolat
 
 ## Download the ready-made app
 
-Download **Mirravel-1.0.0-App.zip** from the release assets, extract it completely and copy **Mirravel.app** to **Applications**. The app uses the selected **Mirror Glass** icon in Finder and the Dock. It opens the existing Terminal menu for diagnostics, applying the patch and restoring its changes. A DMG installer and complete source ZIP are also provided.
+Download **Mirravel-1.1.0-App.zip** from the release assets, extract it completely and copy **Mirravel.app** to **Applications**. The app uses the selected **Mirror Glass** icon in Finder and the Dock. Its native window provides diagnostics, copyable system status, patch and restore controls, and a manual check for stable GitHub releases. Updates are never installed automatically. A DMG installer and complete source ZIP are also provided.
 
 ## First launch: allow Mirravel in macOS
 
@@ -62,11 +62,11 @@ This version is ad-hoc signed and not notarized, so macOS may show **“Mirravel
 3. Click **Open Anyway** next to the message about **Mirravel.app**.
 4. Confirm the local macOS prompt, then open Mirravel again and choose **Open** if prompted.
 
-Allowing the app to open is separate from granting **Terminal → Full Disk Access**, which is also required to apply the experimental patch.
+Allowing the app to open is separate from granting **Mirravel → Full Disk Access** (or Terminal for the separate command menu), which is also required to apply the experimental patch.
 
 ## Build and support
 
-On a Mac run `bash scripts/build-macos.sh`; the output is `dist/Mirravel-1.0.0-Mac.dmg`. Automated fixture tests: `python3 -m unittest discover -s tests -v`.
+On a Mac run `bash scripts/build-macos.sh`; the output is `dist/Mirravel-1.1.0-Mac.dmg`. Automated fixture tests: `python3 -m unittest discover -s tests -v`.
 
 I develop Mirravel as **PwnedG0blin**, [MIT license](LICENSE). [GitHub Sponsors](https://github.com/sponsors/PwnedG0blin) · [Patreon](https://www.patreon.com/cw/PwnedG0blinApp) · [X](https://x.com/PwnedG0blin)
 

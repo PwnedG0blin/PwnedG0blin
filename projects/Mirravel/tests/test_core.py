@@ -133,6 +133,19 @@ except (OSError, KeyError, ValueError, plistlib.InvalidFileException):
         self.assertEqual(self.live.read_bytes(), self.original_bytes)
         self.assertFalse(self.state.exists())
 
+    def test_status_detects_patch_and_unknown_schema_without_writes(self):
+        self.assertIn('eligible-for-patch', self.run_core('status').stdout)
+        self.run_core('apply')
+        self.assertIn('patched', self.run_core('status').stdout)
+        data = plistlib.loads(self.live.read_bytes())
+        del data[DOMAIN]['status']['OS_ELIGIBILITY_INPUT_COUNTRY_LOCATION']
+        self.write(data)
+        before = self.live.read_bytes()
+        report = self.run_core('status').stdout
+        self.assertEqual(report.splitlines()[0], 'unknown')
+        self.assertNotIn(str(self.root), report)
+        self.assertEqual(self.live.read_bytes(), before)
+
     def test_patch_changes_only_three_keys_and_saves_original(self):
         self.run_core('apply')
         expected = self.initial
