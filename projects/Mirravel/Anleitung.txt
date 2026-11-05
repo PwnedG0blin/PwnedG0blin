@@ -1,3 +1,5 @@
+> **1.1.2:** Anwenden und Wiederherstellen öffnen jetzt Terminal. Dafür **Terminal → Full Disk Access** freigeben und Terminal nach Änderung der Freigabe neu starten. Die App aktualisiert die Diagnose beim Aktivieren. EU-Gerätetest am 5. November 2026: iPhone Mirroring funktioniert mit iOS/macOS 27.3 Developer Beta 1 (macOS 26C5035r, arm64) nach Anwendung über Terminal. Der neue App-Start des Terminal-Befehls benötigt noch einen Gerätetest.
+
 Mirravel — iPhone Mirroring Diagnostics for Mac
 
 Website (https://pwnedg0blin.pages.dev/) · Alle Projekte / All projects (https://pwnedg0blin.pages.dev/projekte) · Unterstützen / Support (https://pwnedg0blin.pages.dev/support)

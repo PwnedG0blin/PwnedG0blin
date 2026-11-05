@@ -14,6 +14,7 @@ struct Mirravel: App {
 
 @MainActor
 private struct Dashboard: View {
+    @Environment(\.scenePhase) private var scenePhase
     @AppStorage("lastMacBuild") private var lastBuild = ""
     @AppStorage("lastPatchState") private var lastState = ""
     @State private var diagnosis: Diagnosis?
@@ -81,11 +82,14 @@ private struct Dashboard: View {
         .frame(width: 620)
         .fixedSize(horizontal: false, vertical: true)
         .task { run { await refresh() } }
+        .onChange(of: scenePhase) { _, phase in
+            if phase == .active { run { await refresh() } }
+        }
         .alert("Experimentellen Patch anwenden?", isPresented: $confirmApply) {
             Button("Abbrechen", role: .cancel) {}
             Button("Anwenden") { run { await change("apply") } }
         } message: {
-            Text("Mirravel sichert und ändert drei lokale Freigabewerte. macOS fragt nach Administratorrechten.")
+            Text("Mirravel sichert und ändert drei lokale Freigabewerte. Terminal öffnet die lokale Passwortabfrage. Terminal benötigt Full Disk Access.")
         }
         .alert("Gesicherte Werte wiederherstellen?", isPresented: $confirmRestore) {
             Button("Abbrechen", role: .cancel) {}
@@ -128,7 +132,7 @@ private struct Dashboard: View {
 
     private func change(_ command: String) async {
         guard let output = await runCore(command, administrator: true) else {
-            message = "Der Systemdialog konnte nicht gestartet werden."
+            message = "Terminal konnte nicht gestartet werden."
             return
         }
         message = output.text.isEmpty ? "Vorgang beendet." : output.text
@@ -196,14 +200,15 @@ private func runCore(_ command: String, administrator: Bool = false) async -> (s
     return await Task.detached(priority: .userInitiated) { () -> (success: Bool, text: String)? in
         let process = Process()
         if administrator {
-            process.executableURL = URL(fileURLWithPath: "/usr/bin/osascript")
-            process.arguments = ["-e", """
-                on run argv
-                    set scriptPath to quoted form of (item 1 of argv)
-                    set actionName to quoted form of (item 2 of argv)
-                    do shell script ("/bin/bash " & scriptPath & " " & actionName) with administrator privileges
-                end run
-                """, script.path, command]
+            let resource: String
+            switch command {
+            case "apply": resource = "Apply"
+            case "restore": resource = "Restore"
+            default: return nil
+            }
+            guard let launcher = Bundle.main.url(forResource: resource, withExtension: "command") else { return nil }
+            process.executableURL = URL(fileURLWithPath: "/usr/bin/open")
+            process.arguments = ["-a", "Terminal", launcher.path]
         } else {
             process.executableURL = URL(fileURLWithPath: "/bin/bash")
             process.arguments = [script.path, command]
@@ -215,6 +220,9 @@ private func runCore(_ command: String, administrator: Bool = false) async -> (s
         let data = pipe.fileHandleForReading.readDataToEndOfFile()
         process.waitUntilExit()
         let output = String(decoding: data, as: UTF8.self).trimmingCharacters(in: .whitespacesAndNewlines)
+        if administrator && process.terminationStatus == 0 {
+            return (true, "Terminal wurde geöffnet. Dort das Passwort eingeben und das Ergebnis prüfen. Danach hier Diagnose wählen. Terminal benötigt Full Disk Access.")
+        }
         return (process.terminationStatus == 0, output)
     }.value
 }

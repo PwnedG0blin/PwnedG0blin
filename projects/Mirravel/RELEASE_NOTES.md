@@ -1,17 +1,17 @@
-# Mirravel 1.1.1 – korrigiertes DMG-Layout
+# Mirravel 1.1.2 – Administrator-Aufruf korrigiert
 
-Das Installationsfenster entspricht jetzt der gewählten Encounty-Vorlage: heller, neutraler Hintergrund, Mirravel-Appsymbol links, gestrichelter Pfeil in der Mitte und Applications rechts. Die Anleitung und Lizenz bleiben in der App enthalten. Das Fenster zeigt nur die beiden Installationssymbole; der Datenträger heißt Mirravel 1.1.1.
+Anwenden und Wiederherstellen öffnen jetzt gezielt den jeweiligen lokalen Befehl in Terminal. Dies ersetzt den Administrator-Aufruf über AppleScript, der trotz freigegebener Mirravel-App den Zugriff auf eligibility.plist verweigern konnte. Terminal benötigt **System Settings → Privacy & Security → Full Disk Access**. Das Passwort wird lokal von sudo abgefragt und nicht gespeichert. Die App aktualisiert die Diagnose bei erneuter Aktivierung. Ein geöffneter Terminal-Befehl wird nicht als erfolgreicher Patch ausgegeben.
 
-Die Funktionen aus 1.1.0 bleiben erhalten: natives App-Fenster, Buildwechsel-Diagnose, kopierbarer Status und manuelle Prüfung auf neue stabile GitHub-Releases.
+**EU-Gerätetest am 5. November 2026:** PwnedG0blin hat iPhone Mirroring mit iOS 27.3 Developer Beta 1 und macOS 27.3 Developer Beta 1 (26C5035r), Apple Silicon arm64, nach Anwendung über Terminal erfolgreich getestet. Der korrigierte App-Start dieses Terminal-Wegs benötigt noch einen Gerätetest.
 
-Die App ist ad-hoc signiert und nicht notarisiert. Falls blockiert: **System Settings → Privacy & Security → Open Anyway**. Für den Patch: **Mirravel → Full Disk Access**, danach Mirravel vollständig neu starten.
+Enthält das helle DMG-Layout gemäß Encounty-Vorlage: App links, gestrichelter Pfeil, Applications rechts. Anleitung und Lizenz liegen in der App.
 
-Bisheriger EU-Gerätetest: iOS und macOS 27.2 RC. iOS/macOS 27.3 Developer Beta 1 und das neue App-Fenster sind noch nicht im Zusammenspiel auf Geräten bestätigt.
+Ad-hoc signiert und nicht notarisiert. Bei Startblockierung: **System Settings → Privacy & Security → Open Anyway**.
 
 ## English
 
-The DMG now follows the selected Encounty reference: a light neutral background, Mirravel app icon on the left, a dashed arrow in the middle and Applications on the right. The guide and license remain inside the app.
+Apply and Restore now open their specific local command in Terminal, replacing the AppleScript administrator call that could be denied access even with Full Disk Access enabled for Mirravel. Grant **Terminal → Full Disk Access**. Password entry remains local to sudo. Opening Terminal is not reported as patch success.
 
-The app is ad-hoc signed and not notarized. If blocked, use **System Settings → Privacy & Security → Open Anyway**. Grant **Mirravel → Full Disk Access** before applying the patch and restart the app.
+**EU device test, November 5, 2026:** PwnedG0blin successfully used iPhone Mirroring with iOS 27.3 Developer Beta 1 and macOS 27.3 Developer Beta 1 (26C5035r) on Apple Silicon after applying through Terminal. The corrected app launch of this Terminal route still needs device verification.
 
-The existing EU device test covers iOS/macOS 27.2 RC. Testing with iOS/macOS 27.3 Developer Beta 1 is still pending.
+Includes the selected light DMG layout. Ad-hoc signed, not notarized.

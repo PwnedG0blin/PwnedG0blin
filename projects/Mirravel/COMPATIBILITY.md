@@ -1,3 +1,5 @@
+> **1.1.2:** Apply and Restore now open Terminal. Grant **Terminal → Full Disk Access** and restart Terminal after changing the permission. The app refreshes its diagnosis when activated again. EU device test on November 5, 2026: iPhone Mirroring works with iOS/macOS 27.3 Developer Beta 1 (macOS 26C5035r, arm64) after applying through Terminal. The new app-to-Terminal launch still needs device verification.
+
 # Mirravel upgrade compatibility
 
 ## Existing backups
