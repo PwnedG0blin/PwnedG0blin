@@ -18,7 +18,7 @@ attached=1
 [[ -s "$mountpoint/.background/background.png" ]]
 [[ -s "$mountpoint/.DS_Store" ]]
 [[ "$(readlink "$mountpoint/Applications")" == /Applications ]]
-/usr/bin/osascript "$project/scripts/finder-layout.applescript" "Mirravel 1.1.3" verify
+/usr/bin/osascript "$project/scripts/finder-layout.applescript" "$mountpoint" verify
 app="$mountpoint/Mirravel.app"
 codesign --verify --strict "$app"
 [[ "$(/usr/libexec/PlistBuddy -c 'Print :CFBundleShortVersionString' "$app/Contents/Info.plist")" == 1.1.3 ]]

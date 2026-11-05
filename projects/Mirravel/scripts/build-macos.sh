@@ -68,7 +68,7 @@ trap cleanup EXIT
 hdiutil create -volname 'Mirravel 1.1.3' -srcfolder "$stage" -ov -format UDRW "$rw"
 hdiutil attach -readwrite -nobrowse -mountpoint "$mountpoint" "$rw"
 attached=1
-/usr/bin/osascript "$project/scripts/finder-layout.applescript" "Mirravel 1.1.3" configure
+/usr/bin/osascript "$project/scripts/finder-layout.applescript" "$mountpoint" configure
 sync
 hdiutil detach "$mountpoint" -quiet
 attached=0

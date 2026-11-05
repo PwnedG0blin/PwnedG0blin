@@ -25,11 +25,6 @@ jobs:
         run: |
           for file in Apply.command Restore.command core.sh Mirravel.command DMG_erstellen.command scripts/build-macos.sh scripts/verify-macos.sh; do bash -n "$file"; done
           python3 -m unittest discover -s tests -v
-      - name: Install pinned DMG layout tools in isolated environment
-        run: |
-          python3 -m venv "$RUNNER_TEMP/mirravel-layout"
-          "$RUNNER_TEMP/mirravel-layout/bin/python" -m pip install ds_store==1.3.3 mac_alias==2.2.3
-          echo "MIRRAVEL_LAYOUT_PYTHON=$RUNNER_TEMP/mirravel-layout/bin/python" >> "$GITHUB_ENV"
       - name: Build and verify Universal App and styled DMG
         run: |
           bash scripts/build-macos.sh

@@ -1,8 +1,8 @@
 on run argv
-    set volumeName to item 1 of argv
+    set mountedFolder to (POSIX file (item 1 of argv)) as alias
     set operation to item 2 of argv
     tell application "Finder"
-        tell disk volumeName
+        tell folder mountedFolder
             open
             if operation is "configure" then
                 tell container window
