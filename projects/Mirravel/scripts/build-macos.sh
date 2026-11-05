@@ -57,7 +57,7 @@ layout_python="${MIRRAVEL_LAYOUT_PYTHON:-python3}"
 rw="$output/.Mirravel-layout.dmg"
 mountpoint="$stage/.mount"
 # Keep the mountpoint outside the image content tree.
-mountpoint="/Volumes/Mirravel 1.1.3"
+mountpoint="/Volumes/Mirravel DMG Test 1"
 [[ ! -e "$mountpoint" ]] || { echo "Datenträger bereits eingehängt: $mountpoint" >&2; exit 1; }
 attached=0
 cleanup() {
@@ -67,7 +67,7 @@ cleanup() {
   rm -f -- "$rw"
 }
 trap cleanup EXIT
-hdiutil create -fs HFS+ -volname 'Mirravel 1.1.3' -srcfolder "$stage" -ov -format UDRW "$rw"
+hdiutil create -fs HFS+ -volname 'Mirravel DMG Test 1' -srcfolder "$stage" -ov -format UDRW "$rw"
 hdiutil attach -readwrite -nobrowse -mountpoint "$mountpoint" "$rw"
 attached=1
 /usr/bin/osascript "$project/scripts/finder-layout.applescript" "$mountpoint" configure

@@ -1,0 +1,40 @@
+name: Mirravel DMG Test 1
+on:
+  push:
+    branches: [mirravel-dmg-test-1]
+    paths: ['.github/workflows/mirravel-dmg-test.yml']
+permissions:
+  contents: read
+concurrency:
+  group: mirravel-dmg-test-1
+  cancel-in-progress: true
+jobs:
+  test-package:
+    runs-on: macos-15
+    timeout-minutes: 12
+    permissions:
+      contents: write
+    defaults:
+      run:
+        working-directory: projects/Mirravel
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build test package without changing system eligibility
+        run: |
+          bash -n scripts/build-macos.sh
+          bash -n scripts/verify-macos.sh
+          bash scripts/build-macos.sh
+          bash scripts/verify-macos.sh
+          cd dist
+          mv Mirravel-1.1.3-Mac.dmg Mirravel-DMG-Test-1.dmg
+          mv Mirravel-1.1.3-App.zip Mirravel-DMG-Test-1-App.zip
+          shasum -a 256 Mirravel-DMG-Test-1.dmg Mirravel-DMG-Test-1-App.zip > SHA256SUMS.txt
+      - name: Publish separate prerelease for manual Finder inspection
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          RELEASE_TARGET: ${{ github.sha }}
+        run: |
+          tag=mirravel-v1.1.3-dmg-test.1
+          if gh release view "$tag" >/dev/null 2>&1; then exit 0; fi
+          gh release create "$tag" --target "$RELEASE_TARGET" --prerelease --latest=false --title 'Mirravel DMG Test 1 – nur zur Sichtprüfung' --notes 'Testpaket für die gemeinsame Finder-Sichtprüfung: heller Hintergrund, App links, gestrichelter Pfeil, Applications rechts. Hintergrunddarstellung noch nicht auf dem Anwender-Mac bestätigt. Kein reguläres Update; die Website übernimmt diesen Test nicht. App-Funktionen entsprechen dem aktuellen Entwicklungsstand. Beim Paketbau wird kein System-Patch ausgeführt.' dist/Mirravel-DMG-Test-1.dmg dist/Mirravel-DMG-Test-1-App.zip dist/SHA256SUMS.txt

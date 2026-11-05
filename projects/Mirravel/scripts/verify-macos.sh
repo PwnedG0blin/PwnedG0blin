@@ -4,7 +4,7 @@ set -euo pipefail
 project="$(cd -- "$(dirname -- "$0")/.." && pwd -P)"
 image="$project/dist/Mirravel-1.1.3-Mac.dmg"
 work="$(mktemp -d "${TMPDIR:-/tmp}/Mirravel-verify.XXXXXX")"
-mountpoint="/Volumes/Mirravel 1.1.3"
+mountpoint="/Volumes/Mirravel DMG Test 1"
 [[ ! -e "$mountpoint" ]] || { echo "Datenträger bereits eingehängt: $mountpoint" >&2; exit 1; }
 attached=0
 cleanup() {
