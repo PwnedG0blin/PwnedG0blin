@@ -2,7 +2,7 @@
 # Copyright (c) 2026 PwnedG0blin · Developed by PwnedG0blin · SPDX-License-Identifier: MIT
 set -euo pipefail
 project="$(cd -- "$(dirname -- "$0")/.." && pwd -P)"
-image="$project/dist/Mirravel-1.1.2-Mac.dmg"
+image="$project/dist/Mirravel-1.1.3-Mac.dmg"
 work="$(mktemp -d "${TMPDIR:-/tmp}/Mirravel-verify.XXXXXX")"
 mountpoint="$work/mount"
 mkdir "$mountpoint"
@@ -18,25 +18,10 @@ attached=1
 [[ -s "$mountpoint/.background/background.png" ]]
 [[ -s "$mountpoint/.DS_Store" ]]
 [[ "$(readlink "$mountpoint/Applications")" == /Applications ]]
-"${MIRRAVEL_LAYOUT_PYTHON:-python3}" - "$mountpoint" <<'LAYOUT'
-from pathlib import Path
-import sys
-from ds_store import DSStore
-from mac_alias import Alias
-root = Path(sys.argv[1])
-with DSStore.open(str(root / '.DS_Store'), 'r') as store:
-    assert store['Mirravel.app']['Iloc'] == (130, 210)
-    assert store['Applications']['Iloc'] == (410, 210)
-    assert store['.']['bwsp']['WindowBounds'] == '{{180, 110}, {540, 320}}'
-    assert not (root / 'Anleitung.txt').exists()
-    assert not (root / 'LICENSE').exists()
-    options = store['.']['icvp']
-    assert options['backgroundType'] == 2
-    Alias.from_bytes(options['backgroundImageAlias'])
-LAYOUT
+/usr/bin/osascript "$project/scripts/finder-layout.applescript" "Mirravel 1.1.3" verify
 app="$mountpoint/Mirravel.app"
 codesign --verify --strict "$app"
-[[ "$(/usr/libexec/PlistBuddy -c 'Print :CFBundleShortVersionString' "$app/Contents/Info.plist")" == 1.1.2 ]]
+[[ "$(/usr/libexec/PlistBuddy -c 'Print :CFBundleShortVersionString' "$app/Contents/Info.plist")" == 1.1.3 ]]
 [[ "$(/usr/libexec/PlistBuddy -c 'Print :CFBundleIdentifier' "$app/Contents/Info.plist")" == io.github.pwnedg0blin.Mirravel ]]
 [[ "$(/usr/libexec/PlistBuddy -c 'Print :CFBundleName' "$app/Contents/Info.plist")" == Mirravel ]]
 [[ "$(/usr/libexec/PlistBuddy -c 'Print :CFBundleIconFile' "$app/Contents/Info.plist")" == Mirravel.icns ]]
@@ -56,7 +41,7 @@ done
 /usr/bin/lipo "$app/Contents/MacOS/Mirravel" -verify_arch x86_64 arm64
 lipo -archs "$app/Contents/MacOS/Mirravel"
 # Independently extract and verify the directly downloadable .app archive.
-/usr/bin/ditto -x -k "$project/dist/Mirravel-1.1.2-App.zip" "$work/app-zip"
+/usr/bin/ditto -x -k "$project/dist/Mirravel-1.1.3-App.zip" "$work/app-zip"
 zip_app="$work/app-zip/Mirravel.app"
 codesign --verify --strict "$zip_app"
 /usr/bin/lipo "$zip_app/Contents/MacOS/Mirravel" -verify_arch x86_64 arm64

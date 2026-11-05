@@ -26,8 +26,8 @@ info="$app/Contents/Info.plist"
 /usr/libexec/PlistBuddy -c 'Add :CFBundleExecutable string Mirravel' "$info"
 /usr/libexec/PlistBuddy -c 'Add :CFBundlePackageType string APPL' "$info"
 /usr/libexec/PlistBuddy -c 'Add :NSHighResolutionCapable bool true' "$info"
-/usr/libexec/PlistBuddy -c 'Set :CFBundleShortVersionString 1.1.2' "$info" || /usr/libexec/PlistBuddy -c 'Add :CFBundleShortVersionString string 1.1.2' "$info"
-/usr/libexec/PlistBuddy -c 'Add :CFBundleVersion string 9' "$info" || /usr/libexec/PlistBuddy -c 'Set :CFBundleVersion 9' "$info"
+/usr/libexec/PlistBuddy -c 'Set :CFBundleShortVersionString 1.1.3' "$info" || /usr/libexec/PlistBuddy -c 'Add :CFBundleShortVersionString string 1.1.3' "$info"
+/usr/libexec/PlistBuddy -c 'Add :CFBundleVersion string 10' "$info" || /usr/libexec/PlistBuddy -c 'Set :CFBundleVersion 10' "$info"
 /usr/libexec/PlistBuddy -c 'Set :CFBundleIdentifier io.github.pwnedg0blin.Mirravel' "$info" || /usr/libexec/PlistBuddy -c 'Add :CFBundleIdentifier string io.github.pwnedg0blin.Mirravel' "$info"
 /usr/libexec/PlistBuddy -c 'Set :CFBundleName Mirravel' "$info" || /usr/libexec/PlistBuddy -c 'Add :CFBundleName string Mirravel' "$info"
 /usr/libexec/PlistBuddy -c 'Add :CFBundleDisplayName string Mirravel' "$info" || /usr/libexec/PlistBuddy -c 'Set :CFBundleDisplayName Mirravel' "$info"
@@ -49,7 +49,7 @@ done
 /usr/libexec/PlistBuddy -c 'Delete :CFBundleIconName' "$info" >/dev/null 2>&1 || true
 codesign --force --sign - "$stage/Mirravel.app"
 codesign --verify --strict "$stage/Mirravel.app"
-/usr/bin/ditto -c -k --sequesterRsrc --keepParent "$stage/Mirravel.app" "$output/Mirravel-1.1.2-App.zip"
+/usr/bin/ditto -c -k --sequesterRsrc --keepParent "$stage/Mirravel.app" "$output/Mirravel-1.1.3-App.zip"
 ln -s /Applications "$stage/Applications"
 mkdir -p "$stage/.background"
 python3 "$project/scripts/dmg-background.py" "$stage/.background/background.png"
@@ -65,15 +65,15 @@ cleanup() {
   rm -f -- "$rw"
 }
 trap cleanup EXIT
-hdiutil create -volname 'Mirravel 1.1.2' -srcfolder "$stage" -ov -format UDRW "$rw"
+hdiutil create -volname 'Mirravel 1.1.3' -srcfolder "$stage" -ov -format UDRW "$rw"
 hdiutil attach -readwrite -nobrowse -mountpoint "$mountpoint" "$rw"
 attached=1
-"$layout_python" "$project/scripts/dmg-layout.py" "$mountpoint"
+/usr/bin/osascript "$project/scripts/finder-layout.applescript" "Mirravel 1.1.3" configure
 sync
 hdiutil detach "$mountpoint" -quiet
 attached=0
-hdiutil convert "$rw" -format UDZO -o "$output/Mirravel-1.1.2-Mac.dmg"
-hdiutil verify "$output/Mirravel-1.1.2-Mac.dmg"
-echo "DMG erstellt: $output/Mirravel-1.1.2-Mac.dmg"
+hdiutil convert "$rw" -format UDZO -o "$output/Mirravel-1.1.3-Mac.dmg"
+hdiutil verify "$output/Mirravel-1.1.3-Mac.dmg"
+echo "DMG erstellt: $output/Mirravel-1.1.3-Mac.dmg"
 echo 'Ad-hoc signierte Version, nicht von Apple notarisiert. Keine Systemeinstellungen wurden vom Build geändert.'
 
