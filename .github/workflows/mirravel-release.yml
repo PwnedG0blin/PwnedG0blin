@@ -1,4 +1,5 @@
 name: Mirravel release
+# Finder backgrounds are verified on the final HFS+ volume.
 on:
   push:
     branches: [master]
