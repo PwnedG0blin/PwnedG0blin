@@ -1,4 +1,4 @@
-"""Write a deterministic Finder layout without GUI automation."""
+"""Write the shared light drag-to-Applications Finder layout."""
 from pathlib import Path
 import sys
 from ds_store import DSStore
@@ -8,15 +8,16 @@ root = Path(sys.argv[1]).resolve()
 with DSStore.open(str(root / '.DS_Store'), 'w+') as store:
     store['.']['vSrn'] = ('long', 1)
     store['.']['vstl'] = ('type', b'icnv')
-    store['.']['bwsp'] = {'ShowToolbar': False, 'ShowStatusBar': False,
-        'ShowSidebar': False, 'ShowPathbar': False,
-        'WindowBounds': '{{180, 110}, {1000, 620}}'}
-    store['.']['icvp'] = {'viewOptionsVersion': 1, 'backgroundType': 2,
+    store['.']['bwsp'] = {
+        'ShowToolbar': False, 'ShowStatusBar': False, 'ShowSidebar': False,
+        'ShowPathbar': False, 'WindowBounds': '{{180, 110}, {540, 320}}'
+    }
+    store['.']['icvp'] = {
+        'viewOptionsVersion': 1, 'backgroundType': 2,
         'backgroundImageAlias': Alias.for_file(str(root / '.background/background.png')).to_bytes(),
-        'iconSize': 112.0, 'textSize': 13.0, 'gridSpacing': 100.0,
+        'iconSize': 64.0, 'textSize': 12.0, 'gridSpacing': 100.0,
         'gridOffsetX': 0.0, 'gridOffsetY': 0.0, 'arrangeBy': 'none',
-        'labelOnBottom': True, 'showIconPreview': True, 'showItemInfo': False}
-    for name, position in {'Mirravel.app': (230, 340), 'Applications': (770, 340),
-                           'Anleitung.txt': (420, 530), 'LICENSE': (580, 530)}.items():
+        'labelOnBottom': True, 'showIconPreview': True, 'showItemInfo': False
+    }
+    for name, position in {'Mirravel.app': (130, 210), 'Applications': (410, 210)}.items():
         store[name]['Iloc'] = position
-
