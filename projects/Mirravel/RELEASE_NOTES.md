@@ -1,19 +1,19 @@
-# Mirravel 1.1.3 – Finder-DMG-Darstellung
+# Mirravel 1.1.3 – bestätigtes DMG-Layout
 
-Finder schreibt die Installationsansicht jetzt selbst beim Paketbau. Anschließend wird die fertige, schreibgeschützte DMG erneut geöffnet und über Finder auf Hintergrundbild, Fenstergröße, Symbolgröße und Symbolpositionen geprüft. Die vorherige reine Prüfung der gespeicherten Layout-Datei hatte die abweichende Darstellung nicht erkannt.
+Das Installationsfenster entspricht jetzt der gewählten Vorlage: heller Hintergrund, Mirravel-App links, gestrichelter Pfeil und Applications rechts. PwnedG0blin hat die Darstellung mit DMG Test 1 am 5. November 2026 auf seinem Mac bestätigt. Finder speichert das Layout beim Paketbau; Hintergrund und Symbolpositionen stammen aus der getesteten Vorlage.
 
-Die Vorlage bleibt unverändert: heller Hintergrund, Mirravel links, gestrichelter Pfeil und Applications rechts. Die Darstellung auf dem Anwender-Mac muss noch bestätigt werden.
+Die Terminal-Korrektur aus 1.1.2 bleibt enthalten: Anwenden und Wiederherstellen öffnen den jeweiligen lokalen Befehl in Terminal. Terminal benötigt **System Settings → Privacy & Security → Full Disk Access**. Passwörter werden lokal von sudo abgefragt und nicht gespeichert.
 
-Die Terminal-Korrektur aus 1.1.2 bleibt erhalten. Terminal benötigt Full Disk Access.
+**Erfolgreicher EU-Gerätetest durch PwnedG0blin am 5. November 2026:** iPhone Mirroring funktioniert nach Anwendung über Terminal mit iOS 27.3 Developer Beta 1 und macOS 27.3 Developer Beta 1 (macOS 26C5035r, arm64). Das bestätigt die Verbindung und Patch-Funktion; der korrigierte Start des Terminal-Befehls über die App ist separat zu prüfen.
 
-EU-Gerätetest durch PwnedG0blin am 5. November 2026: iPhone Mirroring funktioniert nach Anwendung über Terminal mit iOS und macOS 27.3 Developer Beta 1 (macOS 26C5035r, arm64).
-
-Ad-hoc signiert, nicht notarisiert. Bei Startblockierung: System Settings → Privacy & Security → Open Anyway.
+Die App ist ad-hoc signiert und nicht notarisiert. Bei Startblockierung: **System Settings → Privacy & Security → Open Anyway**.
 
 ## English
 
-Finder now writes the DMG installation layout itself. The final read-only image is reopened and checked through Finder for its background picture, window size, icon size and icon positions. The prior stored-layout check did not catch the incorrect appearance.
+The DMG now follows the selected layout: light background, Mirravel app on the left, a dashed arrow and Applications on the right. PwnedG0blin confirmed the appearance on his Mac using DMG Test 1 on November 5, 2026.
 
-The light reference layout is unchanged. Appearance on the user's Mac still needs confirmation.
+Includes the Terminal fix from 1.1.2. Apply and Restore open their respective local commands in Terminal, which requires **Full Disk Access**.
 
-Includes the Terminal fix from 1.1.2. Terminal requires Full Disk Access. Successful EU device test with iOS/macOS 27.3 Developer Beta 1 was reported by PwnedG0blin on November 5, 2026.
+Successful EU device test reported by PwnedG0blin on November 5, 2026: iPhone Mirroring works with iOS/macOS 27.3 Developer Beta 1 (macOS 26C5035r, arm64) after applying the patch through Terminal. Launching that Terminal command from the updated app remains a separate verification step.
+
+Ad-hoc signed, not notarized. If blocked, use **System Settings → Privacy & Security → Open Anyway**.

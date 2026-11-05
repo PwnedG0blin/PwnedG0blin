@@ -1,5 +1,5 @@
 name: Mirravel release
-# Finder backgrounds are verified on the final HFS+ volume.
+# DMG design confirmed by the user with DMG Test 1 on 2026-11-05.
 on:
   push:
     branches: [master]

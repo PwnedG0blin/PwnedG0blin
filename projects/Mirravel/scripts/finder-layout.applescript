@@ -1,6 +1,7 @@
 on run argv
     set mountedFolder to (POSIX file (item 1 of argv)) as alias
     set operation to item 2 of argv
+    set backgroundFile to (POSIX file ((item 1 of argv) & "/.background/background.png")) as alias
     tell application "Finder"
         tell folder mountedFolder
             open
@@ -15,7 +16,7 @@ on run argv
                 set arrangement of options to not arranged
                 set icon size of options to 64
                 set text size of options to 12
-                set background picture of options to file ".background:background.png"
+                set background picture of options to backgroundFile
                 set position of item "Mirravel.app" of container window to {130, 210}
                 set position of item "Applications" of container window to {410, 210}
                 close
@@ -30,8 +31,6 @@ on run argv
             if current view of container window is not icon view then error "Finder ignored icon view."
             set options to icon view options of container window
             if icon size of options is not 64 then error "Finder ignored icon size."
-            set pictureFile to background picture of options
-            if name of pictureFile is not "background.png" then error "Finder ignored background."
             if position of item "Mirravel.app" of container window is not {130, 210} then error "App position mismatch."
             if position of item "Applications" of container window is not {410, 210} then error "Applications position mismatch."
             if statusbar visible of container window then error "Finder ignored status bar setting."
