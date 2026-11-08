@@ -1,10 +1,13 @@
-# ClipShift 0.2.0 Beta 1 — Liquid Glass DMG
+# ClipShift 0.2.0 Beta 2 — Liquid Glass DMG
 
 ## Deutsch
 
 ClipShift wandelt neue macOS-Bildschirmaufnahmen auf dem Schreibtisch automatisch von MOV in MP4 um. Die App verwaltet eine native macOS-Ordneraktion und benötigt **FFmpeg**.
 
-**Neu in dieser Beta**
+**Neu in Beta 2**
+- Sichtbare Entwicklerangabe **Developed by PwnedG0blin** im App-Fenster, DMG-Hintergrund und in den App-Informationen.
+
+**Außerdem enthalten**
 - Eigenständige ClipShift.app mit deutscher und englischer Oberfläche.
 - Genau zwei Hauptaktionen: **Installieren** / **Deinstallieren**.
 - Dunkelblaues Liquid-Glass-Design für das DMG-Fenster.
@@ -20,7 +23,10 @@ ClipShift wandelt neue macOS-Bildschirmaufnahmen auf dem Schreibtisch automatisc
 
 ClipShift automatically converts newly created MOV screen recordings on the macOS Desktop to MP4 with a native Folder Action and **FFmpeg**.
 
-**What's new**
+**New in Beta 2**
+- Visible **Developed by PwnedG0blin** attribution in the app window, DMG artwork and application metadata.
+
+**Also included**
 - Standalone bilingual ClipShift.app.
 - Two primary actions: **Install** / **Uninstall**.
 - Custom dark-blue Liquid Glass DMG window and app icon.
