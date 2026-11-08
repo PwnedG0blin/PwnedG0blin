@@ -76,6 +76,14 @@ struct ContentView: View {
                 .disabled(busy)
                 .padding(.top, 6)
 
+                Link(destination: URL(string: "https://github.com/PwnedG0blin")!) {
+                    Text("Developed by PwnedG0blin")
+                        .font(.system(size: 11, weight: .medium))
+                        .foregroundStyle(Color(red: 0.20, green: 0.39, blue: 0.66))
+                }
+                .buttonStyle(.plain)
+                .accessibilityLabel("Developed by PwnedG0blin")
+
                 Text(message.isEmpty
                      ? (german ? "Lokal · Kostenlos · Ohne Hintergrundabfrage" : "Local · Free · No periodic polling")
                      : message)
