@@ -10,7 +10,7 @@ ClipShift wandelt neue MOV-Dateien vom macOS-Schreibtisch automatisch in MP4 um,
 
 ## Installation der ClipShift-App (DMG)
 
-1. Die [ClipShift-DMG-Beta herunterladen](https://github.com/PwnedG0blin/PwnedG0blin/releases/tag/clipshift-v0.2.0-beta.1).
+1. Die [ClipShift-DMG-Beta herunterladen](https://github.com/PwnedG0blin/PwnedG0blin/releases/tag/clipshift-v0.2.0-beta.2).
 2. DMG öffnen und **ClipShift.app** in **Programme** ziehen.
 3. ClipShift starten und **Installieren** wählen. Die App erkennt die Sprache über macOS.
 4. Wenn die automatische Ordneraktions-Zuordnung wegen Berechtigungen scheitert: **Folder Actions Setup** öffnen und **MP4-bei-neuer-MOV.scpt** dem Schreibtisch zuweisen.
