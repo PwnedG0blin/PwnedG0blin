@@ -7,11 +7,11 @@ struct ClipShiftApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .frame(width: 490, height: 390)
+                .frame(width: 490, height: 460)
                 .preferredColorScheme(.light)
         }
         .windowResizability(.contentSize)
-        .defaultSize(width: 490, height: 390)
+        .defaultSize(width: 490, height: 460)
     }
 }
 
