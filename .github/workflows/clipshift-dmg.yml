@@ -57,6 +57,7 @@ jobs:
           codesign --force --deep --sign - "$APP"
           codesign --verify --deep --strict "$APP"
 
+          APP="$RUNNER_TEMP/ClipShift.app"
           brew install create-dmg
           mkdir -p "$RUNNER_TEMP/ClipShift-Volume" dist
           cp -R "$APP" "$RUNNER_TEMP/ClipShift-Volume/"
