@@ -5,11 +5,13 @@ on:
   push:
     paths:
       - 'projects/ScreenRecordingMP4/ClipShiftApp.swift'
+      - 'projects/ScreenRecordingMP4/ClipShiftArtwork.swift'
+      - 'projects/ScreenRecordingMP4/RELEASE-NOTES.md'
       - 'projects/ScreenRecordingMP4/resources/**'
       - '.github/workflows/clipshift-dmg.yml'
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   build:
@@ -32,48 +34,71 @@ jobs:
           <key>CFBundleName</key><string>ClipShift</string>
           <key>CFBundleExecutable</key><string>ClipShift</string>
           <key>CFBundlePackageType</key><string>APPL</string>
-          <key>CFBundleShortVersionString</key><string>0.1.0</string>
-          <key>CFBundleVersion</key><string>1</string>
+          <key>CFBundleIconFile</key><string>ClipShift.icns</string>
+          <key>CFBundleShortVersionString</key><string>0.2.0</string>
+          <key>CFBundleVersion</key><string>2</string>
           <key>LSMinimumSystemVersion</key><string>13.0</string>
           <key>NSAppleEventsUsageDescription</key><string>ClipShift configures a Folder Action for Desktop recordings.</string>
           </dict></plist>
           PLIST
-          cp "$ROOT/resources/convert-folder-action.sh" "$APP/Contents/Resources/"
+
+          mkdir -p "$RUNNER_TEMP/artwork"
+          swift "$ROOT/ClipShiftArtwork.swift" "$RUNNER_TEMP/artwork/icon.png" "$RUNNER_TEMP/artwork/background.png"
+          ICONSET="$RUNNER_TEMP/artwork/ClipShift.iconset"
+          mkdir -p "$ICONSET"
+          for SIZE in 16 32 128 256 512; do
+            sips -s format png -z "$SIZE" "$SIZE" "$RUNNER_TEMP/artwork/icon.png" --out "$ICONSET/icon_${SIZE}x${SIZE}.png" >/dev/null
+            DOUBLE=$((SIZE * 2))
+            sips -s format png -z "$DOUBLE" "$DOUBLE" "$RUNNER_TEMP/artwork/icon.png" --out "$ICONSET/icon_${SIZE}x${SIZE}@2x.png" >/dev/null
+          done
+          iconutil -c icns "$ICONSET" -o "$APP/Contents/Resources/ClipShift.icns"          cp "$ROOT/resources/convert-folder-action.sh" "$APP/Contents/Resources/"
           cp "$ROOT/resources/folder-action.applescript" "$APP/Contents/Resources/"
           swiftc -O -parse-as-library -target arm64-apple-macos13.0 "$ROOT/ClipShiftApp.swift" -o "$APP/Contents/MacOS/ClipShift"
           codesign --force --deep --sign - "$APP"
           codesign --verify --deep --strict "$APP"
-          mkdir -p "$RUNNER_TEMP/ClipShift-Volume"
+
+          brew install create-dmg
+          mkdir -p "$RUNNER_TEMP/ClipShift-Volume" dist
           cp -R "$APP" "$RUNNER_TEMP/ClipShift-Volume/"
-          ln -s /Applications "$RUNNER_TEMP/ClipShift-Volume/Applications"
-          cat > "$RUNNER_TEMP/ClipShift-Volume/READ ME - BITTE LESEN.txt" <<'TXT'
-          ClipShift · macOS screen recording MOV to MP4
-
-          Deutsch:
-          ClipShift.app in Programme ziehen und starten.
-          Auf „Installieren“ klicken. Falls macOS um Erlaubnis bittet, diese für die
-          Ordneraktion erteilen. Wenn die automatische Zuordnung fehlschlägt,
-          „Folder Actions Setup“ öffnen und MP4-bei-neuer-MOV.scpt zum Schreibtisch hinzufügen.
-          FFmpeg wird vorausgesetzt (brew install ffmpeg).
-          Nach erfolgreicher Konvertierung bleiben MOV-Dateien standardmäßig erhalten,
-          sofern die Löschoption nicht zuvor aktiviert wurde.
-
-          English:
-          Drag ClipShift.app to Applications, open it and click Install.
-          macOS may request Folder Actions permissions. If automatic setup fails,
-          open Folder Actions Setup and attach MP4-bei-neuer-MOV.scpt to Desktop.
-          Requires FFmpeg (brew install ffmpeg).
-          Original MOV files are preserved unless deletion was previously enabled.
-
-          This build is ad-hoc signed, not notarized.
-          TXT
-          mkdir -p dist
-          hdiutil create -volname "ClipShift" -srcfolder "$RUNNER_TEMP/ClipShift-Volume" \
-            -format UDZO -ov "dist/ClipShift-0.1.0-macOS-AppleSilicon.dmg"
-          hdiutil verify "dist/ClipShift-0.1.0-macOS-AppleSilicon.dmg"
+          create-dmg \
+            --volname "ClipShift" \
+            --volicon "$APP/Contents/Resources/ClipShift.icns" \
+            --background "$RUNNER_TEMP/artwork/background.png" \
+            --window-pos 220 110 \
+            --window-size 760 500 \
+            --text-size 13 \
+            --icon-size 114 \
+            --icon "ClipShift.app" 180 245 \
+            --hide-extension "ClipShift.app" \
+            --app-drop-link 555 245 \
+            --no-internet-enable \
+            "dist/ClipShift-0.2.0-beta.1-macOS-AppleSilicon.dmg" \
+            "$RUNNER_TEMP/ClipShift-Volume"
+          hdiutil verify "dist/ClipShift-0.2.0-beta.1-macOS-AppleSilicon.dmg"
+          shasum -a 256 dist/*.dmg > dist/SHA256SUMS.txt
       - name: Upload DMG
         uses: actions/upload-artifact@v4
         with:
-          name: ClipShift-0.1.0-macOS-AppleSilicon
-          path: dist/*.dmg
+          name: ClipShift-0.2.0-beta.1-macOS-AppleSilicon
+          path: |
+            dist/*.dmg
+            dist/SHA256SUMS.txt
           if-no-files-found: error
+
+      - name: Publish public GitHub beta release
+        if: github.ref == 'refs/heads/master'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          TAG="clipshift-v0.2.0-beta.1"
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            gh release upload "$TAG" dist/*.dmg dist/SHA256SUMS.txt --clobber
+          else
+            gh release create "$TAG" dist/*.dmg dist/SHA256SUMS.txt \
+              --target "$GITHUB_SHA" \
+              --title "ClipShift 0.2.0 Beta 1 — Liquid Glass DMG" \
+              --prerelease \
+              --notes-file "projects/ScreenRecordingMP4/RELEASE-NOTES.md"
+          fi
