@@ -48,7 +48,7 @@ Free nature learning and hidden object game for kids about wildlife, habitats an
 
 ### [ClipShift — Automatic MOV to MP4 for macOS](projects/ScreenRecordingMP4)
 
-Kostenloses macOS-Zusatztool: Neue MOV-Bildschirmaufnahmen auf dem Schreibtisch automatisch in MP4 umwandeln – über native Ordneraktionen, ohne dauerhafte Intervallprüfung. Zweisprachige Installation (**Deutsch / English**) und optionale Löschung des MOV-Originals nach erfolgreicher Konvertierung. [Deutsch](projects/ScreenRecordingMP4/README.de.md) · [English](projects/ScreenRecordingMP4/README.en.md) · [DMG-Beta](https://github.com/PwnedG0blin/PwnedG0blin/releases/tag/clipshift-v0.2.0-beta.1) · [Quellcode-Installer](projects/ScreenRecordingMP4/INSTALL.command).
+**Developed by PwnedG0blin.** Kostenloses macOS-Zusatztool: Neue MOV-Bildschirmaufnahmen auf dem Schreibtisch automatisch in MP4 umwandeln – über native Ordneraktionen, ohne dauerhafte Intervallprüfung. Zweisprachige Installation (**Deutsch / English**) und optionale Löschung des MOV-Originals nach erfolgreicher Konvertierung. [Deutsch](projects/ScreenRecordingMP4/README.de.md) · [English](projects/ScreenRecordingMP4/README.en.md) · [DMG-Beta](https://github.com/PwnedG0blin/PwnedG0blin/releases/tag/clipshift-v0.2.0-beta.2) · [Quellcode-Installer](projects/ScreenRecordingMP4/INSTALL.command).
 
 Free macOS utility that converts new MOV screen recordings on the Desktop to MP4 using native Folder Actions instead of polling. Bilingual installer, English/German guides and optional source deletion after successful conversion. FFmpeg required; Liquid Glass DMG public beta; ad-hoc signed, not notarized, and not yet verified on a clean Mac.
 
@@ -56,7 +56,7 @@ Free macOS utility that converts new MOV screen recordings on the Desktop to MP4
 
 - **[Stratovo: Einrichtung und Mac-Test-Builds](https://github.com/PwnedG0blin/Stratovo#install-or-build)** — Android-Emulator, Windows-ARM64- und Ubuntu-ARM-VMs; Voraussetzungen und Grenzen stehen direkt beim Projekt.
 - **[Mirravel 1.0.0 Release](https://github.com/PwnedG0blin/PwnedG0blin/releases/tag/mirravel-v1.0.0)** — Mac-App, Quellen und Prüfsummen. Wiederanwendung nach macOS-Updates; erfolgreiche Verbindung mit iOS und macOS 27.2 RC bestätigt.
-- **[ClipShift: Liquid Glass DMG (Beta)](https://github.com/PwnedG0blin/PwnedG0blin/releases/tag/clipshift-v0.2.0-beta.1)** — MOV → MP4, zweisprachiges Installationsprogramm, Anleitung und Prüfsumme; nicht notarisiert.
+- **[ClipShift: Liquid Glass DMG (Beta)](https://github.com/PwnedG0blin/PwnedG0blin/releases/tag/clipshift-v0.2.0-beta.2)** — MOV → MP4, zweisprachiges Installationsprogramm, Anleitung und Prüfsumme; nicht notarisiert.
 - Scenalto und Naturdetektive befinden sich in Entwicklung; auf diesen Projektseiten wird kein bereits veröffentlichter App-Store-Download behauptet.
 
 Funktionsumfang und Verfügbarkeit richten sich nach dem jeweiligen Entwicklungsstand. Tests, Lizenzhinweise und bekannte Einschränkungen stehen direkt beim Projekt.
