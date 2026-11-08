@@ -8,7 +8,17 @@ ClipShift wandelt neue MOV-Dateien vom macOS-Schreibtisch automatisch in MP4 um,
 - FFmpeg und FFprobe über Homebrew: `brew install ffmpeg`
 - Schreibrechte für den Schreibtisch und den Skriptordner
 
-## Installation
+## Installation der ClipShift-App (DMG)
+
+1. Die [ClipShift-DMG-Beta herunterladen](https://github.com/PwnedG0blin/PwnedG0blin/releases/tag/clipshift-v0.2.0-beta.1).
+2. DMG öffnen und **ClipShift.app** in **Programme** ziehen.
+3. ClipShift starten und **Installieren** wählen. Die App erkennt die Sprache über macOS.
+4. Wenn die automatische Ordneraktions-Zuordnung wegen Berechtigungen scheitert: **Folder Actions Setup** öffnen und **MP4-bei-neuer-MOV.scpt** dem Schreibtisch zuweisen.
+5. Für automatische Konvertierung neuer MOV-Dateien muss FFmpeg über Homebrew vorhanden sein: `brew install ffmpeg`.
+
+**Hinweis:** Die App ist derzeit ad-hoc-signiert und nicht von Apple notarisiert. Diese Beta wurde noch nicht auf einem frischen Mac getestet. Kein Sicherheitsdialog sollte pauschal umgangen werden.
+
+## Alternative: Quellcode-Installer
 
 1. Lade [INSTALL.command](INSTALL.command) herunter. Falls macOS die Ausführung blockiert, prüfe den Inhalt und gib die Datei gezielt frei.
 2. Starte die Datei per Terminal: `bash /Pfad/zu/INSTALL.command` (oder per Doppelklick, wenn ausführbar).
