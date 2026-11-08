@@ -154,7 +154,7 @@ enum ClipShiftManager {
                         make new folder action at end of folder actions with properties {path:desktopPath}
                     end if
                     set targetAction to folder action with path desktopPath
-                    if not (exists script identifier) then
+                    if not (exists script "MP4-bei-neuer-MOV.scpt" of targetAction) then
                         make new script at end of scripts of targetAction with properties {name:"\(identifier)", path:"\(action.path)"}
                     end if
                 end tell
