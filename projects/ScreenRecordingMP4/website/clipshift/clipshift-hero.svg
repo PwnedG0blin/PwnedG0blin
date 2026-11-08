@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 580" role="img" aria-label="ClipShift converts MOV into MP4">
+<defs><linearGradient id="bg" x2="1" y2="1"><stop stop-color="#eaf5ff"/><stop offset="1" stop-color="#80b6fa"/></linearGradient><linearGradient id="pane" x2="1" y2="1"><stop stop-color="#ffffff" stop-opacity=".93"/><stop offset="1" stop-color="#d5e9ff" stop-opacity=".64"/></linearGradient><filter id="s"><feGaussianBlur stdDeviation="18"/></filter></defs>
+<rect width="1000" height="580" rx="32" fill="url(#bg)"/><ellipse cx="530" cy="535" rx="380" ry="35" fill="#194d87" opacity=".2" filter="url(#s)"/>
+<rect x="122" y="58" width="756" height="466" rx="42" fill="url(#pane)" stroke="#fff" stroke-width="4"/>
+<circle cx="177" cy="108" r="12" fill="#ff6a67"/><circle cx="211" cy="108" r="12" fill="#ffc43d"/><circle cx="245" cy="108" r="12" fill="#31d16f"/>
+<rect x="460" y="126" width="80" height="68" rx="18" fill="#2779dc"/><path d="M482 146h38v18h-38zm8 20 29 10-29 10" fill="#fff"/>
+<text x="500" y="260" text-anchor="middle" font-family="Arial,sans-serif" font-weight="700" font-size="79" fill="#103969">ClipShift</text>
+<g font-family="Arial,sans-serif" font-size="41" font-weight="bold"><rect x="244" y="333" width="169" height="116" rx="24" fill="#f5fbff" stroke="#b4d3ef"/><text x="328" y="401" text-anchor="middle" fill="#536b88">MOV</text><path d="M452 393h96m-25-23 25 23-25 23" fill="none" stroke="#2386e8" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"/><rect x="580" y="333" width="169" height="116" rx="24" fill="#218afa"/><text x="664" y="401" text-anchor="middle" fill="#fff">MP4</text></g></svg>
