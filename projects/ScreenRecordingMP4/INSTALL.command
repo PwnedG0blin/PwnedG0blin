@@ -1,7 +1,7 @@
 #!/bin/bash
 set -euo pipefail
 
-echo "Screen Recording → MP4 / Bildschirmaufnahme → MP4"
+echo "ClipShift — Bildschirmaufnahme zu MP4 / Screen Recording to MP4"
 echo "1) Deutsch"
 echo "2) English"
 read -r -p "Sprache / Language [1/2]: " lang
@@ -15,6 +15,10 @@ name="MP4-bei-neuer-MOV.scpt"
 mkdir -p "$base" "$actions"
 ffmpeg="$(command -v ffmpeg || true)"
 ffprobe="$(command -v ffprobe || true)"
+[ -n "$ffmpeg" ] || ffmpeg="/opt/homebrew/bin/ffmpeg"
+[ -x "$ffmpeg" ] || ffmpeg="/usr/local/bin/ffmpeg"
+[ -n "$ffprobe" ] || ffprobe="/opt/homebrew/bin/ffprobe"
+[ -x "$ffprobe" ] || ffprobe="/usr/local/bin/ffprobe"
 if [ -z "$ffmpeg" ] || [ -z "$ffprobe" ]; then
   say "FFmpeg fehlt. Bitte zuerst 'brew install ffmpeg' ausführen." "FFmpeg is missing. Please run 'brew install ffmpeg' first."
   exit 1
@@ -29,10 +33,14 @@ log="$base/folder-action.log"
 mkdir -p "$base"
 write_log() { printf '%s %s\n' "$(date '+%Y-%m-%d %H:%M:%S')" "$*" >> "$log"; }
 [ -f "$source_path" ] || exit 0
-case "${source_path,,}" in *.mov) ;; *) exit 0 ;; esac
+case "$source_path" in *.mov|*.MOV) ;; *) exit 0 ;; esac
 case "$source_path" in "$HOME/Desktop/"*) ;; *) exit 0 ;; esac
-ffmpeg="$(command -v ffmpeg || echo /opt/homebrew/bin/ffmpeg)"
-ffprobe="$(command -v ffprobe || echo /opt/homebrew/bin/ffprobe)"
+ffmpeg="$(command -v ffmpeg || true)"
+[ -n "$ffmpeg" ] || ffmpeg="/opt/homebrew/bin/ffmpeg"
+[ -x "$ffmpeg" ] || ffmpeg="/usr/local/bin/ffmpeg"
+ffprobe="$(command -v ffprobe || true)"
+[ -n "$ffprobe" ] || ffprobe="/opt/homebrew/bin/ffprobe"
+[ -x "$ffprobe" ] || ffprobe="/usr/local/bin/ffprobe"
 [ -x "$ffmpeg" ] && [ -x "$ffprobe" ] || { write_log "ERROR: FFmpeg missing"; exit 1; }
 file_name="$(basename "$source_path")"
 destination="${source_path%.*}.mp4"
@@ -93,8 +101,10 @@ on adding folder items to this_folder after receiving added_items
 end adding folder items to
 APPLESCRIPT
 /usr/bin/osacompile -o "$actions/$name" "$base/folder-action.applescript" || fail "AppleScript konnte nicht erstellt werden." "Could not compile AppleScript."
-touch "$base/delete-original-after-success.enabled"
-say "Installation abgeschlossen." "Installation completed."
+say "Soll ClipShift erfolgreiche MOV-Originale löschen? (j/N)" "Should ClipShift delete MOV originals after successful conversion? (y/N)"
+read -r answer
+case "$answer" in j|J|y|Y) touch "$base/delete-original-after-success.enabled" ;; *) rm -f "$base/delete-original-after-success.enabled" ;; esac
+say "ClipShift installiert. Die Ordneraktion muss einmalig mit dem Schreibtisch verbunden werden." "ClipShift installed. Connect the folder action to Desktop once to finish setup."
 say "Jetzt 'Folder Actions Setup' öffnen, Folder Actions aktivieren, Desktop wählen und MP4-bei-neuer-MOV.scpt zuweisen." "Now open 'Folder Actions Setup', enable Folder Actions, choose Desktop and attach MP4-bei-neuer-MOV.scpt."
 say "Falls 'add - new item alert.scpt' aktiviert ist, dieses deaktivieren, damit die Nachfrage nicht erscheint." "If 'add - new item alert.scpt' is enabled, disable it to avoid the extra prompt."
 say "Wichtig: Bereits bestehende MOV-Dateien werden nicht verarbeitet. Erst eine NEUE Testaufnahme machen." "Important: Existing MOV files are not processed. Make a NEW test recording."
