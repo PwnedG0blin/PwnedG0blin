@@ -35,8 +35,10 @@ jobs:
           <key>CFBundleExecutable</key><string>ClipShift</string>
           <key>CFBundlePackageType</key><string>APPL</string>
           <key>CFBundleIconFile</key><string>ClipShift.icns</string>
+          <key>CFBundleGetInfoString</key><string>ClipShift — Developed by PwnedG0blin</string>
+          <key>NSHumanReadableCopyright</key><string>© 2026 PwnedG0blin</string>
           <key>CFBundleShortVersionString</key><string>0.2.0</string>
-          <key>CFBundleVersion</key><string>2</string>
+          <key>CFBundleVersion</key><string>3</string>
           <key>LSMinimumSystemVersion</key><string>13.0</string>
           <key>NSAppleEventsUsageDescription</key><string>ClipShift configures a Folder Action for Desktop recordings.</string>
           </dict></plist>
@@ -74,14 +76,14 @@ jobs:
             --hide-extension "ClipShift.app" \
             --app-drop-link 555 245 \
             --no-internet-enable \
-            "dist/ClipShift-0.2.0-beta.1-macOS-AppleSilicon.dmg" \
+            "dist/ClipShift-0.2.0-beta.2-macOS-AppleSilicon.dmg" \
             "$RUNNER_TEMP/ClipShift-Volume"
-          hdiutil verify "dist/ClipShift-0.2.0-beta.1-macOS-AppleSilicon.dmg"
+          hdiutil verify "dist/ClipShift-0.2.0-beta.2-macOS-AppleSilicon.dmg"
           shasum -a 256 dist/*.dmg > dist/SHA256SUMS.txt
       - name: Upload DMG
         uses: actions/upload-artifact@v4
         with:
-          name: ClipShift-0.2.0-beta.1-macOS-AppleSilicon
+          name: ClipShift-0.2.0-beta.2-macOS-AppleSilicon
           path: |
             dist/*.dmg
             dist/SHA256SUMS.txt
@@ -94,13 +96,13 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          TAG="clipshift-v0.2.0-beta.1"
+          TAG="clipshift-v0.2.0-beta.2"
           if gh release view "$TAG" >/dev/null 2>&1; then
             gh release upload "$TAG" dist/*.dmg dist/SHA256SUMS.txt --clobber
           else
             gh release create "$TAG" dist/*.dmg dist/SHA256SUMS.txt \
               --target "$GITHUB_SHA" \
-              --title "ClipShift 0.2.0 Beta 1 — Liquid Glass DMG" \
+              --title "ClipShift 0.2.0 Beta 2 — Developer Credit" \
               --prerelease \
               --notes-file "projects/ScreenRecordingMP4/RELEASE-NOTES.md"
           fi
