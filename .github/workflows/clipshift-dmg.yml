@@ -1,0 +1,79 @@
+name: ClipShift DMG
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'projects/ScreenRecordingMP4/ClipShiftApp.swift'
+      - 'projects/ScreenRecordingMP4/resources/**'
+      - '.github/workflows/clipshift-dmg.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: macos-26
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+      - name: Compile ClipShift
+        shell: bash
+        run: |
+          set -euo pipefail
+          ROOT="projects/ScreenRecordingMP4"
+          APP="$RUNNER_TEMP/ClipShift.app"
+          mkdir -p "$APP/Contents/MacOS" "$APP/Contents/Resources"
+          cat > "$APP/Contents/Info.plist" <<'PLIST'
+          <?xml version="1.0" encoding="UTF-8"?>
+          <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+          <plist version="1.0"><dict>
+          <key>CFBundleIdentifier</key><string>org.pwnedg0blin.clipshift</string>
+          <key>CFBundleName</key><string>ClipShift</string>
+          <key>CFBundleExecutable</key><string>ClipShift</string>
+          <key>CFBundlePackageType</key><string>APPL</string>
+          <key>CFBundleShortVersionString</key><string>0.1.0</string>
+          <key>CFBundleVersion</key><string>1</string>
+          <key>LSMinimumSystemVersion</key><string>13.0</string>
+          <key>NSAppleEventsUsageDescription</key><string>ClipShift configures a Folder Action for Desktop recordings.</string>
+          </dict></plist>
+          PLIST
+          cp "$ROOT/resources/convert-folder-action.sh" "$APP/Contents/Resources/"
+          cp "$ROOT/resources/folder-action.applescript" "$APP/Contents/Resources/"
+          swiftc -O -parse-as-library -target arm64-apple-macos13.0 "$ROOT/ClipShiftApp.swift" -o "$APP/Contents/MacOS/ClipShift"
+          codesign --force --deep --sign - "$APP"
+          codesign --verify --deep --strict "$APP"
+          mkdir -p "$RUNNER_TEMP/ClipShift-Volume"
+          cp -R "$APP" "$RUNNER_TEMP/ClipShift-Volume/"
+          ln -s /Applications "$RUNNER_TEMP/ClipShift-Volume/Applications"
+          cat > "$RUNNER_TEMP/ClipShift-Volume/READ ME - BITTE LESEN.txt" <<'TXT'
+          ClipShift · macOS screen recording MOV to MP4
+
+          Deutsch:
+          ClipShift.app in Programme ziehen und starten.
+          Auf „Installieren“ klicken. Falls macOS um Erlaubnis bittet, diese für die
+          Ordneraktion erteilen. Wenn die automatische Zuordnung fehlschlägt,
+          „Folder Actions Setup“ öffnen und MP4-bei-neuer-MOV.scpt zum Schreibtisch hinzufügen.
+          FFmpeg wird vorausgesetzt (brew install ffmpeg).
+          Nach erfolgreicher Konvertierung bleiben MOV-Dateien standardmäßig erhalten,
+          sofern die Löschoption nicht zuvor aktiviert wurde.
+
+          English:
+          Drag ClipShift.app to Applications, open it and click Install.
+          macOS may request Folder Actions permissions. If automatic setup fails,
+          open Folder Actions Setup and attach MP4-bei-neuer-MOV.scpt to Desktop.
+          Requires FFmpeg (brew install ffmpeg).
+          Original MOV files are preserved unless deletion was previously enabled.
+
+          This build is ad-hoc signed, not notarized.
+          TXT
+          mkdir -p dist
+          hdiutil create -volname "ClipShift" -srcfolder "$RUNNER_TEMP/ClipShift-Volume" \
+            -format UDZO -ov "dist/ClipShift-0.1.0-macOS-AppleSilicon.dmg"
+          hdiutil verify "dist/ClipShift-0.1.0-macOS-AppleSilicon.dmg"
+      - name: Upload DMG
+        uses: actions/upload-artifact@v4
+        with:
+          name: ClipShift-0.1.0-macOS-AppleSilicon
+          path: dist/*.dmg
+          if-no-files-found: error
