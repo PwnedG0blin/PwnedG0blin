@@ -16,28 +16,43 @@ struct ClipShiftApp: App {
 }
 
 struct ContentView: View {
-    @State private var message: String = ""
+    @State private var message = ""
     @State private var busy = false
     private var german: Bool { Locale.preferredLanguages.first?.lowercased().hasPrefix("de") ?? false }
 
     var body: some View {
         ZStack {
-            Color(red: 0.965, green: 0.973, blue: 0.99).ignoresSafeArea()
-            VStack(spacing: 21) {
-                Image(systemName: "film.stack")
+            LinearGradient(
+                colors: [
+                    Color(red: 0.91, green: 0.95, blue: 1.0),
+                    Color(red: 0.98, green: 0.985, blue: 1.0),
+                    Color(red: 0.88, green: 0.92, blue: 0.99)
+                ],
+                startPoint: .topLeading, endPoint: .bottomTrailing
+            ).ignoresSafeArea()
+
+            Circle()
+                .fill(Color.white.opacity(0.72))
+                .frame(width: 340, height: 340)
+                .blur(radius: 55)
+                .offset(x: -150, y: -130)
+
+            VStack(spacing: 19) {
+                Image(systemName: "film.stack.fill")
                     .font(.system(size: 33, weight: .medium))
-                    .foregroundStyle(Color(red: 0.16, green: 0.38, blue: 0.74))
-                    .frame(width: 77, height: 77)
-                    .background(Color.white, in: RoundedRectangle(cornerRadius: 22))
-                    .shadow(color: .black.opacity(0.07), radius: 15, y: 5)
+                    .symbolRenderingMode(.palette)
+                    .foregroundStyle(Color(red: 0.18, green: 0.40, blue: 0.80), Color(red: 0.62, green: 0.78, blue: 0.98))
+                    .frame(width: 78, height: 78)
+                    .clipShape(RoundedRectangle(cornerRadius: 22, style: .continuous))
+                    .glassSurface(cornerRadius: 22)
 
                 Text("ClipShift")
-                    .font(.system(size: 30, weight: .bold, design: .rounded))
-                    .foregroundStyle(Color(red: 0.12, green: 0.17, blue: 0.27))
+                    .font(.system(size: 32, weight: .bold, design: .rounded))
+                    .foregroundStyle(Color(red: 0.10, green: 0.17, blue: 0.29))
 
                 Text(german ? "Was möchtest du tun?" : "What would you like to do?")
-                    .font(.system(size: 18, weight: .semibold))
-                    .foregroundStyle(Color(red: 0.27, green: 0.32, blue: 0.42))
+                    .font(.system(size: 19, weight: .semibold))
+                    .foregroundStyle(Color(red: 0.25, green: 0.32, blue: 0.45))
 
                 Text(german
                      ? "Neue MOV-Bildschirmaufnahmen automatisch in MP4 umwandeln."
@@ -46,10 +61,10 @@ struct ContentView: View {
                     .foregroundStyle(.secondary)
                     .multilineTextAlignment(.center)
 
-                HStack(spacing: 12) {
+                HStack(spacing: 14) {
                     Button(german ? "Installieren" : "Install") { perform(install: true) }
                         .buttonStyle(.borderedProminent)
-                        .tint(Color(red: 0.15, green: 0.41, blue: 0.78))
+                        .tint(Color(red: 0.17, green: 0.40, blue: 0.79))
                         .controlSize(.large)
                         .frame(width: 170)
 
@@ -59,29 +74,48 @@ struct ContentView: View {
                         .frame(width: 170)
                 }
                 .disabled(busy)
+                .padding(.top, 6)
 
                 Text(message.isEmpty
                      ? (german ? "Lokal · Kostenlos · Ohne Hintergrundabfrage" : "Local · Free · No periodic polling")
                      : message)
                     .font(.system(size: 11))
-                    .foregroundStyle(message.isEmpty ? Color.secondary : Color(red: 0.19, green: 0.34, blue: 0.56))
+                    .foregroundStyle(Color(red: 0.28, green: 0.39, blue: 0.55))
                     .multilineTextAlignment(.center)
-                    .frame(maxWidth: 425)
-                    .frame(minHeight: 35)
+                    .frame(maxWidth: 390, minHeight: 32)
             }
-            .padding(30)
+            .padding(.horizontal, 38)
+            .padding(.vertical, 32)
+            .frame(maxWidth: .infinity)
+            .glassSurface(cornerRadius: 32)
+            .padding(24)
         }
     }
 
     private func perform(install: Bool) {
         busy = true
         message = german ? "Wird ausgeführt …" : "Working …"
+        let isGerman = german
         DispatchQueue.global(qos: .userInitiated).async {
-            let result = install ? ClipShiftManager.install(german: german) : ClipShiftManager.uninstall(german: german)
+            let result = install ? ClipShiftManager.install(german: isGerman) : ClipShiftManager.uninstall(german: isGerman)
             DispatchQueue.main.async {
                 message = result
                 busy = false
             }
+        }
+    }
+}
+
+extension View {
+    @ViewBuilder
+    func glassSurface(cornerRadius: CGFloat) -> some View {
+        if #available(macOS 26.0, *) {
+            self.glassEffect(.regular, in: RoundedRectangle(cornerRadius: cornerRadius, style: .continuous))
+        } else {
+            self.background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: cornerRadius, style: .continuous))
+                .overlay(RoundedRectangle(cornerRadius: cornerRadius, style: .continuous)
+                    .strokeBorder(.white.opacity(0.7), lineWidth: 1))
+                .shadow(color: Color.blue.opacity(0.08), radius: 24, y: 8)
         }
     }
 }
