@@ -46,6 +46,12 @@ Free nature learning and hidden object game for kids about wildlife, habitats an
 
 **Bisherige Namen / Previous names:** Pixelkoje → Stratovo · FrameForge → Scenalto. **Wimmelwelt: Naturdetektive** behält seinen Namen; unter dem App-Symbol heißt sie **Naturdetektive**.
 
+### [ClipShift — Automatic MOV to MP4 for macOS](projects/ScreenRecordingMP4)
+
+Kostenloses macOS-Zusatztool: Neue MOV-Bildschirmaufnahmen auf dem Schreibtisch automatisch in MP4 umwandeln – über native Ordneraktionen, ohne dauerhafte Intervallprüfung. Zweisprachige Installation (**Deutsch / English**) und optionale Löschung des MOV-Originals nach erfolgreicher Konvertierung. [Deutsch](projects/ScreenRecordingMP4/README.de.md) · [English](projects/ScreenRecordingMP4/README.en.md) · [Installer](projects/ScreenRecordingMP4/INSTALL.command).
+
+Free macOS utility that converts new MOV screen recordings on the Desktop to MP4 using native Folder Actions instead of polling. Bilingual installer, English/German guides and optional source deletion after successful conversion. FFmpeg required; public installer not yet verified on a clean Mac.
+
 ## Testversionen / Downloads
 
 - **[Stratovo: Einrichtung und Mac-Test-Builds](https://github.com/PwnedG0blin/Stratovo#install-or-build)** — Android-Emulator, Windows-ARM64- und Ubuntu-ARM-VMs; Voraussetzungen und Grenzen stehen direkt beim Projekt.
