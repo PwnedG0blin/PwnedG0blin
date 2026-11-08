@@ -141,7 +141,7 @@ func drawBackground(context ctx: CGContext) {
          size: 17, tint: color(0xF3FAFF), bold: true)
     text("ClipShift in Programme ziehen", x: 248, y: 79,
          size: 14, tint: color(0xA5CDEB))
-    text("Free  •  Local  •  No cloud", x: 295, y: 37,
+    text("Developed by PwnedG0blin", x: 285, y: 37,
          size: 12, tint: color(0xB8D7F6))
 }
 
